@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/left_drawer_item"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    >
+
+    <ImageView
+        android:id="@+id/left_drawer_image"
+        android:layout_width="23dp"
+        android:layout_height="23dp"
+        android:src="@drawable/ic_menu_share"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:scaleType="centerCrop"
+        />
+
+    <TextView
+        android:id="@+id/left_drawer_tittle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="设置"
+        android:textAllCaps="true"
+        style="@style/DrawerLayoutTextStyle" />
+
+
+
+</LinearLayout>
