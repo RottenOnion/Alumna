@@ -21,7 +21,6 @@ import com.example.alumna.bean.UserBean;
 import com.example.alumna.R;
 import com.example.alumna.utils.DataUtils;
 import com.example.alumna.view.Interface.MainViewImpl;
-import com.example.alumna.widgets.PraiseListView;
 
 import java.util.ArrayList;
 
