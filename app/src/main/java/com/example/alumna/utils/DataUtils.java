@@ -12,6 +12,10 @@ public class DataUtils {
 
    public static ArrayList<UserBean> list=new ArrayList<UserBean>();
 
+    public static String BASEURL="http://123.207.66.152:8080/Myservlet/";
+    public static String LOGININ="login";
+
+
     static {
         UserBean user=new UserBean(1);
         for(int i=0;i<5;++i){

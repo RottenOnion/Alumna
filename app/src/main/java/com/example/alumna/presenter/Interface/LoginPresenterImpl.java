@@ -5,4 +5,6 @@ package com.example.alumna.presenter.Interface;
  */
 
 public interface LoginPresenterImpl {
+
+    void Login();
 }

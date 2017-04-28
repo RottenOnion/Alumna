@@ -1,11 +1,13 @@
 package com.example.alumna.model.Interface;
 
+import java.util.Map;
+
 /**
  * Created by Leebobo on 2017/4/26.
  */
 
 public interface LoginModelImpl {
 
-    void Login(String phone,String password);
+    void Login(Map<String, String> params);
 
 }

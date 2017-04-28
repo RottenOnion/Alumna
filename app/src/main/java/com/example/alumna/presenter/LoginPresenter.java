@@ -14,7 +14,13 @@ public class LoginPresenter implements LoginPresenterImpl{
     private LoginViewImpl lView;
     private LoginModelImpl lModel;
     public LoginPresenter(LoginViewImpl view){
+
         lView=view;
         lModel=new LoginModel();
+    }
+
+    public void Login(){
+
+        lModel.Login(lView.getLoginImfor());
     }
 }
