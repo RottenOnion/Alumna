@@ -52,5 +52,9 @@ public class UserBean {
         this.phone = phone;
     }
 
-
+    public void Print(){
+        System.out.println("head="+getHead());
+        System.out.println("username="+getUsername());
+        System.out.println("phone="+getPhone());
+    }
 }

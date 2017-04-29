@@ -1,7 +1,6 @@
 package com.example.alumna.utils;
 
 
-
 import java.io.IOException;
 
 import okhttp3.Call;
@@ -18,8 +17,9 @@ import okhttp3.Response;
 
 public class HttpConnectUtil {
 
-    String Url;
-    String Data;
+    private String Url;
+    private String Data;
+    private String result;
 
     public HttpConnectUtil(String url,String data){
         Url=url;
@@ -35,10 +35,8 @@ public class HttpConnectUtil {
 
         OkHttpClient client=new OkHttpClient();
 
-
-        Request request = new Request.Builder()
+        Request request = new Request.Builder().url(Url)
                 .post(body)
-                .url(Url)
                 .build();
 
         try {
@@ -47,13 +45,17 @@ public class HttpConnectUtil {
                 public void onFailure(Call call, IOException e) {
                     //失败
                     System.out.println("failed");
-
                 }
 
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
-                    System.out.println("success");
 
+                    if (response.isSuccessful()){
+                        //System.out.println(response.body().toString());
+                        result=response.body().string();
+                        System.out.println(result);
+
+                    }
                 }
             });
         }catch (Exception e){

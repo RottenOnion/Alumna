@@ -1,10 +1,11 @@
 package com.example.alumna.model;
 
-import android.os.Looper;
-
+import com.example.alumna.bean.UserBean;
 import com.example.alumna.model.Interface.LoginModelImpl;
 import com.example.alumna.utils.DataUtils;
 import com.example.alumna.utils.HttpConnectUtil;
+import com.google.gson.Gson;
+
 
 import java.net.URLEncoder;
 import java.util.HashMap;
@@ -24,11 +25,12 @@ public class LoginModel implements LoginModelImpl{
             @Override
             public void run() {
 
+                //url
                 StringBuffer url= new StringBuffer(DataUtils.BASEURL);
                 url.append(DataUtils.LOGININ);
 
+                //data
                 StringBuffer builder=new StringBuffer();
-
                 if (null != params && !params.isEmpty()){
                     builder.append("{");
                     for (HashMap.Entry<String, String> entry : params.entrySet()){
@@ -42,10 +44,23 @@ public class LoginModel implements LoginModelImpl{
                 }
 
                 HttpConnectUtil login=new HttpConnectUtil(url.toString(),builder.toString());
-                System.out.print(builder);
+
                 login.HttpPost();
+
+
             }
         }).start();
 
     }
+
+    void Parse(String result){
+        LoginResult lr=new Gson().fromJson(result,LoginResult.class);
+        lr.user.Print();
+    }
+
+    class LoginResult{
+        public String Status;
+        public UserBean user;
+    }
+
 }

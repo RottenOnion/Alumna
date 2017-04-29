@@ -31,5 +31,6 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile files('src/libs/okhttp-3.7.0.jar')
     compile files('src/libs/okio-1.12.0.jar')
+    compile files('src/libs/gson-2.2.4.jar')
 }
 

@@ -21,6 +21,7 @@ import com.example.alumna.bean.UserBean;
 import com.example.alumna.R;
 import com.example.alumna.utils.DataUtils;
 import com.example.alumna.view.Interface.MainViewImpl;
+import com.example.alumna.widgets.PraiseListView;
 
 import java.util.ArrayList;
 
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
     private RecyclerView mLeftRvView;
     private ArrayList<LeftBean> mLeftDatas;
 
+    private PraiseListView praiseListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         mLeftRvView = (RecyclerView) findViewById(R.id.main_left_recycler);
+        praiseListView=(PraiseListView)findViewById(R.id.praiseListView);
 
 
         setSupportActionBar(toolbar);
@@ -63,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
         mLeftRvView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         mLeftRvView.setAdapter(leftAdapter);
 
-
+        praiseListView.setList(DataUtils.getList());
     }
 
     private void loadLeftDatas() {
