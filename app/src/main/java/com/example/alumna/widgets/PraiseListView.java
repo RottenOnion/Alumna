@@ -1,6 +1,5 @@
 package com.example.alumna.widgets;
 
-
 import android.content.Context;
 
 import android.text.Layout;
@@ -36,7 +35,7 @@ public class PraiseListView extends TextView {
     private List<UserBean> list;
     private OnItemClickListener onItemClickListener;
 
-    private final static int FONT_FRONT_COLOR = R.color.praise_listview_font_front_color;
+    private final static int FONT_FRONT_COLOR = R.color.username_font_front_color;
 
     public PraiseListView(Context context) {
         super(context);
@@ -124,23 +123,15 @@ public class PraiseListView extends TextView {
 class PraiseListViewMethod extends BaseMovementMethod {
 
     private final static int DEFAULT_CLICKABLE_COLOR_ID = R.color.default_clickable_color;
-    /**整个textView的背景色*/
-    private int textViewBgColor;
+
     /**点击部分文字时部分文字的背景色*/
-    private int clickableSpanBgColor;
+    private int clickableSpanBgColor=R.color.default_clickable_color;
 
     private BackgroundColorSpan mBgSpan;
     private ClickableSpan[] mClickLinks;
-    private boolean isPassToTv = false;
     /**
      * true：响应textview的点击事件， false：响应设置的clickableSpan事件
      */
-    public boolean isPassToTv() {
-        return isPassToTv;
-    }
-    private void setPassToTv(boolean isPassToTv){
-        this.isPassToTv = isPassToTv;
-    }
 
     public PraiseListViewMethod(){
         this.clickableSpanBgColor = MyApplication.getContext().getResources().getColor(DEFAULT_CLICKABLE_COLOR_ID);
@@ -168,7 +159,6 @@ class PraiseListViewMethod extends BaseMovementMethod {
             mClickLinks = buffer.getSpans(off, off, ClickableSpan.class);
             if(mClickLinks.length > 0){
                 // 点击的是Span区域，不要把点击事件传递
-                setPassToTv(false);
                 Selection.setSelection(buffer,
                         buffer.getSpanStart(mClickLinks[0]),
                         buffer.getSpanEnd(mClickLinks[0]));
@@ -178,17 +168,13 @@ class PraiseListViewMethod extends BaseMovementMethod {
                         buffer.getSpanStart(mClickLinks[0]),
                         buffer.getSpanEnd(mClickLinks[0]),
                         Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            }else{
-                setPassToTv(true);
-                // textview选中效果
-                widget.setBackgroundColor(textViewBgColor);
             }
-
-        }else if(action == MotionEvent.ACTION_UP){
-            if(mClickLinks.length > 0){
-                mClickLinks[0].onClick(widget);
-                if(mBgSpan != null){//移除点击时设置的背景span
-                    buffer.removeSpan(mBgSpan);
+            }
+            else if(action == MotionEvent.ACTION_UP){
+                 if(mClickLinks.length > 0){
+                    mClickLinks[0].onClick(widget);
+                     if(mBgSpan != null){//移除点击时设置的背景span
+                        buffer.removeSpan(mBgSpan);
                 }
             }else{
 

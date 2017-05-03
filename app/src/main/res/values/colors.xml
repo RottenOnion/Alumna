@@ -8,6 +8,8 @@
 
     <color name="transparent">#00000000</color>
     <color name="default_clickable_color">#cccccc</color>
-    <color name="praise_listview_font_front_color">#267aa9</color>
+    <color name="listview_bg_color">#faefef</color>
+    <color name="listview_clickable_color">#cccccc</color>
+    <color name="username_font_front_color">#1500fe</color>
 
 </resources>

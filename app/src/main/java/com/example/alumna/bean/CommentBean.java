@@ -8,6 +8,7 @@ public class CommentBean {
     private int cid;
     private int uid;
     private int tid;
+    private UserBean user;
     private String comment;
     private String time;
 
@@ -45,5 +46,13 @@ public class CommentBean {
 
     public String getTime() {
         return time;
+    }
+
+    public UserBean getUser() {
+        return user;
+    }
+
+    public void setUser(UserBean user) {
+        this.user = user;
     }
 }
