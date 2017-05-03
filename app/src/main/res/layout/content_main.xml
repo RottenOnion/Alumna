@@ -10,26 +10,11 @@
 
     tools:showIn="@layout/app_bar_main">
 
-    <com.example.alumna.widgets.PraiseListView
-        android:id="@+id/praiseListView"
-        android:layout_width="344dp"
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:lineSpacingMultiplier="1.1"
-        android:textSize="14sp"
-        tools:layout_editor_absoluteX="387dp"
-        tools:layout_editor_absoluteY="-114dp" />
-
-    <com.example.alumna.widgets.CommentListView
-        android:id="@+id/commenlistview"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:lineSpacingMultiplier="1.1"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent" />
-
+        android:id="@+id/topiclist"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp">
+    </android.support.v7.widget.RecyclerView>
 </android.support.constraint.ConstraintLayout>

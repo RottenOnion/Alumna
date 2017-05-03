@@ -8,11 +8,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.alumna.MyApplication;
 import com.example.alumna.adapter.LeftDrawerAdapter;
 import com.example.alumna.bean.CommentBean;
 import com.example.alumna.bean.LeftBean;
@@ -20,6 +22,7 @@ import com.example.alumna.bean.TopicBean;
 import com.example.alumna.bean.UserBean;
 import com.example.alumna.R;
 import com.example.alumna.utils.DataUtils;
+import com.example.alumna.view.Adapter.TopicListAdapter;
 import com.example.alumna.view.Interface.MainViewImpl;
 import com.example.alumna.widgets.CommentListView;
 import com.example.alumna.widgets.PraiseListView;
@@ -31,8 +34,9 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
     private RecyclerView mLeftRvView;
     private ArrayList<LeftBean> mLeftDatas;
 
-    private PraiseListView praiseListView;
-    private CommentListView commentListView;
+    //private PraiseListView praiseListView;
+    //private CommentListView commentListView;
+    private RecyclerView topiclist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +45,17 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         mLeftRvView = (RecyclerView) findViewById(R.id.main_left_recycler);
 
-        praiseListView=(PraiseListView)findViewById(R.id.praiseListView);
-        commentListView=(CommentListView)findViewById(R.id.commenlistview);
+        {
+            //praiseListView=(PraiseListView)findViewById(R.id.praiseListView);
+            //commentListView=(CommentListView)findViewById(R.id.commenlistview);
+            topiclist = (RecyclerView) findViewById(R.id.topiclist);
+            TopicListAdapter adapter=new TopicListAdapter(MyApplication.getContext());
+            LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+            layoutManager.setOrientation(OrientationHelper.VERTICAL);
+            topiclist.setLayoutManager(layoutManager);
+            topiclist.setAdapter(adapter);
 
-
+        }
         setSupportActionBar(toolbar);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -70,8 +81,8 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
         mLeftRvView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         mLeftRvView.setAdapter(leftAdapter);
 
-        praiseListView.setList(DataUtils.getList());
-        commentListView.setList(DataUtils.getCommentlist());
+        //praiseListView.setList(DataUtils.getList());
+        //commentListView.setList(DataUtils.getCommentlist());
     }
 
     private void loadLeftDatas() {
