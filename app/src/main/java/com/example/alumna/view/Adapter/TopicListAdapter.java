@@ -12,17 +12,18 @@ import com.example.alumna.utils.DataUtils;
 
 import java.util.ArrayList;
 
+import static com.example.alumna.utils.ParseUtil.StringParseTime;
 
 
 public class TopicListAdapter extends RecyclerView.Adapter<TextViewHolder>{
 
-    private ArrayList<TopicBean> list=new ArrayList<TopicBean>() ;
+    private ArrayList<TopicBean> list ;
     private Context context;
     private LayoutInflater inflater;
 
-    public TopicListAdapter(Context context){
+    public TopicListAdapter(Context context,ArrayList<TopicBean> list){
         this.context=context;
-        list.add(new TopicBean(1));
+        this.list=list;
     }
 
     @Override
@@ -41,8 +42,14 @@ public class TopicListAdapter extends RecyclerView.Adapter<TextViewHolder>{
 
 
     public void onBindViewHolder(TextViewHolder holder, int position) {
+        holder.viewType=Integer.valueOf(list.get(position).getType());
+        holder.imfor.setText(list.get(position).getImfor());
+        holder.name.setText(list.get(position).getUsername());
+        holder.location.setText(list.get(position).getLocation());
+        holder.time.setText(StringParseTime(list.get(position).getTime()));
         holder.commentListView.setList(DataUtils.getCommentlist());
         holder.praiseListView.setList(DataUtils.getList());
+        holder.deleteBtn.setVisibility(View.GONE);
     }
 
     public int getItemCount() {

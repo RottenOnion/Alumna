@@ -3,6 +3,7 @@ package com.example.alumna.bean;
 public class TopicBean {
     private int tid;
     private int uid;
+    private String username;
     private String location;
     private String type;
     private String imfor;
@@ -68,5 +69,13 @@ public class TopicBean {
 
     public void setCommentMum(int commentMum) {
         this.commentMum = commentMum;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

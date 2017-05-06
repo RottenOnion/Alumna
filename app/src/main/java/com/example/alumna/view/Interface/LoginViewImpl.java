@@ -8,5 +8,5 @@ import java.util.Map;
  */
 
 public interface LoginViewImpl {
-    Map<String, String> getLoginImfor() ;
+    Map<String, Object> getLoginImfor() ;
 }

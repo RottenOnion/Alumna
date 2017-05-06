@@ -4,14 +4,29 @@ import com.example.alumna.bean.CommentBean;
 import com.example.alumna.bean.TopicBean;
 import com.example.alumna.bean.UserBean;
 import com.example.alumna.model.Interface.MainModelImpl;
+import com.example.alumna.utils.DataUtils;
+import com.example.alumna.utils.Http.HttpRequestCallback;
+import com.example.alumna.utils.Http.HttpUtil;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
+
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import okhttp3.Call;
 
 /**
  * Created by Administrator on 2017/4/25.
  */
 
 public class MainModel implements MainModelImpl {
+
     @Override
     public String getBackground(int uid) {
         //先查找本地，找到就返回，然后后台访问服务器获取背景图路径
@@ -24,10 +39,18 @@ public class MainModel implements MainModelImpl {
     }
 
     @Override
-    public ArrayList<TopicBean> getTopicList(int uid) {
+    public ArrayList<TopicBean> getTopicList(int uid,HttpRequestCallback callback) {
         //发送uid和时间戳给服务器，返回动态列表
-        return null;
+        String url=new String(DataUtils.BASEURL+DataUtils.GETTOPIC);
+
+        Map<String,Object> params=new HashMap<>();
+        params.put("uid",uid);
+
+        HttpUtil gettopic=new HttpUtil();
+        gettopic.PostRequest(url, params, callback);
+        return  null;
     }
+
 
     @Override
     /*点赞*/

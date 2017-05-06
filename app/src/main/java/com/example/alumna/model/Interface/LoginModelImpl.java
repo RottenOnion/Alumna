@@ -8,6 +8,6 @@ import java.util.Map;
 
 public interface LoginModelImpl {
 
-    void Login(Map<String, String> params);
+    void Login(Map<String, Object> params);
 
 }

@@ -21,7 +21,10 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
 
     public int viewType;
     public ImageView head;
-    public TextView name,time,location;
+    public TextView name,time,location,imfor;
+
+    public TextView deleteBtn;
+    public ImageView snsBtn;
 
     public PraiseListView praiseListView;
     public CommentListView commentListView;
@@ -36,6 +39,10 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
         name=(TextView)itemView.findViewById(R.id.nameTv);
         time=(TextView)itemView.findViewById(R.id.timeTv);
         location=(TextView)itemView.findViewById(R.id.locationTv);
+        imfor=(TextView)itemView.findViewById(R.id.imforTv);
+        deleteBtn=(TextView)itemView.findViewById(R.id.deleteBtn);
+
+        snsBtn=(ImageView)itemView.findViewById(R.id.snsBtn);
 
         praiseListView=(PraiseListView)itemView.findViewById(R.id.praiseList);
         commentListView=(CommentListView)itemView.findViewById(R.id.commentList);

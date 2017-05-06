@@ -2,13 +2,9 @@ package com.example.alumna.model;
 
 import com.example.alumna.bean.UserBean;
 import com.example.alumna.model.Interface.LoginModelImpl;
-import com.example.alumna.utils.DataUtils;
-import com.example.alumna.utils.HttpConnectUtil;
+import com.example.alumna.utils.Http.HttpUtil;
 import com.google.gson.Gson;
 
-
-import java.net.URLEncoder;
-import java.util.HashMap;
 import java.util.Map;
 
 
@@ -18,39 +14,8 @@ import java.util.Map;
 
 public class LoginModel implements LoginModelImpl{
     @Override
-    public void Login(final Map<String, String> params) {
-
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                //url
-                StringBuffer url= new StringBuffer(DataUtils.BASEURL);
-                url.append(DataUtils.LOGININ);
-
-                //data
-                StringBuffer builder=new StringBuffer();
-                if (null != params && !params.isEmpty()){
-                    builder.append("{");
-                    for (HashMap.Entry<String, String> entry : params.entrySet()){
-                        builder.append("\"").append(entry.getKey()).append("\"").
-                                append(":").
-                                append("\"").append(URLEncoder.encode(entry.getValue())).append("\"").
-                                append(",");
-                    }
-                    builder.deleteCharAt(builder.length() - 1);
-                    builder.append("}");
-                }
-
-                HttpConnectUtil login=new HttpConnectUtil(url.toString(),builder.toString());
-
-                login.HttpPost();
-
-
-            }
-        }).start();
-
+    public void Login(final Map<String, Object> params) {
+        HttpUtil login=new HttpUtil();
     }
 
     void Parse(String result){

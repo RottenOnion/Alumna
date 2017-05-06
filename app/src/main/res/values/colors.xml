@@ -6,6 +6,7 @@
     <color name="plain">#ececec</color>
 
 
+    <color name="black">#000</color>
     <color name="transparent">#00000000</color>
     <color name="default_clickable_color">#cccccc</color>
     <color name="listview_bg_color">#faefef</color>

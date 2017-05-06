@@ -4,6 +4,7 @@ package com.example.alumna.model.Interface;
 import com.example.alumna.bean.CommentBean;
 import com.example.alumna.bean.TopicBean;
 import com.example.alumna.bean.UserBean;
+import com.example.alumna.utils.Http.HttpRequestCallback;
 
 import java.util.ArrayList;
 
@@ -16,7 +17,7 @@ public interface MainModelImpl {
 
     UserBean getImfor(int uid);
 
-    ArrayList<TopicBean> getTopicList(int uid);
+    ArrayList<TopicBean> getTopicList(int uid, HttpRequestCallback callback);
 
     void setLike(int uid, int tid);
 
