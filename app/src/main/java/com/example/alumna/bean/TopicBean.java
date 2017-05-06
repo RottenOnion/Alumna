@@ -9,7 +9,7 @@ public class TopicBean {
     private String imfor;
     private String time;
     private int likeNum;
-    private int commentMum;
+    private int commentNum;
 
     public TopicBean(int id) {
         tid = id;
@@ -63,12 +63,12 @@ public class TopicBean {
         this.likeNum = likeNum;
     }
 
-    public int getCommentMum() {
-        return commentMum;
+    public int getCommentNum() {
+        return commentNum;
     }
 
-    public void setCommentMum(int commentMum) {
-        this.commentMum = commentMum;
+    public void setCommentNum(int commentNum) {
+        this.commentNum = commentNum;
     }
 
     public String getUsername() {
@@ -77,5 +77,13 @@ public class TopicBean {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public int getTid() {
+        return tid;
+    }
+
+    public void setTid(int tid) {
+        this.tid = tid;
     }
 }

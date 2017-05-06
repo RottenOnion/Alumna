@@ -17,7 +17,7 @@ public interface MainModelImpl {
 
     UserBean getImfor(int uid);
 
-    ArrayList<TopicBean> getTopicList(int uid, HttpRequestCallback callback);
+    void getTopicList(int uid, HttpRequestCallback callback);
 
     void setLike(int uid, int tid);
 
@@ -25,6 +25,6 @@ public interface MainModelImpl {
 
     void setComment(int uid, int tid, String comment);
 
-    ArrayList<CommentBean> getComment(int tid);
+    void getComment(int tid,HttpRequestCallback callback);
 
 }

@@ -22,4 +22,6 @@ public interface MainPresenterImpl {
     void LikeTopic(int uid, int tid);
 
     void CommentTopic(int uid, int tid, String comment);
+
+    void getCommentList(int tid);
 }

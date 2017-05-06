@@ -27,6 +27,7 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
     public ImageView snsBtn;
 
     public PraiseListView praiseListView;
+    public View line;
     public CommentListView commentListView;
 
     public TopicListViewHolder(View itemView,int type) {
@@ -45,6 +46,8 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
         snsBtn=(ImageView)itemView.findViewById(R.id.snsBtn);
 
         praiseListView=(PraiseListView)itemView.findViewById(R.id.praiseList);
+
+        line=(View)itemView.findViewById(R.id.line);
         commentListView=(CommentListView)itemView.findViewById(R.id.commentList);
     }
 

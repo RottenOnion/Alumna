@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
     //private PraiseListView praiseListView;
     //private CommentListView commentListView;
     private RecyclerView topiclist;
+    TopicListAdapter adapter;
 
     private MainPresenter presenter;
     @Override
@@ -125,6 +126,16 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
 
 
     @Override
+    public void showProgressBar() {
+
+    }
+
+    @Override
+    public void hideProgressBar() {
+
+    }
+
+    @Override
     public void showBackground(String url) {
 
     }
@@ -136,12 +147,14 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
 
     @Override
     public void showTopicList(ArrayList<TopicBean> list) {
-        TopicListAdapter adapter=new TopicListAdapter(MyApplication.getContext(),list);
+        adapter=new TopicListAdapter(MyApplication.getContext(),list);
         topiclist.setAdapter(adapter);
     }
 
     @Override
     public void showComment(ArrayList<CommentBean> list) {
+        for (int i=0;i<adapter.getItemCount();++i){
+        }
 
     }
 }

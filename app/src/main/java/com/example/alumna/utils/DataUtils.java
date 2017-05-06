@@ -18,6 +18,8 @@ public class DataUtils {
     public static String BASEURL="http://123.207.66.152:8080/Myservlet/";
     public static String LOGININ="login";
     public static String GETTOPIC="gettopic";
+    public static String GETCOMMENT="getcomment";
+
 
 
     static {

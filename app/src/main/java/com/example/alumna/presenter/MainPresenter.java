@@ -1,5 +1,6 @@
 package com.example.alumna.presenter;
 
+import com.example.alumna.bean.CommentBean;
 import com.example.alumna.bean.TopicBean;
 import com.example.alumna.model.Interface.MainModelImpl;
 import com.example.alumna.model.MainModel;
@@ -49,12 +50,12 @@ public class MainPresenter implements MainPresenterImpl {
         mModel.getTopicList(uid,new HttpRequestCallback<String>() {
             @Override
             public void onStart() {
-
+                mView.showProgressBar();
             }
 
             @Override
             public void onFinish() {
-
+                mView.hideProgressBar();
             }
 
             @Override
@@ -88,7 +89,35 @@ public class MainPresenter implements MainPresenterImpl {
     @Override
     public void CommentTopic(int uid, int tid, String comment) {
         mModel.setComment(uid, tid, comment);
+    }
 
-        mView.showComment(mModel.getComment(tid));
+    @Override
+    public void getCommentList(int tid) {
+        mModel.getComment(tid, new HttpRequestCallback<String>() {
+            @Override
+            public void onStart() {
+            }
+
+            @Override
+            public void onFinish() {
+            }
+
+            @Override
+            public void onResponse(String result) {
+                JsonObject jsonObject=new JsonParser().parse(result.toString()).getAsJsonObject();
+                JsonArray jsonArray=jsonObject.getAsJsonArray("List");
+                Gson gson=new Gson();
+                ArrayList<CommentBean>list=new ArrayList<>();
+                for (JsonElement bean:jsonArray){
+                    CommentBean comment=gson.fromJson(bean,new TypeToken<CommentBean>(){ }.getType());
+                    list.add(comment);
+                }
+            }
+
+            @Override
+            public void onFailure(Call call) {
+
+            }
+        });
     }
 }

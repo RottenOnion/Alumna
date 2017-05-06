@@ -13,6 +13,10 @@ import java.util.ArrayList;
 
 public interface MainViewImpl {
 
+    void showProgressBar();
+
+    void hideProgressBar();
+
     void showBackground(String url);
 
     void showImfor(UserBean user);

@@ -39,7 +39,7 @@ public class MainModel implements MainModelImpl {
     }
 
     @Override
-    public ArrayList<TopicBean> getTopicList(int uid,HttpRequestCallback callback) {
+    public void getTopicList(int uid,HttpRequestCallback callback) {
         //发送uid和时间戳给服务器，返回动态列表
         String url=new String(DataUtils.BASEURL+DataUtils.GETTOPIC);
 
@@ -48,7 +48,6 @@ public class MainModel implements MainModelImpl {
 
         HttpUtil gettopic=new HttpUtil();
         gettopic.PostRequest(url, params, callback);
-        return  null;
     }
 
 
@@ -72,7 +71,14 @@ public class MainModel implements MainModelImpl {
 
     @Override
     /*返回该动态下的评论列表*/
-    public ArrayList<CommentBean> getComment(int tid) {
-        return null;
+    public void getComment(int tid,HttpRequestCallback callback) {
+        String url=new String(DataUtils.BASEURL+DataUtils.GETTOPIC);
+
+        Map<String,Object> params=new HashMap<>();
+        params.put("tid",tid);
+
+        HttpUtil getComment=new HttpUtil();
+        getComment.PostRequest(url, params, callback);
+
     }
 }

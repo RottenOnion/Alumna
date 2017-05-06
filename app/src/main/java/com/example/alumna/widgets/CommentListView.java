@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.alumna.MyApplication;
 import com.example.alumna.R;
@@ -103,7 +104,7 @@ public class CommentListView extends LinearLayout{
         }
         View convertView = layoutInflater.inflate(R.layout.comment_item,null, false);
         TextView commentTv = (TextView) convertView.findViewById(R.id.commentTv);
-
+        final CommentMovementMethod movementMethod=new CommentMovementMethod();
         final CommentBean comment=list.get(index);
 
         SpannableStringBuilder builder = new SpannableStringBuilder();
@@ -114,7 +115,17 @@ public class CommentListView extends LinearLayout{
         builder.append(comment.getComment());
         System.out.println(builder.toString());
         commentTv.setText(builder);
-        commentTv.setMovementMethod(new CommentMovementMethod());
+        commentTv.setMovementMethod(movementMethod);
+        commentTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(movementMethod.isPassToTv()){
+                    if(onItemClickListener!=null){
+                        onItemClickListener.onItemClick(index);
+                    }
+                }
+            }
+        });
         return convertView;
     }
 
@@ -125,7 +136,7 @@ public class CommentListView extends LinearLayout{
         SpanText.setSpan(new ClickableSpan() {
                              @Override
                              public void onClick(View widget) {
-                           //      Toast.makeText(MyApplication.getContext(), textStr + " &id = " + id, Toast.LENGTH_SHORT).show();
+                                 Toast.makeText(MyApplication.getContext(), textStr , Toast.LENGTH_SHORT).show();
                              }
                              public void updateDrawState(TextPaint ds) {
                                  ds.setUnderlineText(false);
