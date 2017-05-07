@@ -6,8 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.alumna.MainActivity"
+    tools:context="com.example.alumna.view.MainActivity"
 
     tools:showIn="@layout/app_bar_main">
 
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/topiclist"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp">
+    </android.support.v7.widget.RecyclerView>
 </android.support.constraint.ConstraintLayout>
