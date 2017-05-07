@@ -1,25 +1,17 @@
 package com.example.alumna.model;
 
-import com.example.alumna.bean.CommentBean;
-import com.example.alumna.bean.TopicBean;
 import com.example.alumna.bean.UserBean;
 import com.example.alumna.model.Interface.MainModelImpl;
 import com.example.alumna.utils.DataUtils;
 import com.example.alumna.utils.Http.HttpRequestCallback;
 import com.example.alumna.utils.Http.HttpUtil;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.reflect.TypeToken;
+
 
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import okhttp3.Call;
 
 /**
  * Created by Administrator on 2017/4/25.
@@ -41,12 +33,16 @@ public class MainModel implements MainModelImpl {
     @Override
     public void getTopicList(int uid,HttpRequestCallback callback) {
         //发送uid和时间戳给服务器，返回动态列表
-        String url=new String(DataUtils.BASEURL+DataUtils.GETTOPIC);
+        String url=new String(DataUtils.BASEURL+DataUtils.GETTOPIC
+        );
 
+        //TimerStat time=new TimerStat(1493177167000);
         Map<String,Object> params=new HashMap<>();
         params.put("uid",uid);
+        //params.put("location","123");
+        //params.put("time",time);
 
-        HttpUtil gettopic=new HttpUtil();
+        HttpUtil gettopic=HttpUtil.getInstance();
         gettopic.PostRequest(url, params, callback);
     }
 
@@ -77,7 +73,7 @@ public class MainModel implements MainModelImpl {
         Map<String,Object> params=new HashMap<>();
         params.put("tid",tid);
 
-        HttpUtil getComment=new HttpUtil();
+        HttpUtil getComment=HttpUtil.getInstance();
         getComment.PostRequest(url, params, callback);
 
     }

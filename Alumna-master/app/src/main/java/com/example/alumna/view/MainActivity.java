@@ -14,9 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.alumna.adapter.LeftDrawerAdapter;
-<<<<<<< HEAD:app/src/main/java/com/example/alumna/MainActivity.java
-import com.example.alumna.bean.LeftBean;
-=======
 import com.example.alumna.bean.CommentBean;
 import com.example.alumna.bean.LeftBean;
 import com.example.alumna.bean.TopicBean;
@@ -24,7 +21,6 @@ import com.example.alumna.bean.UserBean;
 import com.example.alumna.R;
 import com.example.alumna.utils.DataUtils;
 import com.example.alumna.view.Interface.MainViewImpl;
->>>>>>> 93f7c240f58d818fc132483b13d99158c13eea24:Alumna-master/app/src/main/java/com/example/alumna/view/MainActivity.java
 
 import java.util.ArrayList;
 

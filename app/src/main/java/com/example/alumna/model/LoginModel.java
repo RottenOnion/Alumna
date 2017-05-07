@@ -15,7 +15,7 @@ import java.util.Map;
 public class LoginModel implements LoginModelImpl{
     @Override
     public void Login(final Map<String, Object> params) {
-        HttpUtil login=new HttpUtil();
+        HttpUtil login=HttpUtil.getInstance();
     }
 
     void Parse(String result){

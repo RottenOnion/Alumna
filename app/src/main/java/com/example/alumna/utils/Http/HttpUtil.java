@@ -24,25 +24,28 @@ public class HttpUtil {
 
     private Handler handler;
     private OkHttpClient client;
-    //private static HttpUtil instance;
+    private static HttpUtil instance;
 
-    public HttpUtil(){
+    private HttpUtil(){
         client = new OkHttpClient();
         handler = new Handler(Looper.getMainLooper());
-
     }
-
-//    public static synchronized HttpUtil getInstance()
-//    {
-//        if (instance == null)
-//        {
-//            synchronized (HttpUtil.class)
-//            {
-//                instance = new HttpUtil();
-//            }
-//        }
-//        return instance;
-//    }
+    /*
+    单例模式，确保只有一个线程访问网络
+     */
+    public static synchronized HttpUtil getInstance()
+    {
+        if (instance == null)
+        {
+            synchronized (HttpUtil.class)
+            {
+                if (instance==null){
+                    instance = new HttpUtil();
+                }
+            }
+        }
+        return instance;
+    }
 
     public void PostRequest(final String url, final Map<String, Object> params, final HttpRequestCallback callback){
         String data= ParseUtil.MapParseString(params);
@@ -68,7 +71,7 @@ public class HttpUtil {
             public void onResponse(Call call, Response response) throws IOException {
                 if (response!=null&&response.isSuccessful()){
                     String result=response.body().string();
-                    System.out.println(result);
+                    //System.out.println(result);
                    onSuccessJsonStringMethod(result,callback);
                 }
             }

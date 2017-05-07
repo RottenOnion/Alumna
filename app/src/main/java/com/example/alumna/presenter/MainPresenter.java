@@ -1,5 +1,7 @@
 package com.example.alumna.presenter;
 
+import android.util.Log;
+
 import com.example.alumna.bean.CommentBean;
 import com.example.alumna.bean.TopicBean;
 import com.example.alumna.model.Interface.MainModelImpl;
@@ -60,7 +62,7 @@ public class MainPresenter implements MainPresenterImpl {
 
             @Override
             public void onResponse(String result) {
-                JsonObject jsonObject=new JsonParser().parse(result.toString()).getAsJsonObject();
+                JsonObject jsonObject=new JsonParser().parse(result).getAsJsonObject();
                 JsonArray jsonArray=jsonObject.getAsJsonArray("List");
                 Gson gson=new Gson();
                 ArrayList<TopicBean>list=new ArrayList<>();

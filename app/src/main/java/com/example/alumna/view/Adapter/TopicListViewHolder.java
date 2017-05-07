@@ -6,9 +6,18 @@ import android.view.ViewStub;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.alumna.MyApplication;
 import com.example.alumna.R;
+import com.example.alumna.utils.DataUtils;
+import com.example.alumna.utils.Http.HttpRequestCallback;
+import com.example.alumna.utils.Http.HttpUtil;
+import com.example.alumna.utils.Image.ImageUtil;
 import com.example.alumna.widgets.CommentListView;
 import com.example.alumna.widgets.PraiseListView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Leebobo on 2017/5/3.
@@ -53,4 +62,26 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
 
     public abstract void initSubView(int viewType, ViewStub viewStub);
 
+    protected void loadhead(String url){
+        //url="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=966093302,1751994111&fm=58";
+        ImageUtil.LoadImageFromUrl(this.head,url);
+    }
+
+    protected void loadCommentList(int tid, HttpRequestCallback callback){
+        String url=new String(DataUtils.BASEURL+DataUtils.GETCOMMENT);
+        Map<String,Object> params=new HashMap<>();
+        params.put("tid",tid);
+
+        HttpUtil getcomment=HttpUtil.getInstance();
+        getcomment.PostRequest(url, params, callback);
+    }
+
+    protected void loadLikeList(int tid,HttpRequestCallback callback){
+        String url=new String(DataUtils.BASEURL+DataUtils.GETLIKE);
+        Map<String,Object> params=new HashMap<>();
+        params.put("tid",tid);
+
+        HttpUtil getlikelist=HttpUtil.getInstance();
+        getlikelist.PostRequest(url, params, callback);
+    }
 }

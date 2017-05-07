@@ -10,6 +10,7 @@ public class TopicBean {
     private String time;
     private int likeNum;
     private int commentNum;
+    private String head;
 
     public TopicBean(int id) {
         tid = id;
@@ -85,5 +86,13 @@ public class TopicBean {
 
     public void setTid(int tid) {
         this.tid = tid;
+    }
+
+    public String getHead() {
+        return head;
+    }
+
+    public void setHead(String head) {
+        this.head = head;
     }
 }

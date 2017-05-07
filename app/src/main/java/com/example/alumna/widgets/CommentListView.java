@@ -13,6 +13,7 @@ import android.text.style.BackgroundColorSpan;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -113,7 +114,7 @@ public class CommentListView extends LinearLayout{
         builder.append(": ");
         //comment
         builder.append(comment.getComment());
-        System.out.println(builder.toString());
+        //Log.i(this.getClass().getName(),builder.toString());
         commentTv.setText(builder);
         commentTv.setMovementMethod(movementMethod);
         commentTv.setOnClickListener(new View.OnClickListener() {
