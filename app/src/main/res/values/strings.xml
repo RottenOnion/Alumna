@@ -30,4 +30,10 @@
     <string name="information">我的信息</string>
     <string name="name">添加姓名信息</string>
     <string name="gender">添加性别信息</string>
+    <string name="school">添加学校名称</string>
+    <string name="grade">添加年级信息</string>
+    <string name="home">添加家乡信息</string>
+    <string name="freq_location">经常出没的地点</string>
+    <string name="signature">添加你的个性签名</string>
+    <string name="wechat_infor">添加微信账号</string>
 </resources>

@@ -3,91 +3,260 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/head_view"
             android:layout_width="180dp"
             android:layout_height="180dp"
-            android:src="@drawable/test_touxiang"
-            android:scaleType="centerCrop"
+            android:layout_gravity="center_horizontal"
             android:layout_margin="20dp"
-            android:layout_gravity="center_horizontal"/>
+            android:scaleType="centerCrop"
+            android:src="@drawable/test_touxiang" />
 
-        <view
+        <View
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginTop="10dp"
+            android:layout_height="1dp"
             android:layout_marginBottom="10dp"
-            android:background="#edeaea"/>
+            android:layout_marginTop="10dp"
+            android:background="#edeaea" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
             android:text="@string/information"
-            android:textSize="16sp"
-            android:textColor="@color/colorThemeRed"/>
+            android:textColor="@color/colorThemeRed"
+            android:textColorHint="@color/textHintGray"
+            android:textSize="14sp" />
 
         <LinearLayout
             android:id="@+id/name_layout"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:orientation="horizontal"
+            android:layout_height="25dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp"
             android:gravity="center_vertical"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp">
+            android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginLeft="15dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginRight="30dp"
-                android:src="@drawable/icon_name"/>
+                android:src="@drawable/icon_name" />
 
-            <EditText
+            <TextView
                 android:id="@+id/name_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:hint="@string/name"
                 android:textColor="@android:color/black"
-                android:background="@null"
-                android:hint="@string/name"/>
+                android:textColorHint="@color/textHintGray"
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/gender_layout"
+            android:id="@+id/school_layout"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:orientation="horizontal"
+            android:layout_height="25dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp"
             android:gravity="center_vertical"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp">
+            android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginLeft="15dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginRight="30dp"
-                android:src="@drawable/icon_name"/>
+                android:src="@drawable/icon_school" />
 
-            <EditText
-                android:id="@+id/gender_text"
+            <TextView
+                android:id="@+id/school_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:hint="@string/school"
                 android:textColor="@android:color/black"
-                android:background="@null"
-                android:hint="@string/gender"/>
+                android:textColorHint="@color/textHintGray"
+                android:textSize="16sp" />
         </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/grade_layout"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="30dp"
+                android:src="@drawable/icon_grade" />
+
+            <TextView
+                android:id="@+id/grade_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/grade"
+                android:textColor="@android:color/black"
+                android:textColorHint="@color/textHintGray"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/home_layout"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="30dp"
+                android:src="@drawable/icon_home" />
+
+            <TextView
+                android:id="@+id/home_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/home"
+                android:textColor="@android:color/black"
+                android:textColorHint="@color/textHintGray"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/location_layout"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="30dp"
+                android:src="@drawable/icon_location" />
+
+            <TextView
+                android:id="@+id/location_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/freq_location"
+                android:textColor="@android:color/black"
+                android:textColorHint="@color/textHintGray"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/signature_layout"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="30dp"
+                android:src="@drawable/icon_work" />
+
+            <TextView
+                android:id="@+id/signature_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/signature"
+                android:textColor="@android:color/black"
+                android:textColorHint="@color/textHintGray"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="#edeaea" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:text="我的社交账号"
+            android:textColor="@color/colorThemeRed"
+
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:id="@+id/wechat_layout"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="30dp"
+                android:src="@drawable/icon_wechat" />
+
+            <TextView
+                android:id="@+id/wechat_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/wechat_infor"
+                android:textColor="@android:color/black"
+                android:textColorHint="@color/textHintGray"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="20dp"
+            android:background="#edeaea" />
+
+
+
+
 
     </LinearLayout>
 
-
-
 </ScrollView>
+
+
+
+

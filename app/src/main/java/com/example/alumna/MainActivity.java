@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.alumna.adapter.LeftDrawerAdapter;
+import com.example.alumna.bean.LeftBean;
 
 import java.util.ArrayList;
 

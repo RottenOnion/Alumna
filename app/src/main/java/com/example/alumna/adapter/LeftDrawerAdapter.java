@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.alumna.LeftBean;
+import com.example.alumna.bean.LeftBean;
 import com.example.alumna.R;
 
 import java.util.ArrayList;

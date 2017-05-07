@@ -1,4 +1,4 @@
-package com.example.alumna;
+package com.example.alumna.bean;
 
 /**
  * Created by py on 2017/4/24.

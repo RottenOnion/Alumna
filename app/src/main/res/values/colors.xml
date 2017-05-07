@@ -6,4 +6,5 @@
     <color name="plain">#ececec</color>
     <color name="colorThemeRed">#be3434</color>
     <color name="colorPlainGray">#edeaea</color>
+    <color name="textHintGray">#b4b0b0</color>
 </resources>
