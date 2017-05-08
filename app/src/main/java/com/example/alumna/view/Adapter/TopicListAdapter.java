@@ -43,6 +43,20 @@ public class TopicListAdapter extends BaseRecycleViewAdapter{
         this.context=context;
         this.list=list;
     }
+    @Override
+    public int getItemViewType(int position) {
+
+        int itemType = 0;
+        TopicBean topic = list.get(position);
+        if (topic.TYPE_URL.equals(topic.getType())) {
+            itemType = CircleViewHolder.TYPE_URL;
+        } else if (CircleItem.TYPE_IMG.equals(item.getType())) {
+            itemType = CircleViewHolder.TYPE_IMAGE;
+        } else if(CircleItem.TYPE_VIDEO.equals(item.getType())){
+            itemType = CircleViewHolder.TYPE_VIDEO;
+        }
+        return itemType;
+    }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -53,7 +67,6 @@ public class TopicListAdapter extends BaseRecycleViewAdapter{
         }else if (viewType==TopicListViewHolder.TYPE_IMAGE){
            holder=new ImageViewHolder(view);
         }
-        //holder= new TextViewHolder(view);
         return holder;
     }
 
