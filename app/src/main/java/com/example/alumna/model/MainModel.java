@@ -33,14 +33,12 @@ public class MainModel implements MainModelImpl {
     @Override
     public void getTopicList(int uid,HttpRequestCallback callback) {
         //发送uid和时间戳给服务器，返回动态列表
-        String url=new String(DataUtils.BASEURL+DataUtils.GETTOPIC
-        );
+        String url=new String(DataUtils.BASEURL+DataUtils.INIT);
 
-        //TimerStat time=new TimerStat(1493177167000);
         Map<String,Object> params=new HashMap<>();
         params.put("uid",uid);
-        //params.put("location","123");
-        //params.put("time",time);
+        params.put("location","123");
+        params.put("time","149317700000");
 
         HttpUtil gettopic=HttpUtil.getInstance();
         gettopic.PostRequest(url, params, callback);

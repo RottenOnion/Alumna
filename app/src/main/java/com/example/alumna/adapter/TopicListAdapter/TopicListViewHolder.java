@@ -1,4 +1,4 @@
-package com.example.alumna.view.Adapter;
+package com.example.alumna.adapter.TopicListAdapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -6,8 +6,6 @@ import android.view.ViewStub;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.example.alumna.MyApplication;
 import com.example.alumna.R;
 import com.example.alumna.utils.DataUtils;
 import com.example.alumna.utils.Http.HttpRequestCallback;
@@ -63,7 +61,6 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
     public abstract void initSubView(int viewType, ViewStub viewStub);
 
     protected void loadhead(String url){
-        //url="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=966093302,1751994111&fm=58";
         ImageUtil.LoadImageFromUrl(this.head,url);
     }
 

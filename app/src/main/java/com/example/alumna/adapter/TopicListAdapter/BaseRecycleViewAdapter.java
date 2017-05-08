@@ -1,4 +1,4 @@
-package com.example.alumna.view.Adapter;
+package com.example.alumna.adapter.TopicListAdapter;
 
 import android.support.v7.widget.RecyclerView;
 

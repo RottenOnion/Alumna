@@ -1,4 +1,4 @@
-package com.example.alumna.view.Adapter;
+package com.example.alumna.adapter.TopicListAdapter;
 
 import android.view.View;
 import android.view.ViewStub;

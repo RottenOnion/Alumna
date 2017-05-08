@@ -1,20 +1,15 @@
-package com.example.alumna.view.Adapter;
+package com.example.alumna.adapter.TopicListAdapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.example.alumna.MyApplication;
 import com.example.alumna.R;
 import com.example.alumna.bean.CommentBean;
-import com.example.alumna.bean.JsonBean;
 import com.example.alumna.bean.TopicBean;
 import com.example.alumna.bean.UserBean;
-import com.example.alumna.utils.DataUtils;
 import com.example.alumna.utils.Http.HttpRequestCallback;
 import com.example.alumna.widgets.CommentListView;
 import com.example.alumna.widgets.PraiseListView;
@@ -32,8 +27,7 @@ import okhttp3.Call;
 import static com.example.alumna.utils.ParseUtil.StringParseTime;
 
 
-
-public class TopicListAdapter extends BaseRecycleViewAdapter{
+public class TopicListAdapter extends BaseRecycleViewAdapter {
 
     private ArrayList<TopicBean> list ;
     private Context context;
@@ -48,12 +42,10 @@ public class TopicListAdapter extends BaseRecycleViewAdapter{
 
         int itemType = 0;
         TopicBean topic = list.get(position);
-        if (topic.TYPE_URL.equals(topic.getType())) {
-            itemType = CircleViewHolder.TYPE_URL;
-        } else if (CircleItem.TYPE_IMG.equals(item.getType())) {
-            itemType = CircleViewHolder.TYPE_IMAGE;
-        } else if(CircleItem.TYPE_VIDEO.equals(item.getType())){
-            itemType = CircleViewHolder.TYPE_VIDEO;
+        if (TopicBean.TYPE_TEXT.equals(topic.getType())) {
+            itemType = TopicListViewHolder.TYPE_TEXT;
+        } else if (TopicBean.TYPE_IMAGE.equals(topic.getType())) {
+            itemType = TopicListViewHolder.TYPE_IMAGE;
         }
         return itemType;
     }
@@ -62,9 +54,9 @@ public class TopicListAdapter extends BaseRecycleViewAdapter{
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder holder = null;
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_topic_item,parent, false);
-        if (viewType==TopicListViewHolder.TYPE_TEXT) {
+        if (viewType== TopicListViewHolder.TYPE_TEXT) {
             holder= new TextViewHolder(view);
-        }else if (viewType==TopicListViewHolder.TYPE_IMAGE){
+        }else if (viewType== TopicListViewHolder.TYPE_IMAGE){
            holder=new ImageViewHolder(view);
         }
         return holder;
@@ -102,7 +94,7 @@ public class TopicListAdapter extends BaseRecycleViewAdapter{
     /*
     处理点赞列表
      */
-    private void setPraiseListView(final TopicListViewHolder holder,final int position){
+    private void setPraiseListView(final TopicListViewHolder holder, final int position){
         if(this.list.get(position).getLikeNum()>0){
 
             final int tid=list.get(position).getTid();
@@ -152,7 +144,7 @@ public class TopicListAdapter extends BaseRecycleViewAdapter{
     处理评论列表
      */
 
-    private void setCommentListView(final TopicListViewHolder holder,  final int position){
+    private void setCommentListView(final TopicListViewHolder holder, final int position){
         if(this.list.get(position).getCommentNum()>0){
 
             final int tid=list.get(position).getTid();

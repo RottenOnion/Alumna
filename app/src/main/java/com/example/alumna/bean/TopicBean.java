@@ -1,6 +1,9 @@
 package com.example.alumna.bean;
 
 public class TopicBean {
+    public static String TYPE_TEXT="1";
+    public static String TYPE_IMAGE="2";
+
     private int tid;
     private int uid;
     private String username;
