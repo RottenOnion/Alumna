@@ -25,16 +25,15 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
 
 import okhttp3.Call;
 
 import static com.example.alumna.utils.ParseUtil.StringParseTime;
 
 
-public class TopicListAdapter extends RecyclerView.Adapter<TextViewHolder>{
+
+public class TopicListAdapter extends BaseRecycleViewAdapter{
 
     private ArrayList<TopicBean> list ;
     private Context context;
@@ -46,21 +45,21 @@ public class TopicListAdapter extends RecyclerView.Adapter<TextViewHolder>{
     }
 
     @Override
-    public TextViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        TextViewHolder holder=null;
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        RecyclerView.ViewHolder holder = null;
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_topic_item,parent, false);
-//        if (viewType==TYPE_TEXT) {
-//             holder= new TextViewHolder(view);
-//        }else if (viewType==TYPE_IMAGE){
-//           //holder=new ImageViewHolder(view);
-//        }
-        holder= new TextViewHolder(view);
+        if (viewType==TopicListViewHolder.TYPE_TEXT) {
+            holder= new TextViewHolder(view);
+        }else if (viewType==TopicListViewHolder.TYPE_IMAGE){
+           holder=new ImageViewHolder(view);
+        }
+        //holder= new TextViewHolder(view);
         return holder;
     }
 
-
-
-    public void onBindViewHolder(TextViewHolder holder, int position) {
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder,final int position) {
+        final TopicListViewHolder holder = (TopicListViewHolder) viewHolder;
 
         holder.itemView.setTag(position);
         holder.viewType=Integer.valueOf(list.get(position).getType());
@@ -90,7 +89,7 @@ public class TopicListAdapter extends RecyclerView.Adapter<TextViewHolder>{
     /*
     处理点赞列表
      */
-    private void setPraiseListView(final TextViewHolder holder,final int position){
+    private void setPraiseListView(final TopicListViewHolder holder,final int position){
         if(this.list.get(position).getLikeNum()>0){
 
             final int tid=list.get(position).getTid();
@@ -140,7 +139,7 @@ public class TopicListAdapter extends RecyclerView.Adapter<TextViewHolder>{
     处理评论列表
      */
 
-    private void setCommentListView(final TextViewHolder holder,  final int position){
+    private void setCommentListView(final TopicListViewHolder holder,  final int position){
         if(this.list.get(position).getCommentNum()>0){
 
             final int tid=list.get(position).getTid();
