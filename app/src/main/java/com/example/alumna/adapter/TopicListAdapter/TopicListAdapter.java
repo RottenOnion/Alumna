@@ -2,17 +2,22 @@ package com.example.alumna.adapter.TopicListAdapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.alumna.R;
+import com.example.alumna.adapter.TopicListAdapter.ViewHolder.ImageViewHolder;
+import com.example.alumna.adapter.TopicListAdapter.ViewHolder.TextViewHolder;
+import com.example.alumna.adapter.TopicListAdapter.ViewHolder.TopicListViewHolder;
 import com.example.alumna.bean.CommentBean;
 import com.example.alumna.bean.TopicBean;
 import com.example.alumna.bean.UserBean;
 import com.example.alumna.utils.Http.HttpRequestCallback;
 import com.example.alumna.widgets.CommentListView;
 import com.example.alumna.widgets.PraiseListView;
+import com.example.alumna.widgets.SnsPopupWindow;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -36,6 +41,7 @@ public class TopicListAdapter extends BaseRecycleViewAdapter {
     public TopicListAdapter(Context context,ArrayList<TopicBean> list){
         this.context=context;
         this.list=list;
+
     }
     @Override
     public int getItemViewType(int position) {
@@ -85,6 +91,17 @@ public class TopicListAdapter extends BaseRecycleViewAdapter {
 
         //处理点赞列表
         setPraiseListView(holder,position);
+
+        //popupwindow
+        {
+            holder.popupWindow.setItemClickListener(new PopupItemClickListener(position,list.get(position)));
+            holder.snsBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    holder.popupWindow.showPopupWindow(view);
+                }
+            });
+        }
     }
 
     public int getItemCount() {
@@ -193,6 +210,50 @@ public class TopicListAdapter extends BaseRecycleViewAdapter {
 
         }else {
             holder.commentListView.setVisibility(View.GONE);
+        }
+    }
+
+    private class PopupItemClickListener implements SnsPopupWindow.OnItemClickListener{
+        //private String mFavorId;
+        //动态在列表中的位置
+        private int Position;
+        private long mLasttime = 0;
+        private TopicBean topic;
+
+        public PopupItemClickListener(int position, TopicBean topic){
+            //this.mFavorId = favorId;
+            this.Position = position;
+            this.topic = topic;
+        }
+
+        @Override
+        public void onItemClick(SnsPopupWindow.ActionItem actionitem, int position) {
+            switch (position) {
+                case 0://点赞、取消点赞
+                    if(System.currentTimeMillis()-mLasttime<700)//防止快速点击操作
+                        return;
+                    mLasttime = System.currentTimeMillis();
+//                    if(presenter != null){
+//                        if ("赞".equals(actionitem.mTitle.toString())) {
+//                            presenter.addFavort(this.position);
+//                        } else {//取消点赞
+//                            presenter.deleteFavort(this.position, mFavorId);
+//                        }
+//                    }
+                    Log.i(this.getClass().getName(),"like");
+                    break;
+                case 1://发布评论
+//                    if(presenter != null){
+//                        CommentConfig config = new CommentConfig();
+//                        config.circlePosition = this.position;
+//                        config.commentType = CommentConfig.Type.PUBLIC;
+//                        presenter.showEditTextBody(config);
+//                    }
+                    Log.i(this.getClass().getName(),"comment");
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

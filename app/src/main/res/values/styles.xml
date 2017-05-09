@@ -20,6 +20,11 @@
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">#ddffffff</item>
     </style>
-    
+
+    <!--SnsPopupWindow的运动动画-->
+    <style name="sns_pop_anim" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/pop_enter_anim</item>
+        <item name="android:windowExitAnimation">@anim/pop_exit_anim</item>
+    </style>
 
 </resources>

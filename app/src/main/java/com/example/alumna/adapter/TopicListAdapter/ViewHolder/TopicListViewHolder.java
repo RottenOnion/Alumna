@@ -1,4 +1,4 @@
-package com.example.alumna.adapter.TopicListAdapter;
+package com.example.alumna.adapter.TopicListAdapter.ViewHolder;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -13,6 +13,7 @@ import com.example.alumna.utils.Http.HttpUtil;
 import com.example.alumna.utils.Image.ImageUtil;
 import com.example.alumna.widgets.CommentListView;
 import com.example.alumna.widgets.PraiseListView;
+import com.example.alumna.widgets.SnsPopupWindow;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,9 +34,14 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
     public TextView deleteBtn;
     public ImageView snsBtn;
 
+    //点赞列表
     public PraiseListView praiseListView;
     public View line;
+    //评论列表
     public CommentListView commentListView;
+
+    //弹出窗口
+    public SnsPopupWindow popupWindow;
 
     public TopicListViewHolder(View itemView,int type) {
         super(itemView);
@@ -53,18 +59,19 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
         snsBtn=(ImageView)itemView.findViewById(R.id.snsBtn);
 
         praiseListView=(PraiseListView)itemView.findViewById(R.id.praiseList);
-
         line=(View)itemView.findViewById(R.id.line);
         commentListView=(CommentListView)itemView.findViewById(R.id.commentList);
+
+        popupWindow=new SnsPopupWindow(itemView.getContext());
     }
 
     public abstract void initSubView(int viewType, ViewStub viewStub);
 
-    protected void loadhead(String url){
+    public void loadhead(String url){
         ImageUtil.LoadImageFromUrl(this.head,url);
     }
 
-    protected void loadCommentList(int tid, HttpRequestCallback callback){
+    public void loadCommentList(int tid, HttpRequestCallback callback){
         String url=new String(DataUtils.BASEURL+DataUtils.GETCOMMENT);
         Map<String,Object> params=new HashMap<>();
         params.put("tid",tid);
@@ -73,7 +80,7 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
         getcomment.PostRequest(url, params, callback);
     }
 
-    protected void loadLikeList(int tid,HttpRequestCallback callback){
+    public void loadLikeList(int tid,HttpRequestCallback callback){
         String url=new String(DataUtils.BASEURL+DataUtils.GETLIKE);
         Map<String,Object> params=new HashMap<>();
         params.put("tid",tid);

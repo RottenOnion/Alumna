@@ -16,17 +16,15 @@ import android.view.View;
 
 import com.example.alumna.MyApplication;
 import com.example.alumna.adapter.LeftDrawerAdapter;
+import com.example.alumna.adapter.TopicListAdapter.TopicListAdapter;
 import com.example.alumna.bean.CommentBean;
 import com.example.alumna.bean.LeftBean;
 import com.example.alumna.bean.TopicBean;
 import com.example.alumna.bean.UserBean;
 import com.example.alumna.R;
 import com.example.alumna.presenter.MainPresenter;
-import com.example.alumna.utils.DataUtils;
-import com.example.alumna.view.Adapter.TopicListAdapter;
 import com.example.alumna.view.Interface.MainViewImpl;
-import com.example.alumna.widgets.CommentListView;
-import com.example.alumna.widgets.PraiseListView;
+
 
 import java.util.ArrayList;
 
@@ -153,8 +151,6 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
 
     @Override
     public void showComment(ArrayList<CommentBean> list) {
-        for (int i=0;i<adapter.getItemCount();++i){
-        }
 
     }
 }
