@@ -7,21 +7,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.alumna.R;
-import com.example.alumna.adapter.TopicListAdapter.TopicListAdapter;
 import com.example.alumna.bean.CommentBean;
 import com.example.alumna.bean.TopicBean;
 import com.example.alumna.bean.UserBean;
 import com.example.alumna.utils.DataUtils;
-import com.example.alumna.utils.Http.HttpRequestCallback;
-import com.example.alumna.utils.Http.HttpUtil;
 import com.example.alumna.utils.Image.ImageUtil;
 import com.example.alumna.widgets.CommentListView;
 import com.example.alumna.widgets.PraiseListView;
 import com.example.alumna.widgets.SnsPopupWindow;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+
 
 import static com.example.alumna.utils.ParseUtil.StringParseTime;
 
@@ -57,7 +53,7 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
         presenter=new ViewHolderPresenter(this);
 
         ViewStub viewStub = (ViewStub) itemView.findViewById(R.id.viewStub);
-
+        initSubView(viewType, viewStub);
         head=(ImageView)itemView.findViewById(R.id.headIv);
         name=(TextView)itemView.findViewById(R.id.nameTv);
         time=(TextView)itemView.findViewById(R.id.timeTv);
@@ -77,10 +73,6 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
 
     public abstract void initSubView(int viewType, ViewStub viewStub);
 
-    public void loadhead(String url){
-        ImageUtil.LoadImageFromUrl(this.head,url);
-    }
-
     public void setData(TopicBean topic){
         viewType=Integer.valueOf(topic.getType());
         imfor.setText(topic.getImfor());
@@ -88,23 +80,31 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
         location.setText(topic.getLocation());
         time.setText(StringParseTime(topic.getTime()));
 
-        loadhead(topic.getHead());
+        //加载头像
+        ImageUtil.LoadImageFromUrl(this.head,topic.getHead());
 
-        deleteBtn.setVisibility(View.GONE);
+        //删除按钮
+        if(topic.getUid()==DataUtils.curUser.getUid()){
+            deleteBtn.setVisibility(View.GONE);
+        }
 
         if(topic.getCommentNum()>0||topic.getLikeNum()>0){
             line.setVisibility(View.VISIBLE);
+            //处理点赞列表
             if(topic.getLikeNum()>0){
                 presenter.loadLikeList(topic.getTid());
             }else {
                 praiseListView.setVisibility(View.GONE);
             }
+
+            //处理评论列表
             if(topic.getCommentNum()>0){
                 presenter.loadCommentList(topic.getTid());
             }else {
                 commentListView.setVisibility(View.GONE);
             }
         }
+
     }
 
     public void initPopupWindow(int tid) {
@@ -116,24 +116,35 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
         });
         popupWindow.setItemClickListener(new PopupItemClickListener(tid));
 
+
     }
 
-    public void setPraiseListView(ArrayList<UserBean> list){
+    public void setPraiseListView(final ArrayList<UserBean> list){
         praiseListView.setList(list);
+        praiseListView.setOnItemClickListener(new PraiseListView.OnItemClickListener() {
+            @Override
+            public void onClick(int position) {
+                presenter.getUserImfor(list.get(position).getUid());
+            }
+        });
     }
 
     public void setCommentListView(ArrayList<CommentBean>list){
         commentListView.setList(list);
+        commentListView.setOnItemClickListener(new CommentListView.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                //评论
+            }
+        });
     }
 
     private class PopupItemClickListener implements SnsPopupWindow.OnItemClickListener{
-        //动态在列表中的位置
+
         private long lasttime = 0;
         private int tid;
-        //private int position;
 
         public PopupItemClickListener(final int tid){
-            //this.position = position;
             this.tid=tid;
         }
 

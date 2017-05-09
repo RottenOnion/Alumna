@@ -8,8 +8,10 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.PopupWindow;
+import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.example.alumna.MyApplication;
 import com.example.alumna.R;
 import com.example.alumna.utils.DensityUtil;
 
@@ -21,8 +23,8 @@ import java.util.ArrayList;
  */
 
 public class SnsPopupWindow extends PopupWindow implements View.OnClickListener {
-    private TextView digBtn;
-    private TextView commentBtn;
+    private TableRow digBtn;
+    private TableRow commentBtn;
 
     // 实例化一个矩形
     private Rect rect = new Rect();
@@ -47,14 +49,14 @@ public class SnsPopupWindow extends PopupWindow implements View.OnClickListener 
 
     public SnsPopupWindow(Context context) {
         View view = LayoutInflater.from(context).inflate(R.layout.sns_popupwindow, null);
-        digBtn = (TextView) view.findViewById(R.id.digBtn);
-        commentBtn = (TextView) view.findViewById(R.id.commentBtn);
+        digBtn = (TableRow) view.findViewById(R.id.digBtn);
+        commentBtn = (TableRow) view.findViewById(R.id.commentBtn);
         digBtn.setOnClickListener(this);
         commentBtn.setOnClickListener(this);
 
         this.setContentView(view);
-        this.setWidth(DensityUtil.dip2px(context, 100));
-       this.setHeight(DensityUtil.dip2px(context, 30));
+        this.setWidth(DensityUtil.dip2px(context, 150));
+        this.setHeight(DensityUtil.dip2px(context, 40));
         this.setFocusable(true);
         this.setOutsideTouchable(true);
         this.update();
@@ -75,7 +77,7 @@ public class SnsPopupWindow extends PopupWindow implements View.OnClickListener 
         parent.getLocationOnScreen(location);
         // 设置矩形的大小
         rect.set(location[0], location[1], location[0] + parent.getWidth(), location[1] + parent.getHeight());
-        digBtn.setText(actionItems.get(0).mTitle);
+        //digBtn.setText(actionItems.get(0).mTitle);
         if(!this.isShowing()){
             showAtLocation(parent, Gravity.NO_GRAVITY, location[0] - this.getWidth()
                     , location[1] - ((this.getHeight() - parent.getHeight()) / 2));

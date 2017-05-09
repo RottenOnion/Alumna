@@ -14,6 +14,7 @@ import com.example.alumna.adapter.TopicListAdapter.ViewHolder.TopicListViewHolde
 import com.example.alumna.bean.TopicBean;
 import com.example.alumna.bean.UserBean;
 import com.example.alumna.utils.DataUtils;
+import com.example.alumna.utils.Image.ImageUtil;
 import com.example.alumna.widgets.SnsPopupWindow;
 
 import java.util.ArrayList;
@@ -31,10 +32,6 @@ public class TopicListAdapter extends BaseRecycleViewAdapter {
     public TopicListAdapter(Context context,ArrayList<TopicBean> list){
         this.context=context;
         this.list=list;
-    }
-
-    public ArrayList<TopicBean> getTopicList(){
-        return list;
     }
 
     @Override
@@ -68,9 +65,19 @@ public class TopicListAdapter extends BaseRecycleViewAdapter {
         final TopicListViewHolder holder = (TopicListViewHolder) viewHolder;
 
         holder.setData(list.get(position));
-
         //popupwindow
         holder.initPopupWindow(list.get(position).getTid());
+        //Log.i(this.getClass().getName(),position+"------"+holder.viewType);
+
+        switch (holder.viewType){
+            case TopicListViewHolder.TYPE_IMAGE://图片
+                Log.i(this.getClass().getName(),position+"------"+holder.viewType);
+
+                //ImageUtil.LoadImageFromRes(((ImageViewHolder)holder).imageView,R.drawable.test_touxiang);
+                break;
+            default:
+                break;
+        }
     }
 
 

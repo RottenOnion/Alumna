@@ -16,8 +16,8 @@ public class ImageUtil {
     public static void LoadImageFromUrl(ImageView view,String url){
         Glide.with(MyApplication.getContext())
                 .load(url)
-                .placeholder(R.drawable.test_touxiang  )
-                .error(R.drawable.test_touxiang)
+                .placeholder(R.drawable.ic_loading)
+                .error(R.drawable.ic_error)
                 .into(view);
     }
 

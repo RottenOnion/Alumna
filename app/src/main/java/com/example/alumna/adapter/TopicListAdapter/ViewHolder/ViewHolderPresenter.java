@@ -5,7 +5,6 @@ import android.view.View;
 
 import com.example.alumna.bean.CommentBean;
 import com.example.alumna.bean.UserBean;
-import com.example.alumna.utils.DataUtils;
 import com.example.alumna.utils.Http.HttpRequestCallback;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -120,7 +119,8 @@ public class ViewHolderPresenter implements ViewHolderPresenterImpl{
                 JsonObject jsonObject=new JsonParser().parse(result).getAsJsonObject();
                 Log.i(this.getClass().getName(),jsonObject.get("status").getAsString());
                 if (jsonObject.get("status").getAsString().equals("1")||jsonObject.get("status").getAsString().equals("0")){
-                    //操作成功status=0 or 1
+                    //操作成功status=0 or status=1
+                    loadLikeList(tid);
                 }
             }
 
@@ -138,7 +138,31 @@ public class ViewHolderPresenter implements ViewHolderPresenterImpl{
     }
 
     @Override
-    public void getUserImfor() {
+    public void getUserImfor(final int uid) {
+        vhModel.getUserImfor(uid, new HttpRequestCallback<String>() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+
+            @Override
+            public void onResponse(String result) {
+                JsonObject jsonObject=new JsonParser().parse(result).getAsJsonObject();
+                //JsonArray jsonArray=jsonObject.getAsJsonArray("user");
+                //Gson gson=new Gson();
+                Log.i(this.getClass().getName(),result);
+            }
+
+            @Override
+            public void onFailure(Call call) {
+
+            }
+        });
 
     }
 }

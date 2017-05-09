@@ -23,6 +23,7 @@ public class DataUtils {
     public static String GETLIKE="getlike";
     public static String SETLIKE="setlike";
     public static String SETCOMMENT="setcomment";
+    public static String GETUSER="getuser";
 
 
 

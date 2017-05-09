@@ -39,4 +39,13 @@ class ViewHolderModel {
         HttpUtil setLike=HttpUtil.getInstance();
         setLike.PostRequest(url, params,callback);
     }
+
+    public void getUserImfor(int uid,HttpRequestCallback callback){
+        String url=new String(DataUtils.BASEURL+DataUtils.GETUSER);
+        Map<String,Object> params=new HashMap<>();
+        params.put("uid",uid);
+
+        HttpUtil getuser=HttpUtil.getInstance();
+        getuser.PostRequest(url, params,callback);
+    }
 }
