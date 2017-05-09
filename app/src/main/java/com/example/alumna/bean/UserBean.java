@@ -57,4 +57,12 @@ public class UserBean {
         System.out.println("username="+getUsername());
         System.out.println("phone="+getPhone());
     }
+
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
+    }
 }

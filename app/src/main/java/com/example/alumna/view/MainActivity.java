@@ -23,6 +23,7 @@ import com.example.alumna.bean.TopicBean;
 import com.example.alumna.bean.UserBean;
 import com.example.alumna.R;
 import com.example.alumna.presenter.MainPresenter;
+import com.example.alumna.utils.DataUtils;
 import com.example.alumna.view.Interface.MainViewImpl;
 
 
@@ -33,8 +34,6 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
     private RecyclerView mLeftRvView;
     private ArrayList<LeftBean> mLeftDatas;
 
-    //private PraiseListView praiseListView;
-    //private CommentListView commentListView;
     private RecyclerView topiclist;
     TopicListAdapter adapter;
 
@@ -79,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
         mLeftRvView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         mLeftRvView.setAdapter(leftAdapter);
 
-        presenter.loadTopicList(1);
+        presenter.loadTopicList(DataUtils.curUser.getUid());
     }
 
     private void loadLeftDatas() {

@@ -63,6 +63,7 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
         commentListView=(CommentListView)itemView.findViewById(R.id.commentList);
 
         popupWindow=new SnsPopupWindow(itemView.getContext());
+        line.setVisibility(View.GONE);
     }
 
     public abstract void initSubView(int viewType, ViewStub viewStub);
@@ -71,21 +72,4 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
         ImageUtil.LoadImageFromUrl(this.head,url);
     }
 
-    public void loadCommentList(int tid, HttpRequestCallback callback){
-        String url=new String(DataUtils.BASEURL+DataUtils.GETCOMMENT);
-        Map<String,Object> params=new HashMap<>();
-        params.put("tid",tid);
-
-        HttpUtil getcomment=HttpUtil.getInstance();
-        getcomment.PostRequest(url, params, callback);
-    }
-
-    public void loadLikeList(int tid,HttpRequestCallback callback){
-        String url=new String(DataUtils.BASEURL+DataUtils.GETLIKE);
-        Map<String,Object> params=new HashMap<>();
-        params.put("tid",tid);
-
-        HttpUtil getlikelist=HttpUtil.getInstance();
-        getlikelist.PostRequest(url, params, callback);
-    }
 }
