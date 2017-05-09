@@ -1,4 +1,4 @@
-package com.example.alumna.adapter.TopicListAdapter;
+package com.example.alumna.adapter.TopicListAdapter.ViewHolder;
 
 import com.example.alumna.utils.DataUtils;
 import com.example.alumna.utils.Http.HttpRequestCallback;
@@ -11,7 +11,7 @@ import java.util.Map;
  * Created by Leebobo on 2017/5/9.
  */
 
-public class TopicListModel {
+class ViewHolderModel {
     public void getLikeList(int tid,HttpRequestCallback callback){
         String url=new String(DataUtils.BASEURL+DataUtils.GETLIKE);
         Map<String,Object> params=new HashMap<>();

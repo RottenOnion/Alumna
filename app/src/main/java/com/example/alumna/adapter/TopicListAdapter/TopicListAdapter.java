@@ -26,13 +26,11 @@ public class TopicListAdapter extends BaseRecycleViewAdapter {
     private ArrayList<TopicBean> list ;
     private Context context;
     private LayoutInflater inflater;
-    private TopicListPresenter present;
     private UserBean curUser= DataUtils.curUser;
 
     public TopicListAdapter(Context context,ArrayList<TopicBean> list){
         this.context=context;
         this.list=list;
-        present=new TopicListPresenter(this);
     }
 
     public ArrayList<TopicBean> getTopicList(){
@@ -69,83 +67,16 @@ public class TopicListAdapter extends BaseRecycleViewAdapter {
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder,final int position) {
         final TopicListViewHolder holder = (TopicListViewHolder) viewHolder;
 
-        holder.itemView.setTag(position);
-        holder.viewType=Integer.valueOf(list.get(position).getType());
-        holder.imfor.setText(list.get(position).getImfor());
-        holder.name.setText(list.get(position).getUsername());
-        holder.location.setText(list.get(position).getLocation());
-        holder.time.setText(StringParseTime(list.get(position).getTime()));
-
-        holder.loadhead(list.get(position).getHead());
-
-        holder.deleteBtn.setVisibility(View.GONE);
-
-        //处理评论和点赞列表
-        initCommentBody(position, holder);
+        holder.setData(list.get(position));
 
         //popupwindow
-        initPopupWindow(position, holder);
+        holder.initPopupWindow(list.get(position).getTid());
     }
 
-    private void initPopupWindow(int position, final TopicListViewHolder holder) {
-        holder.snsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                holder.popupWindow.showPopupWindow(view);
-            }
-        });
-        holder.popupWindow.setItemClickListener(new PopupItemClickListener(position,list.get(position).getTid()));
-
-    }
-
-    private void initCommentBody(int position, TopicListViewHolder holder) {
-        if(list.get(position).getCommentNum()>0||list.get(position).getLikeNum()>0){
-            holder.line.setVisibility(View.VISIBLE);
-            //处理点赞列表
-            if (list.get(position).getLikeNum()>0){
-                present.loadLikeList(holder,position);
-            }else{
-                holder.praiseListView.setVisibility(View.GONE);
-            }
-
-            if(list.get(position).getCommentNum()>0){
-                present.loadCommentList(holder,position);
-            }else {
-                holder.commentListView.setVisibility(View.GONE);
-            }
-        }
-    }
 
     public int getItemCount() {
         return list.size();
     }
 
-    private class PopupItemClickListener implements SnsPopupWindow.OnItemClickListener{
-        //动态在列表中的位置
-        private long lasttime = 0;
-        private int tid;
-        private int position;
 
-        public PopupItemClickListener(final int position, final int tid){
-            this.position = position;
-            this.tid=tid;
-        }
-
-        @Override
-        public void onItemClick(SnsPopupWindow.ActionItem actionitem, int position) {
-            switch (position) {
-                case 0://点赞、取消点赞
-                    if(System.currentTimeMillis()- lasttime <500)//防止快速点击操作
-                        return;
-                    lasttime = System.currentTimeMillis();
-                    present.setLike(curUser.getUid(),tid);
-                    break;
-                case 1://发布评论
-                    present.setComment();
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
 }
