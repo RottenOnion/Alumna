@@ -1,7 +1,6 @@
 package com.example.alumna.adapter.TopicListAdapter.ViewHolder;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewStub;
 import android.widget.ImageView;
@@ -85,7 +84,7 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
 
     public void setData(TopicBean topic){
         viewType=Integer.valueOf(topic.getType());
-        imfor.setText(topic.getImfor());
+        imfor.setText(topic.getInfor());
         name.setText(topic.getUsername());
         location.setText(topic.getLocation());
         time.setText(StringParseTime(topic.getTime()));
@@ -168,6 +167,8 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
                     presenter.setLike(DataUtils.curUser.getUid(),tid);
                     break;
                 case 1://发布评论
+
+                    lasttime = System.currentTimeMillis();
                     editTextPopupWindow.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

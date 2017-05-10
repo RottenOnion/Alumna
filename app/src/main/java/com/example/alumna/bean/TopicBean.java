@@ -1,22 +1,69 @@
 package com.example.alumna.bean;
 
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.NotNull;
+import org.greenrobot.greendao.annotation.Property;
+import org.greenrobot.greendao.annotation.Generated;
+
+@Entity
 public class TopicBean {
     public static String TYPE_TEXT="1";
     public static String TYPE_IMAGE="2";
 
-    private int tid;
-    private int uid;
-    private String username;
-    private String location;
-    private String type;
-    private String imfor;
-    private String time;
-    private int likeNum;
-    private int commentNum;
-    private String head;
+    @Id
+    private Long id;
 
-    public TopicBean(int id) {
-        tid = id;
+    @Property(nameInDb = "TID")
+    private int tid;
+
+    @Property(nameInDb="UID")
+    private int uid;
+
+    @Property(nameInDb = "USERNAME")
+    private String username;
+
+    @Property(nameInDb = "LOCATION")
+    private String location;
+
+    @Property(nameInDb = "TYPE")
+    private String type;
+
+    @Property(nameInDb ="INFORMATION")
+    private String imfor;
+
+    @Property(nameInDb = "TIME")
+    private String time;
+
+    @Property(nameInDb = "LIKE_NUMBER")
+    private int likeNum;
+
+    @Property(nameInDb = "COMMENT_NUMBER")
+    private int commentNum;
+
+    @Property(nameInDb = "HEAD")
+    private String head;
+    
+
+    @Generated(hash = 1961217991)
+    public TopicBean() {
+    }
+
+    @Generated(hash = 2105103690)
+    public TopicBean(Long id, int tid, int uid, String username, String location,
+            String type, String imfor, String time, int likeNum, int commentNum,
+            String head) {
+        this.id = id;
+        this.tid = tid;
+        this.uid = uid;
+        this.username = username;
+        this.location = location;
+        this.type = type;
+        this.imfor = imfor;
+        this.time = time;
+        this.likeNum = likeNum;
+        this.commentNum = commentNum;
+        this.head = head;
     }
 
     public int getUid() {
@@ -43,12 +90,12 @@ public class TopicBean {
         this.type = type;
     }
 
-    public String getImfor() {
+    public String getInfor() {
         return imfor;
     }
 
-    public void setImfor(String imfor) {
-        this.imfor = imfor;
+    public void setInfor(String infor) {
+        this.imfor = infor;
     }
 
     public String getTime() {
@@ -97,5 +144,21 @@ public class TopicBean {
 
     public void setHead(String head) {
         this.head = head;
+    }
+
+    public String getImfor() {
+        return this.imfor;
+    }
+
+    public void setImfor(String imfor) {
+        this.imfor = imfor;
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

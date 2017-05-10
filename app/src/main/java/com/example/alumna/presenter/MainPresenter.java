@@ -2,6 +2,7 @@ package com.example.alumna.presenter;
 
 import android.util.Log;
 
+import com.example.alumna.DBHelper.DateBaseHelper;
 import com.example.alumna.bean.CommentBean;
 import com.example.alumna.bean.TopicBean;
 import com.example.alumna.model.Interface.MainModelImpl;
@@ -35,19 +36,6 @@ public class MainPresenter implements MainPresenterImpl {
     }
 
     @Override
-    public void loadBackground(int uid) {
-
-        mView.showBackground(mModel.getBackground(uid));
-    }
-
-
-    @Override
-    public void loadImfor(int uid) {
-
-        mView.showImfor(mModel.getImfor(uid));
-    }
-
-    @Override
     public void loadTopicList(int uid) {
         mModel.getTopicList(uid,new HttpRequestCallback<String>() {
             @Override
@@ -62,6 +50,8 @@ public class MainPresenter implements MainPresenterImpl {
 
             @Override
             public void onResponse(String result) {
+                DateBaseHelper helper=DateBaseHelper.getInstance();
+
                 JsonObject jsonObject=new JsonParser().parse(result).getAsJsonObject();
                 JsonArray jsonArray=jsonObject.getAsJsonArray("list");
                 Gson gson=new Gson();
@@ -69,7 +59,9 @@ public class MainPresenter implements MainPresenterImpl {
                 for (JsonElement bean:jsonArray){
                     TopicBean topic=gson.fromJson(bean,new TypeToken<TopicBean>(){ }.getType());
                     list.add(topic);
+                    //helper.update(topic);
                 }
+                //helper.insertAll(list);
                 mView.showTopicList(list);
             }
 
@@ -81,45 +73,4 @@ public class MainPresenter implements MainPresenterImpl {
     }
 
 
-    @Override
-    public void LikeTopic(int uid, int tid) {
-        mModel.setLike(uid, tid);
-        mModel.getLikeList(tid);
-
-    }
-
-    @Override
-    public void CommentTopic(int uid, int tid, String comment) {
-        mModel.setComment(uid, tid, comment);
-    }
-
-    @Override
-    public void getCommentList(int tid) {
-        mModel.getComment(tid, new HttpRequestCallback<String>() {
-            @Override
-            public void onStart() {
-            }
-
-            @Override
-            public void onFinish() {
-            }
-
-            @Override
-            public void onResponse(String result) {
-                JsonObject jsonObject=new JsonParser().parse(result.toString()).getAsJsonObject();
-                JsonArray jsonArray=jsonObject.getAsJsonArray("List");
-                Gson gson=new Gson();
-                ArrayList<CommentBean>list=new ArrayList<>();
-                for (JsonElement bean:jsonArray){
-                    CommentBean comment=gson.fromJson(bean,new TypeToken<CommentBean>(){ }.getType());
-                    list.add(comment);
-                }
-            }
-
-            @Override
-            public void onFailure(Call call) {
-
-            }
-        });
-    }
 }

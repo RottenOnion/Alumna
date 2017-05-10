@@ -46,13 +46,7 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         mLeftRvView = (RecyclerView) findViewById(R.id.main_left_recycler);
 
-        {
-            topiclist = (RecyclerView) findViewById(R.id.topiclist);
-            LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-            layoutManager.setOrientation(OrientationHelper.VERTICAL);
-            topiclist.setLayoutManager(layoutManager);
 
-        }
         setSupportActionBar(toolbar);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -78,8 +72,18 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
         mLeftRvView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         mLeftRvView.setAdapter(leftAdapter);
 
-        presenter.loadTopicList(DataUtils.curUser.getUid());
+        {
+            topiclist = (RecyclerView) findViewById(R.id.topiclist);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+            layoutManager.setOrientation(OrientationHelper.VERTICAL);
+            topiclist.setLayoutManager(layoutManager);
+            presenter.loadTopicList(DataUtils.curUser.getUid());
+
+        }
+
+
     }
+
 
     private void loadLeftDatas() {
         mLeftDatas = new ArrayList<>();

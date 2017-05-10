@@ -59,8 +59,8 @@ public class MemberModel implements MemberModelImpl {
 
         int size = 10;
         for (int i = 0; i < size; ++i) {
-            TopicBean temp = new TopicBean(i);
-            temp.setImfor("" + i);
+            TopicBean temp = new TopicBean();
+            temp.setInfor("" + i);
             list.add(temp);
         }
 

@@ -102,7 +102,7 @@ public class FriendCircleAdapter extends BaseRecycleViewAdapter {
 
 
     public int getItemCount() {
-        return list.size();
+        return list.size()+1;
     }
 
 
