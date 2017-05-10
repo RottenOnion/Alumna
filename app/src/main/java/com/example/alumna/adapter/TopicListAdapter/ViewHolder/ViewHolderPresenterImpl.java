@@ -16,7 +16,7 @@ public interface ViewHolderPresenterImpl {
     void setLike(final int uid,final int tid);
 
     //评论
-    void setComment();
+    void setComment(final int uid,final int tid,final String comment);
 
     //查看用户
     void getUserImfor(final int uid);

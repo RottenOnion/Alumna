@@ -79,7 +79,7 @@ public class CommentListView extends LinearLayout{
         public void onItemLongClick(int position);
     }
 
-    public void setList(List<CommentBean> data){
+    public void notifyDataSetChanged(List<CommentBean> data){
         this.list=data;
         showList();
     }

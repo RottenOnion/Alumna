@@ -48,4 +48,15 @@ class ViewHolderModel {
         HttpUtil getuser=HttpUtil.getInstance();
         getuser.PostRequest(url, params,callback);
     }
+
+    public void setComment(int uid,int tid,String comment,HttpRequestCallback callback){
+        String url=new String(DataUtils.BASEURL+DataUtils.SETCOMMENT);
+        Map<String,Object> params=new HashMap<>();
+        params.put("uid",uid);
+        params.put("tid",tid);
+        params.put("comment",comment);
+
+        HttpUtil setComment=HttpUtil.getInstance();
+        setComment.PostRequest(url, params,callback);
+    }
 }

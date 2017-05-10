@@ -31,23 +31,10 @@ public class DataUtils {
 
 
     static {
-//        for(int i=0;i<=5;++i){
-//            UserBean user=new UserBean(i);
-//            user.setUsername(i+"00");
-//            list.add(user);
-//        }
-//
-//        for(int i=0;i<4;++i){
-//            CommentBean comment=new CommentBean(i);
-//            comment.setUser(list.get(i));
-//            commentlist.add(comment);
-//        }
-//        commentlist.get(0).setComment("那夜谁将酒喝掉");
-//        commentlist.get(1).setComment("因此我讲得多了");
-//        commentlist.get(2).setComment("然后你摇着我手拒绝我");
-//        commentlist.get(3).setComment("动人像友情深了");
+
         curUser=new UserBean(1);
-        curUser.setUsername("curUser");
+        curUser.setUsername("lollipop");
+        curUser.setHead("https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=966093302,1751994111&fm=58");
     }
 
     public static ArrayList<UserBean> getList(){

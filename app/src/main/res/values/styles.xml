@@ -23,8 +23,13 @@
 
     <!--SnsPopupWindow的运动动画-->
     <style name="sns_pop_anim" parent="android:Animation">
-        <item name="android:windowEnterAnimation">@anim/pop_enter_anim</item>
-        <item name="android:windowExitAnimation">@anim/pop_exit_anim</item>
+        <item name="android:windowEnterAnimation">@anim/sns_pop_enter_anim</item>
+        <item name="android:windowExitAnimation">@anim/sns_pop_exit_anim</item>
+    </style>
+
+    <style name="edittext_pop_anim" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/edittext_pop_enter_anim</item>
+        <item name="android:windowExitAnimation">@anim/edittext_pop_exit_anim</item>
     </style>
 
 </resources>

@@ -73,7 +73,7 @@ public class SnsPopupWindow extends PopupWindow implements View.OnClickListener 
         addAction(new ActionItem("评论"));
     }
 
-    public void showPopupWindow(View parent){
+        public void showPopupWindow(View parent){
         parent.getLocationOnScreen(location);
         // 设置矩形的大小
         rect.set(location[0], location[1], location[0] + parent.getWidth(), location[1] + parent.getHeight());

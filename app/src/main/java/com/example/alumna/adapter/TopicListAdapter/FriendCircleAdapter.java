@@ -7,7 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+import com.example.alumna.MyApplication;
 import com.example.alumna.R;
+import com.example.alumna.adapter.TopicListAdapter.ViewHolder.BackgroundWallViewHolder;
 import com.example.alumna.adapter.TopicListAdapter.ViewHolder.ImageViewHolder;
 import com.example.alumna.adapter.TopicListAdapter.ViewHolder.TextViewHolder;
 import com.example.alumna.adapter.TopicListAdapter.ViewHolder.TopicListViewHolder;
@@ -22,14 +25,15 @@ import java.util.ArrayList;
 import static com.example.alumna.utils.ParseUtil.StringParseTime;
 
 
-public class TopicListAdapter extends BaseRecycleViewAdapter {
+public class FriendCircleAdapter extends BaseRecycleViewAdapter {
 
+    private static final int TYPE_BGWALL=0;
     private ArrayList<TopicBean> list ;
     private Context context;
     private LayoutInflater inflater;
     private UserBean curUser= DataUtils.curUser;
 
-    public TopicListAdapter(Context context,ArrayList<TopicBean> list){
+    public FriendCircleAdapter(Context context, ArrayList<TopicBean> list){
         this.context=context;
         this.list=list;
     }
@@ -38,8 +42,9 @@ public class TopicListAdapter extends BaseRecycleViewAdapter {
     //获取topic的类型，按照不同的type来初始化
     //如果不给viewtype初始化会报空指针
     public int getItemViewType(int position) {
+        if (position==0)return TYPE_BGWALL;
         int itemType = 0;
-        TopicBean topic = list.get(position);
+        TopicBean topic = list.get(position-1);
         if (TopicBean.TYPE_TEXT.equals(topic.getType())) {
             itemType = TopicListViewHolder.TYPE_TEXT;
         } else if (TopicBean.TYPE_IMAGE.equals(topic.getType())) {
@@ -51,29 +56,44 @@ public class TopicListAdapter extends BaseRecycleViewAdapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder holder = null;
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_topic_item,parent, false);
-        if (viewType== TopicListViewHolder.TYPE_TEXT) {
-            holder= new TextViewHolder(view);
-        }else if (viewType== TopicListViewHolder.TYPE_IMAGE){
-           holder=new ImageViewHolder(view);
+        View view ;
+        if (viewType==TYPE_BGWALL){
+            //背景墙
+            view=LayoutInflater.from(parent.getContext()).inflate(R.layout.background_wall_item,parent, false);
+            holder=new BackgroundWallViewHolder(view);
+        }else {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_topic_item,parent, false);
+            if (viewType== TopicListViewHolder.TYPE_TEXT) {
+                //文本消息
+                holder= new TextViewHolder(view);
+            }else if (viewType== TopicListViewHolder.TYPE_IMAGE){
+                //图片消息
+                holder=new ImageViewHolder(view);
+            }
         }
         return holder;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder,final int position) {
-        final TopicListViewHolder holder = (TopicListViewHolder) viewHolder;
+        if(position==TYPE_BGWALL){
+            BackgroundWallViewHolder holder=(BackgroundWallViewHolder)viewHolder;
+            holder.init(curUser);
+            return;
+        }
 
-        holder.setData(list.get(position));
+        final TopicListViewHolder holder = (TopicListViewHolder) viewHolder;
+        //注意减去Background的位置
+        holder.setData(list.get(position-1));
         //popupwindow
-        holder.initPopupWindow(list.get(position).getTid());
-        //Log.i(this.getClass().getName(),position+"------"+holder.viewType);
+        holder.initPopupWindow(list.get(position-1).getTid());
 
         switch (holder.viewType){
             case TopicListViewHolder.TYPE_IMAGE://图片
-                Log.i(this.getClass().getName(),position+"------"+holder.viewType);
-
-                //ImageUtil.LoadImageFromRes(((ImageViewHolder)holder).imageView,R.drawable.test_touxiang);
+                Glide.with(MyApplication.getContext()).
+                        load(R.drawable.test_touxiang).override(500,500).
+                        placeholder(R.drawable.ic_loading).
+                        into(((ImageViewHolder)holder).imageView);
                 break;
             default:
                 break;

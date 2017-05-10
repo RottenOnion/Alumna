@@ -2,7 +2,9 @@ package com.example.alumna.adapter.TopicListAdapter.ViewHolder;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
+import com.example.alumna.MyApplication;
 import com.example.alumna.bean.CommentBean;
 import com.example.alumna.bean.UserBean;
 import com.example.alumna.utils.Http.HttpRequestCallback;
@@ -133,8 +135,29 @@ public class ViewHolderPresenter implements ViewHolderPresenterImpl{
     }
 
     @Override
-    public void setComment() {
+    public void setComment(final int uid,final int tid,final String comment) {
+        Toast.makeText(MyApplication.getContext(),comment,Toast.LENGTH_SHORT).show();
+        vhModel.setComment(uid, tid, comment, new HttpRequestCallback<String>() {
+            @Override
+            public void onStart() {
+                vhView.editTextPopupWindow.dismiss();
+            }
 
+            @Override
+            public void onFinish() {
+
+            }
+
+            @Override
+            public void onResponse(String result) {
+                vhView.editTextPopupWindow.clearAllText();
+            }
+
+            @Override
+            public void onFailure(Call call) {
+
+            }
+        });
     }
 
     @Override

@@ -58,12 +58,12 @@ public class PraiseListView extends TextView {
         this.onItemClickListener = onItemClickListener;
     }
 
-    public void setList(List<UserBean> list) {
+    public void notifyDataSetChanged(List<UserBean> list) {
         this.list = list;
         showList();
     }
 
-    void showList() {
+    private void showList() {
 
         SpannableStringBuilder builder = new SpannableStringBuilder();
         //点赞人数为0时候不显示

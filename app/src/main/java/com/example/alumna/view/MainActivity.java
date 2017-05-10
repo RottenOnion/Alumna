@@ -16,7 +16,7 @@ import android.view.View;
 
 import com.example.alumna.MyApplication;
 import com.example.alumna.adapter.LeftDrawerAdapter;
-import com.example.alumna.adapter.TopicListAdapter.TopicListAdapter;
+import com.example.alumna.adapter.TopicListAdapter.FriendCircleAdapter;
 import com.example.alumna.bean.CommentBean;
 import com.example.alumna.bean.LeftBean;
 import com.example.alumna.bean.TopicBean;
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
     private ArrayList<LeftBean> mLeftDatas;
 
     private RecyclerView topiclist;
-    TopicListAdapter adapter;
+    FriendCircleAdapter adapter;
 
     private MainPresenter presenter;
     @Override
@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
 
     @Override
     public void showTopicList(ArrayList<TopicBean> list) {
-        adapter=new TopicListAdapter(MyApplication.getContext(),list);
+        adapter=new FriendCircleAdapter(MyApplication.getContext(),list);
         topiclist.setAdapter(adapter);
     }
 

@@ -31,9 +31,5 @@ public class ImageViewHolder extends TopicListViewHolder {
         if (imageView!=null){
             this.imageView=imageView;
         }
-        Glide.with(MyApplication.getContext()).
-                load(R.drawable.test_touxiang).override(500,500).
-                placeholder(R.drawable.ic_loading).
-                into(this.imageView);
     }
 }
