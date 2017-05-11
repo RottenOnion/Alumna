@@ -41,5 +41,6 @@ dependencies {
     compile files('src/libs/gson-2.2.4.jar')
     compile files('src/libs/glide-3.7.0.jar')
     compile 'org.greenrobot:greendao:3.2.2'
+    compile 'com.lzy.widget:imagepicker:0.5.5'
 }
 
