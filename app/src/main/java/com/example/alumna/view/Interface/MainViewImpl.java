@@ -17,11 +17,5 @@ public interface MainViewImpl {
 
     void hideProgressBar();
 
-    void showBackground(String url);
-
-    void showImfor(UserBean user);
-
     void showTopicList(ArrayList<TopicBean> list);
-
-    void showComment(ArrayList<CommentBean> list);
 }

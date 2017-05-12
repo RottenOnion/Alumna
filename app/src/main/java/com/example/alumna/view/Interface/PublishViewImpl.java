@@ -8,4 +8,7 @@ import java.util.ArrayList;
 
 public interface PublishViewImpl {
     void showSelectedImage(ArrayList<String> imagelist);
+
+    void setLocationText(String location);
+
 }

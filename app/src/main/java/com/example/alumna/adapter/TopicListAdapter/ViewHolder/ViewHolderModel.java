@@ -1,11 +1,15 @@
 package com.example.alumna.adapter.TopicListAdapter.ViewHolder;
 
+import android.util.Log;
+
 import com.example.alumna.utils.DataUtils;
 import com.example.alumna.utils.Http.HttpRequestCallback;
 import com.example.alumna.utils.Http.HttpUtil;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
 
 /**
  * Created by Leebobo on 2017/5/9.
@@ -55,6 +59,7 @@ class ViewHolderModel {
         params.put("uid",uid);
         params.put("tid",tid);
         params.put("comment",comment);
+        params.put("time", ""+new Date(System.currentTimeMillis()).getTime());
 
         HttpUtil setComment=HttpUtil.getInstance();
         setComment.PostRequest(url, params,callback);

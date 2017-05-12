@@ -42,5 +42,7 @@ dependencies {
     compile files('src/libs/glide-3.7.0.jar')
     compile 'org.greenrobot:greendao:3.2.2'
     compile 'com.lzy.widget:imagepicker:0.5.5'
+    compile 'com.google.android.gms:play-services-maps:+'
+    compile files('src/libs/AMap_Location_V3.4.0_20170427.jar')
 }
 

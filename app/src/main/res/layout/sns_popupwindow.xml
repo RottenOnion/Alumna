@@ -3,7 +3,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
-    android:background="#ffffff">
+    android:background="@color/colorPrimary">
 
     <TableRow
         android:id="@+id/digBtn"
@@ -27,7 +27,7 @@
             android:layout_height="match_parent"
             android:text="  赞  "
             android:gravity="center"
-            android:textColor="@color/black"/>
+            android:textColor="@color/white"/>
     </TableRow>
 
     <View
@@ -35,7 +35,7 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="2dp"
         android:layout_marginTop="2dp"
-        android:background="#707070"
+        android:background="@color/colorPrimaryDark"
         />
     <TableRow
         android:id="@+id/commentBtn"
@@ -60,6 +60,6 @@
             android:layout_marginRight="5dp"
             android:singleLine="true"
             android:gravity="center"
-            android:textColor="@color/black"/>
+            android:textColor="@color/white"/>
     </TableRow>
 </LinearLayout>

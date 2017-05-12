@@ -112,7 +112,7 @@ public class EditTextPopupWindow extends PopupWindow {
     }
 
     public void clearAllText(){
-        commentEt.clearComposingText();
+        commentEt.getText().clear();
     }
 }
 

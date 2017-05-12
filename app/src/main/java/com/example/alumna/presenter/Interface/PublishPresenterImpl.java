@@ -10,5 +10,8 @@ public interface PublishPresenterImpl {
     void loadSelectedImage();
 
     /*发布动态*/
-    void publish();
+    void publish(String topic);
+
+    /*获取定位*/
+    void getLocation();
 }

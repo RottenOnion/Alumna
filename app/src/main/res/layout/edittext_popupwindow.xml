@@ -3,7 +3,8 @@
     android:id="@+id/et_pop_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="@color/white">
 
     <EditText
         android:id="@+id/commentEt"
@@ -11,17 +12,18 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_marginLeft="10dp"
+        android:layout_marginRight="5dp"
         android:layout_weight="1"
         android:ems="10"
         android:inputType="textMultiLine"
-        android:textSize="18dp" />
+        android:textSize="16dp" />
 
     <Button
         android:id="@+id/sendBtn"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
+        android:layout_gravity="center"
         android:text="发送" />
 
 </LinearLayout>

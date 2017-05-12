@@ -18,6 +18,7 @@ import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.Call;
 
@@ -50,7 +51,6 @@ public class MainPresenter implements MainPresenterImpl {
 
             @Override
             public void onResponse(String result) {
-                DateBaseHelper helper=DateBaseHelper.getInstance();
 
                 JsonObject jsonObject=new JsonParser().parse(result).getAsJsonObject();
                 JsonArray jsonArray=jsonObject.getAsJsonArray("list");
@@ -67,7 +67,9 @@ public class MainPresenter implements MainPresenterImpl {
 
             @Override
             public void onFailure(Call call) {
-
+                DateBaseHelper helper=DateBaseHelper.getInstance();
+                List<TopicBean> list=helper.queryAll();
+                mView.showTopicList((ArrayList<TopicBean>)list);
             }
         });
     }

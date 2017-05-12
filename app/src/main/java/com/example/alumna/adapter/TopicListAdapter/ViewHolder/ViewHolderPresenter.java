@@ -15,9 +15,12 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
+import java.net.URLDecoder;
 import java.util.ArrayList;
 
 import okhttp3.Call;
+
+import static android.net.Uri.encode;
 
 /**
  * Created by Leebobo on 2017/5/9.
@@ -119,7 +122,6 @@ public class ViewHolderPresenter implements ViewHolderPresenterImpl{
             @Override
             public void onResponse(String result) {
                 JsonObject jsonObject=new JsonParser().parse(result).getAsJsonObject();
-                Log.i(this.getClass().getName(),jsonObject.get("status").getAsString());
                 if (jsonObject.get("status").getAsString().equals("1")||jsonObject.get("status").getAsString().equals("0")){
                     //操作成功status=0 or status=1
                     loadLikeList(tid);
@@ -136,7 +138,6 @@ public class ViewHolderPresenter implements ViewHolderPresenterImpl{
 
     @Override
     public void setComment(final int uid,final int tid,final String comment) {
-        Toast.makeText(MyApplication.getContext(),comment,Toast.LENGTH_SHORT).show();
         vhModel.setComment(uid, tid, comment, new HttpRequestCallback<String>() {
             @Override
             public void onStart() {
@@ -151,6 +152,12 @@ public class ViewHolderPresenter implements ViewHolderPresenterImpl{
             @Override
             public void onResponse(String result) {
                 vhView.editTextPopupWindow.clearAllText();
+                JsonObject jsonObject=new JsonParser().parse(result).getAsJsonObject();
+                if (jsonObject.get("status").getAsString().equals("1")){
+                    //操作成功status=0 or status=1
+                    loadCommentList(tid);
+                }
+
             }
 
             @Override
