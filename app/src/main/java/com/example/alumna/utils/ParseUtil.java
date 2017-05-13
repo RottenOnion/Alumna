@@ -1,5 +1,7 @@
 package com.example.alumna.utils;
 
+import android.util.Log;
+
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,7 +30,7 @@ public class  ParseUtil {
             if (entry.getValue() instanceof Integer) {
                 builder.append(entry.getValue()).append(",");
             } else {
-                builder.append("\"").append(URLEncoder.encode(entry.getValue().toString())).append("\"").
+                builder.append("\"").append(entry.getValue().toString()).append("\"").
                         append(",");
             }
         }

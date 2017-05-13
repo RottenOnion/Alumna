@@ -26,6 +26,7 @@ import com.example.alumna.bean.TopicBean;
 import com.example.alumna.presenter.MainPresenter;
 import com.example.alumna.utils.DataUtils;
 import com.example.alumna.view.Interface.MainViewImpl;
+import com.lzy.imagepicker.ui.ImagePreviewDelActivity;
 
 import java.util.ArrayList;
 
@@ -78,10 +79,11 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
             public void onItemClick(View v, int position) {
                 switch (position){
                     case 0:
-
+                        Intent i=new Intent(MainActivity.this,SelectPhotoActivity.class);
+                        MainActivity.this.startActivity(i);
                         break;
                     case 1:
-                        Intent i=new Intent(MainActivity.this,UpdateImforActivity.class);
+                        i=new Intent(MainActivity.this,UpdateImforActivity.class);
                         MainActivity.this.startActivity(i);
                         break;
                     case 2:

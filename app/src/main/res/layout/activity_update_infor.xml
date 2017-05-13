@@ -69,13 +69,14 @@
                 android:layout_marginRight="30dp"
                 android:src="@drawable/icon_name" />
 
-            <TextView
+            <EditText
                 android:id="@+id/name_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/name"
                 android:textColor="@android:color/black"
                 android:textColorHint="@color/textHintGray"
+                android:background="@null"
                 android:textSize="16sp" />
         </LinearLayout>
 
@@ -95,13 +96,14 @@
                 android:layout_marginRight="30dp"
                 android:src="@drawable/icon_school" />
 
-            <TextView
+            <EditText
                 android:id="@+id/school_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/school"
                 android:textColor="@android:color/black"
                 android:textColorHint="@color/textHintGray"
+                android:background="@null"
                 android:textSize="16sp" />
         </LinearLayout>
 
@@ -121,13 +123,14 @@
                 android:layout_marginRight="30dp"
                 android:src="@drawable/icon_grade" />
 
-            <TextView
+            <EditText
                 android:id="@+id/grade_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/grade"
                 android:textColor="@android:color/black"
                 android:textColorHint="@color/textHintGray"
+                android:background="@null"
                 android:textSize="16sp" />
         </LinearLayout>
 
@@ -139,7 +142,8 @@
             android:layout_marginBottom="15dp"
             android:layout_marginTop="15dp"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <ImageView
                 android:layout_width="18dp"
@@ -148,13 +152,14 @@
                 android:layout_marginRight="30dp"
                 android:src="@drawable/icon_home" />
 
-            <TextView
+            <EditText
                 android:id="@+id/home_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/home"
                 android:textColor="@android:color/black"
                 android:textColorHint="@color/textHintGray"
+                android:background="@null"
                 android:textSize="16sp" />
         </LinearLayout>
 
@@ -175,13 +180,14 @@
                 android:layout_marginRight="30dp"
                 android:src="@drawable/icon_location" />
 
-            <TextView
+            <EditText
                 android:id="@+id/location_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/freq_location"
                 android:textColor="@android:color/black"
                 android:textColorHint="@color/textHintGray"
+                android:background="@null"
                 android:textSize="16sp" />
         </LinearLayout>
 
@@ -202,13 +208,14 @@
                 android:layout_marginRight="30dp"
                 android:src="@drawable/icon_work" />
 
-            <TextView
+            <EditText
                 android:id="@+id/signature_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/signature"
                 android:textColor="@android:color/black"
                 android:textColorHint="@color/textHintGray"
+                android:background="@null"
                 android:textSize="16sp" />
         </LinearLayout>
 
@@ -218,7 +225,9 @@
             android:layout_height="1dp"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
-            android:background="#edeaea" />
+            android:background="#edeaea"
+            android:visibility="gone"
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -228,7 +237,7 @@
             android:layout_marginTop="15dp"
             android:text="我的社交账号"
             android:textColor="@color/colorThemeRed"
-
+            android:visibility="gone"
             android:textSize="14sp" />
 
         <LinearLayout
@@ -238,7 +247,8 @@
             android:layout_marginBottom="15dp"
             android:layout_marginTop="15dp"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <ImageView
                 android:layout_width="18dp"

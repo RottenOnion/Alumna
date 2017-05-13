@@ -2,15 +2,20 @@ package com.example.alumna.utils.Http;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import com.example.alumna.utils.ParseUtil;
+import com.lzy.imagepicker.bean.ImageItem;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -56,6 +61,21 @@ public class HttpUtil {
         client.newCall(request).enqueue(getCallBack(callback));
     }
 
+    public void UploadImage(final String url, final List<ImageItem> imgs,final HttpRequestCallback callback){
+        final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/png");
+        MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
+        for (ImageItem img:imgs){
+            File file=new File(img.path);
+            if (file!=null){
+                builder.addFormDataPart("img", file.getName(), RequestBody.create(MEDIA_TYPE_PNG, file));
+            }
+        }
+
+        MultipartBody requestBody = builder.build();
+        Request request = new Request.Builder().url(url).post(requestBody).build();
+        client.newCall(request).enqueue(getCallBack(callback));
+    }
+
     private Callback getCallBack(final HttpRequestCallback callback){
         if (callback!=null){
             callback.onStart();
@@ -64,14 +84,14 @@ public class HttpUtil {
         return new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                 System.out.println("failed");
+                Log.i(this.getClass().getName(),"request failed");
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 if (response!=null&&response.isSuccessful()){
+                    Log.i(this.getClass().getName(),"request successful");
                     String result=response.body().string();
-                    //System.out.println(result);
                    onSuccessJsonStringMethod(result,callback);
                 }
             }

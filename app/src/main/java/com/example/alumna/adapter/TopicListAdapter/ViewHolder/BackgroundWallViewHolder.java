@@ -29,9 +29,9 @@ public class BackgroundWallViewHolder extends RecyclerView.ViewHolder{
     }
 
     public void init(UserBean curUser){
-        ImageUtil.LoadImageFromUrl(backgroundIv,
+        ImageUtil.displayImage(backgroundIv,
                 "http://pic.qiantucdn.com/58pic/20/10/79/575539df7ebf3_1024.jpg");
-        ImageUtil.LoadImageFromUrl(headTv,curUser.getHead());
+        ImageUtil.displayImage(headTv,curUser.getHead());
         nameTv.setText(curUser.getUsername());
     }
 }

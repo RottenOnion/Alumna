@@ -90,7 +90,7 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
         time.setText(StringParseTime(topic.getTime()));
 
         //加载头像
-        ImageUtil.LoadImageFromUrl(this.head,topic.getHead());
+        ImageUtil.displayImage(this.head,topic.getHead());
 
         //删除按钮
         if(topic.getUid()==DataUtils.curUser.getUid()){

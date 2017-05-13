@@ -13,19 +13,11 @@ import java.io.File;
  */
 
 public class ImageUtil {
-    public static void LoadImageFromUrl(ImageView view,String url){
+    public static void displayImage(ImageView view, String path){
         Glide.with(MyApplication.getContext())
-                .load(url)
+                .load(path)
                 .placeholder(R.drawable.ic_loading)
                 .error(R.drawable.ic_error)
                 .into(view);
-    }
-
-    public static void LoadImageFromFile(ImageView view, File file){
-
-    }
-
-    public static void LoadImageFromRes(ImageView view,int resource){
-
     }
 }
