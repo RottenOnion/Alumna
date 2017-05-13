@@ -76,6 +76,7 @@
                 android:hint="@string/name"
                 android:textColor="@android:color/black"
                 android:textColorHint="@color/textHintGray"
+                android:focusable="false"
                 android:background="@null"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -103,6 +104,8 @@
                 android:hint="@string/school"
                 android:textColor="@android:color/black"
                 android:textColorHint="@color/textHintGray"
+                android:focusable="false"
+
                 android:background="@null"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -128,6 +131,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/grade"
+                android:focusable="false"
+
                 android:textColor="@android:color/black"
                 android:textColorHint="@color/textHintGray"
                 android:background="@null"
@@ -157,6 +162,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/home"
+                android:focusable="false"
+
                 android:textColor="@android:color/black"
                 android:textColorHint="@color/textHintGray"
                 android:background="@null"
@@ -185,6 +192,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/freq_location"
+                android:focusable="false"
+
                 android:textColor="@android:color/black"
                 android:textColorHint="@color/textHintGray"
                 android:background="@null"
@@ -213,6 +222,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/signature"
+                android:focusable="false"
+
                 android:textColor="@android:color/black"
                 android:textColorHint="@color/textHintGray"
                 android:background="@null"

@@ -5,7 +5,7 @@
     <!-- Strings related to login -->
     <string name="prompt_username">用户名</string>
     <string name="prompt_password">密码</string>
-    <string name="action_sign_in">登录/注册</string>
+    <string name="action_sign_in">登录</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
@@ -38,5 +38,7 @@
     <string name="freq_location">经常出没的地点</string>
     <string name="signature">添加你的个性签名</string>
     <string name="wechat_infor">添加微信账号</string>
+    <string name="register">注册</string>
+    <string name="fotgetpsw">忘记密码</string>
 
 </resources>

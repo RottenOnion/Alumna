@@ -5,13 +5,15 @@
     <color name="colorAccent">#FF4081</color>
     <color name="plain">#ececec</color>
 
-    <color name="colorThemeRed">#be3434</color>
+    <color name="colorThemeRed">#fbd34141</color>
+    <color name="colorDarkRed">#ed9f1c1c</color>
     <color name="colorPlainGray">#edeaea</color>
     <color name="textHintGray">#b4b0b0</color>
     <color name="white">#ffffff</color>
     <color name="green">#00ec00</color>
 
     <color name="black">#000</color>
+    <color name="halftransparent">#0f000000</color>
     <color name="transparent">#00000000</color>
     <color name="default_clickable_color">#cccccc</color>
     <color name="listview_bg_color">#faefef</color>
