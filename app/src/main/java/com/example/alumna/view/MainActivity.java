@@ -21,7 +21,6 @@ import com.example.alumna.adapter.TopicListAdapter.FriendCircleAdapter;
 import com.example.alumna.bean.LeftBean;
 import com.example.alumna.bean.TopicBean;
 import com.example.alumna.presenter.MainPresenter;
-import com.example.alumna.utils.DataUtils;
 import com.example.alumna.view.Interface.MainViewImpl;
 
 import java.util.ArrayList;
@@ -63,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+
         /*
          初始化左侧滑菜单Item
          */
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
                         MainActivity.this.startActivity(i);
                         break;
                     case 1:
-                        i=new Intent(MainActivity.this,UpdateImforActivity.class);
+                        i=new Intent(MainActivity.this,InformActivity.class);
                         MainActivity.this.startActivity(i);
                         break;
                     case 2:

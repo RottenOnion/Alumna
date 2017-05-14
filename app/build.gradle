@@ -42,13 +42,10 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'org.greenrobot:greendao:3.2.2'
     compile 'com.lzy.widget:imagepicker:0.5.5'
-<<<<<<< HEAD
     compile 'com.google.android.gms:play-services-maps:10.2.4'
     testCompile 'junit:junit:4.12'
-=======
     compile 'com.google.android.gms:play-services-maps:+'
     compile files('src/libs/AMap_Location_V3.4.0_20170427.jar')
     compile 'com.tencent.bugly:crashreport:latest.release'
->>>>>>> 08a1adf40887eaf99f6ec1740126387e6e903077
 }
 
