@@ -56,18 +56,12 @@ public class PublishActivity extends AppCompatActivity implements View.OnClickLi
         toolbar=(Toolbar)findViewById(R.id.toolbar);
         backBtn=(Button)findViewById(R.id.back_Btn) ;
         setSupportActionBar(toolbar);
-        if(isImage){
-            imageListView=(ImageListView)findViewById(R.id.img_list_view);
-            imageListView.setVisibility(View.VISIBLE);
-            Intent intent = new Intent(this, ImageGridActivity.class);
-            startActivityForResult(intent, TYPE_IMAGE);
-        }
+
 
         //setlistener
         backBtn.setOnClickListener(this);
         publishBtn.setOnClickListener(this);
         publishBtn.setClickable(false);
-
         topicEt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -89,10 +83,14 @@ public class PublishActivity extends AppCompatActivity implements View.OnClickLi
         });
 
         presenter = new PublishPresenter(this);
-
         presenter.getLocation();
 
-
+        if(isImage){
+            imageListView=(ImageListView)findViewById(R.id.img_list_view);
+            imageListView.setVisibility(View.VISIBLE);
+            Intent intent = new Intent(this, ImageGridActivity.class);
+            startActivityForResult(intent, TYPE_IMAGE);
+        }
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
