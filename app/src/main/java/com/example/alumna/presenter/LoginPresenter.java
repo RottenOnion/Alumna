@@ -13,6 +13,7 @@ import com.example.alumna.view.Interface.LoginViewImpl;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.tencent.bugly.crashreport.CrashReport;
 
 import okhttp3.Call;
 
@@ -50,7 +51,7 @@ public class LoginPresenter implements LoginPresenterImpl{
                     JsonObject user = jsonObject.get("user").getAsJsonObject();
                     Gson gson = new Gson();
                     UserBean userBean = gson.fromJson(user, UserBean.class);
-                    Log.i("user",userBean.toString());
+                    MyApplication.setCurUser(userBean);
                     lView.StartMainActivity();
                 }else if (status.equals("-1")){
                     Toast.makeText(MyApplication.getContext(),"密码错误",Toast.LENGTH_SHORT).show();

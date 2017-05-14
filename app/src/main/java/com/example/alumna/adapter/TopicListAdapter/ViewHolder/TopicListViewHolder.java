@@ -6,6 +6,7 @@ import android.view.ViewStub;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.alumna.MyApplication;
 import com.example.alumna.R;
 import com.example.alumna.bean.CommentBean;
 import com.example.alumna.bean.TopicBean;
@@ -93,7 +94,7 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
         ImageUtil.displayImage(this.head,topic.getHead());
 
         //删除按钮
-        if(topic.getUid()==DataUtils.curUser.getUid()){
+        if(topic.getUid()== MyApplication.getcurUser().getUid()){
             deleteBtn.setVisibility(View.GONE);
         }
 
@@ -164,7 +165,7 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
                     if(System.currentTimeMillis()- lasttime <500)//防止快速点击操作
                         return;
                     lasttime = System.currentTimeMillis();
-                    presenter.setLike(DataUtils.curUser.getUid(),tid);
+                    presenter.setLike(MyApplication.getcurUser().getUid(),tid);
                     break;
                 case 1://发布评论
 
@@ -177,7 +178,7 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
                                     break;
                                 case R.id.sendBtn:
                                     String comment=editTextPopupWindow.getComment();
-                                    if (comment!=null) presenter.setComment(DataUtils.curUser.getUid(), tid,comment);
+                                    if (comment!=null) presenter.setComment(MyApplication.getcurUser().getUid(), tid,comment);
                                     break;
                                 default:break;
                             }

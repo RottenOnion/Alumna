@@ -2,6 +2,7 @@ package com.example.alumna.widgets;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -103,7 +104,7 @@ public class EditTextPopupWindow extends PopupWindow {
     public String getComment(){
         String text;
         text=commentEt.getText().toString();
-        if(text!=null){
+        if(!TextUtils.isEmpty(text)){
             return text;
         }else {
             Toast.makeText(MyApplication.getContext(),"请输入文字",Toast.LENGTH_SHORT).show();
