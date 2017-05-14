@@ -55,13 +55,18 @@
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
-        <activity android:name=".view.SelectPhotoActivity"
-                    android:label="@string/app_name">
+        <activity android:name=".view.SelectPhotoActivity">
+
         </activity>
 
         <activity
             android:name="com.lzy.imagepicker.ui.ImagePreviewDelActivity"
             android:theme="@style/ImagePickerThemeFullScreen"/>
+
+        <activity
+            android:name=".view.InformActivity"
+            android:label="@string/no_string">
+        </activity>
     </application>
 
 </manifest>

@@ -39,6 +39,6 @@
     <string name="signature">添加你的个性签名</string>
     <string name="wechat_infor">添加微信账号</string>
     <string name="register">注册</string>
-    <string name="fotgetpsw">忘记密码</string>
+    <string name="fotgetpsw">忘记密码?</string>
 
 </resources>

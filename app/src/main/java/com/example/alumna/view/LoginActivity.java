@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity implements LoginViewImpl ,O
         LoginView=(LinearLayout)findViewById(R.id.loginView);
         phoneTv = (AutoCompleteTextView) findViewById(R.id.phoneTv);
         passwordEv = (EditText) findViewById(R.id.passwordEt);
-        signBtn = (Button) findViewById(R.id.signBtn);
+        signBtn = (Button) findViewById(R.id.loginBtn);
         progressView = (ProgressBar) findViewById(R.id.login_progress);
         forgetpassword=(TextView)findViewById(R.id.foggetpassword) ;
         register=(TextView)findViewById(R.id.register);
@@ -94,7 +94,7 @@ public class LoginActivity extends AppCompatActivity implements LoginViewImpl ,O
             case R.id.foggetpassword:
                 Toast.makeText(MyApplication.getContext(),"忘记密码",Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.signBtn:
+            case R.id.loginBtn:
                 presenter.Login();
             default:break;
         }
