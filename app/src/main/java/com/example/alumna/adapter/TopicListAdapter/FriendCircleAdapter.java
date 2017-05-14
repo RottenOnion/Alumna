@@ -31,7 +31,7 @@ public class FriendCircleAdapter extends BaseRecycleViewAdapter {
     private ArrayList<TopicBean> list ;
     private Context context;
     private LayoutInflater inflater;
-    private UserBean curUser= DataUtils.curUser;
+    private UserBean curUser= MyApplication.getcurUser();
 
     public FriendCircleAdapter(Context context, ArrayList<TopicBean> list){
         this.context=context;

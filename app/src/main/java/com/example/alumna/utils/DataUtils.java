@@ -27,17 +27,6 @@ public class DataUtils {
     public static final String SENDPIC="sendpic";
 
 
-
-    public static UserBean curUser;
-
-
-    static {
-
-        curUser=new UserBean(1);
-        curUser.setUsername("lollipop");
-        curUser.setHead("https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=966093302,1751994111&fm=58");
-    }
-
     public static ArrayList<UserBean> getList(){
         return list;
     }

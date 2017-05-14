@@ -95,8 +95,7 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(OrientationHelper.VERTICAL);
         topiclist.setLayoutManager(layoutManager);
-        presenter.loadTopicList(DataUtils.curUser.getUid());
-
+        presenter.loadTopicList(MyApplication.getcurUser().getUid());
 
     }
 

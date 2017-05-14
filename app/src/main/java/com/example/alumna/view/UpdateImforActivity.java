@@ -68,7 +68,7 @@ public class UpdateImforActivity extends AppCompatActivity implements View.OnCli
 
 
         //load
-        presenter.loadImfor(DataUtils.curUser.getUid());
+        presenter.loadImfor(MyApplication.getcurUser().getUid());
 
     }
 
