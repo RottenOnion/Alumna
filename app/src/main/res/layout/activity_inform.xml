@@ -1,9 +1,223 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.alumna.view.InformActivity">
+    android:fitsSystemWindows="true">
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <ImageView
+                android:id="@+id/head_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/test_touxiang"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.5" />
+
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/text_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="张敬轩"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_gender"
+                android:layout_width="40dp"
+                android:layout_height="20dp"
+                android:layout_alignLeft="@id/text_name"
+                android:layout_below="@id/text_name"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/button_male_shape"
+                android:clickable="false"
+                android:text="男"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/btn_grade"
+                android:layout_width="40dp"
+                android:layout_height="20dp"
+                android:layout_toRightOf="@id/btn_gender"
+                android:layout_below="@id/text_name"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/button_grade_shape"
+                android:clickable="false"
+                android:text="大三"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:id="@+id/text_school"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/btn_gender"
+                android:layout_below="@id/btn_gender"
+                android:layout_marginTop="10dp"
+                android:text="华南理工大学"
+                android:textColor="@color/textHintGray"
+                android:textSize="14sp" />
+
+            <View
+                android:id="@+id/divider_1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/text_school"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="20dp"
+                android:background="#edeaea"
+
+                />
+
+            <TextView
+                android:id="@+id/tip_inform"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/divider_1"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:text="@string/information"
+                android:textColor="@color/colorThemeRed"
+                android:textSize="14sp" />
+
+
+            <ImageView
+                android:layout_below="@id/tip_inform"
+                android:id="@+id/icon_location"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="30dp"
+                android:src="@drawable/icon_location" />
+
+            <TextView
+                android:layout_toRightOf="@id/icon_location"
+                android:layout_alignTop="@id/icon_location"
+                android:id="@+id/text_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:text="新天地"/>
+
+            <ImageView
+                android:layout_below="@id/icon_location"
+                android:id="@+id/icon_signature"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="30dp"
+                android:src="@drawable/icon_work" />
+
+            <TextView
+                android:layout_toRightOf="@id/icon_signature"
+                android:layout_alignTop="@id/icon_signature"
+                android:id="@+id/text_signature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:text="如有天樱花再开，期望可跟你示爱"/>
+
+
+            <View
+                android:id="@+id/divider_2"
+                android:layout_below="@id/icon_signature"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="20dp"
+                android:background="#edeaea"
+
+                />
+
+            <TextView
+                android:id="@+id/tip_wechat"
+                android:layout_below="@id/divider_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:text="我的社交账号"
+                android:textColor="@color/colorThemeRed"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/icon_wechat"
+                android:layout_below="@id/tip_wechat"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/icon_wechat" />
+
+
+            <TextView
+                android:id="@+id/wechat_text"
+                android:layout_toRightOf="@id/icon_wechat"
+                android:layout_alignTop="@id/icon_wechat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:text="Hins"/>
+
+
+            <View
+                android:layout_below="@id/icon_wechat"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="20dp"
+                android:background="#edeaea" />
+
+
+
+
+
+        </RelativeLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+
+</android.support.design.widget.CoordinatorLayout>

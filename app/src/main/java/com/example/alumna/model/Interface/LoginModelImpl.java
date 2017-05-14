@@ -1,5 +1,7 @@
 package com.example.alumna.model.Interface;
 
+import com.example.alumna.utils.Http.HttpRequestCallback;
+
 import java.util.Map;
 
 /**
@@ -8,6 +10,6 @@ import java.util.Map;
 
 public interface LoginModelImpl {
 
-    void Login(Map<String, Object> params);
+    void Login(Map<String, Object> params, HttpRequestCallback<String>callback);
 
 }

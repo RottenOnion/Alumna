@@ -2,21 +2,30 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#c73231</color>
     <color name="plain">#ececec</color>
 
-    <color name="colorThemeRed">#be3434</color>
+    <color name="colorThemeRed">#c73231</color>
+    <color name="colorDarkRed">#aa2929</color>
     <color name="colorPlainGray">#edeaea</color>
     <color name="textHintGray">#b4b0b0</color>
     <color name="white">#ffffff</color>
     <color name="green">#00ec00</color>
 
     <color name="black">#000</color>
+    <color name="halftransparent">#0f000000</color>
     <color name="transparent">#00000000</color>
     <color name="default_clickable_color">#cccccc</color>
     <color name="listview_bg_color">#faefef</color>
     <color name="listview_clickable_color">#cccccc</color>
     <color name="username_font_front_color">#1500fe</color>
+
+    <color name="colorMale">#2782dd</color>
+    <color name="colorFemale">#cf6790</color>
+
+    <color name="loginYellow">#f5e06a</color>
+
+    <color name="wechatGreen">#62b900</color>
 
 
 </resources>

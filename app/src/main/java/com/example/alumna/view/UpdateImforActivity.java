@@ -62,6 +62,7 @@ public class UpdateImforActivity extends AppCompatActivity implements View.OnCli
 
         //set listener
         head_view.setOnClickListener(this);
+        location_text.setOnClickListener(this);
 
         presenter = new UpdateImforPresenter(this);
 
@@ -94,6 +95,8 @@ public class UpdateImforActivity extends AppCompatActivity implements View.OnCli
                 startActivityForResult(intent, HEAD_PICKER);
                 startActivity(intent);
                 break;
+            case R.id.location_text:
+                location_text.setFocusable(true);
             default:break;
         }
     }

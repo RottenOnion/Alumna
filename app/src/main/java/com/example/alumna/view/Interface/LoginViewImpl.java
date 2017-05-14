@@ -1,6 +1,4 @@
 package com.example.alumna.view.Interface;
-
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -9,4 +7,10 @@ import java.util.Map;
 
 public interface LoginViewImpl {
     Map<String, Object> getLoginImfor() ;
+
+    void showProgressBar();
+
+    void hideProgressBar();
+
+    void StartMainActivity();
 }
