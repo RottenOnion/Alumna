@@ -1,6 +1,5 @@
 package com.example.alumna.view;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
@@ -11,10 +10,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.alumna.MyApplication;
 import com.example.alumna.R;
@@ -26,7 +23,6 @@ import com.example.alumna.bean.TopicBean;
 import com.example.alumna.presenter.MainPresenter;
 import com.example.alumna.utils.DataUtils;
 import com.example.alumna.view.Interface.MainViewImpl;
-import com.lzy.imagepicker.ui.ImagePreviewDelActivity;
 
 import java.util.ArrayList;
 
