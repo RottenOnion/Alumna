@@ -67,6 +67,10 @@
             android:name=".view.InformActivity"
             android:label="@string/no_string">
         </activity>
+
+        <activity android:name=".view.NearbyActivity"
+            android:label="">
+        </activity>
     </application>
 
 </manifest>

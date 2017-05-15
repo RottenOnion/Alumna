@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.example.alumna.MyApplication;
 import com.example.alumna.R;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
 
     private MainPresenter presenter;
     private Button publishBtn;
+    private LinearLayout layoutCircle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +48,19 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
         mLeftRvView = (RecyclerView) findViewById(R.id.main_left_recycler);
         topiclist = (RecyclerView) findViewById(R.id.topiclist);
         publishBtn=(Button)findViewById(R.id.publish_Btn) ;
+        layoutCircle = (LinearLayout) findViewById(R.id.friend_circle);
         publishBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i=new Intent(MainActivity.this,PublishActivity.class);
                 MainActivity.this.startActivity(i);
+            }
+        });
+        layoutCircle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(MainActivity.this,NearbyActivity.class);
+                MainActivity.this.startActivity(intent);
             }
         });
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
