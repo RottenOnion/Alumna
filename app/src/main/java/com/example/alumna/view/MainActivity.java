@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.example.alumna.MyApplication;
 import com.example.alumna.R;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
 
     private MainPresenter presenter;
     private Button publishBtn;
+    private LinearLayout layoutCircle;
 
     private final static boolean TYPE_TEXT=false;
     private static final boolean TYPE_IMAGE=true;
@@ -49,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
         mLeftRvView = (RecyclerView) findViewById(R.id.main_left_recycler);
         topiclist = (RecyclerView) findViewById(R.id.topiclist);
         publishBtn=(Button)findViewById(R.id.publish_Btn) ;
+        layoutCircle = (LinearLayout) findViewById(R.id.friend_circle);
         publishBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,6 +67,13 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
                 i.putExtra("flag",TYPE_TEXT);
                 MainActivity.this.startActivity(i);
                 return false;
+            }
+        });
+        layoutCircle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(MainActivity.this,NearbyActivity.class);
+                MainActivity.this.startActivity(intent);
             }
         });
 
@@ -106,12 +116,12 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(OrientationHelper.VERTICAL);
         topiclist.setLayoutManager(layoutManager);
+        presenter.loadTopicList(MyApplication.getcurUser().getUid());
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        presenter.loadTopicList(MyApplication.getcurUser().getUid());
     }
 
     private void loadLeftDatas() {

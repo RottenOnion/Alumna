@@ -2,10 +2,7 @@ package com.example.alumna.widgets;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 
@@ -27,13 +24,13 @@ public class ImageShower extends GridLayout{
     private ArrayList<ImageItem> imgs;
 
     private Context context;
-    private static final int DEFAULT_COW_COUNT =4;//默认每行4列
+    private static final int DEFAULT_COLUMN_COUNT =4;//默认每行4列
     private static final boolean DEFAULT_APDEND=true;//默认追加一张图片
     private static int DEFUALT_SPACING = 10;//默认间隔10px
     private static int MAX_WIDTH=0;
 
     private int per_img_width;//每张图片宽度
-    private int cowCount=DEFAULT_COW_COUNT;//列数
+    private int columnCount= DEFAULT_COLUMN_COUNT;//列数
     private boolean isApdend=DEFAULT_APDEND;//默认追加一张图片
     private int spacing = DEFUALT_SPACING;//图片间默认间隔10px
 
@@ -57,6 +54,10 @@ public class ImageShower extends GridLayout{
 
     public OnItemClickListener getOnItemClickListener() {
         return onItemClickListener;
+    }
+
+    public void setcolumn(int column){
+        columnCount=column;
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
@@ -84,8 +85,8 @@ public class ImageShower extends GridLayout{
 
     private void showImageList(){
         removeAllViews();
-        setColumnCount(cowCount);
-        per_img_width=MAX_WIDTH/cowCount-spacing;
+        setColumnCount(columnCount);
+        per_img_width=MAX_WIDTH/columnCount-spacing;
         for (int i=0;i<imgs.size();++i){
             LayoutParams params= new LayoutParams();
             params.width=per_img_width;

@@ -114,7 +114,6 @@ public class CommentListView extends LinearLayout{
         builder.append(": ");
         //comment
         builder.append(comment.getComment());
-        //Log.i(this.getClass().getName(),builder.toString());
         commentTv.setText(builder);
         commentTv.setMovementMethod(movementMethod);
         commentTv.setOnClickListener(new View.OnClickListener() {

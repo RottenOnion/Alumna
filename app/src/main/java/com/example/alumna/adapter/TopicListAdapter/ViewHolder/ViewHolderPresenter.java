@@ -2,9 +2,7 @@ package com.example.alumna.adapter.TopicListAdapter.ViewHolder;
 
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
-import com.example.alumna.MyApplication;
 import com.example.alumna.bean.CommentBean;
 import com.example.alumna.bean.UserBean;
 import com.example.alumna.utils.Http.HttpRequestCallback;
@@ -15,12 +13,10 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
-import java.net.URLDecoder;
 import java.util.ArrayList;
 
 import okhttp3.Call;
 
-import static android.net.Uri.encode;
 
 /**
  * Created by Leebobo on 2017/5/9.
@@ -41,7 +37,8 @@ public class ViewHolderPresenter implements ViewHolderPresenterImpl{
         vhModel.getLikeList(tid, new HttpRequestCallback<String>() {
             @Override
             public void onStart() {
-
+                vhView.praiseListView.setText("");
+                vhView.praiseListView.setVisibility(View.GONE);
             }
 
             @Override
@@ -52,15 +49,18 @@ public class ViewHolderPresenter implements ViewHolderPresenterImpl{
             @Override
             public void onResponse(String result) {
                 JsonObject jsonObject=new JsonParser().parse(result).getAsJsonObject();
-                JsonArray jsonArray=jsonObject.getAsJsonArray("list");
-                Gson gson=new Gson();
-                ArrayList<UserBean> likeList=new ArrayList<>();
-                for (JsonElement bean:jsonArray){
-                    UserBean user=gson.fromJson(bean,new TypeToken<UserBean>(){ }.getType());
-                    likeList.add(user);
+                int status=jsonObject.get("status").getAsInt();
+                if (status==-1){
+                    JsonArray jsonArray=jsonObject.getAsJsonArray("list");
+                    Gson gson=new Gson();
+                    ArrayList<UserBean> likeList=new ArrayList<>();
+                    for (JsonElement bean:jsonArray){
+                        UserBean user=gson.fromJson(bean,new TypeToken<UserBean>(){ }.getType());
+                        likeList.add(user);
+                    }
+                    vhView.setPraiseListView(likeList);
+                    vhView.praiseListView.setVisibility(View.VISIBLE);
                 }
-                vhView.setPraiseListView(likeList);
-                vhView.praiseListView.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -75,7 +75,8 @@ public class ViewHolderPresenter implements ViewHolderPresenterImpl{
         vhModel.getCommentList(tid, new HttpRequestCallback<String>() {
             @Override
             public void onStart() {
-
+                vhView.commentListView.removeAllViews();
+                vhView.commentListView.setVisibility(View.GONE);
             }
 
             @Override
@@ -86,17 +87,20 @@ public class ViewHolderPresenter implements ViewHolderPresenterImpl{
             @Override
             public void onResponse(String result) {
                 JsonObject jsonObject=new JsonParser().parse(result).getAsJsonObject();
+                int status=jsonObject.get("status").getAsInt();
+                if (status==1){
+                    JsonArray jsonArray=jsonObject.getAsJsonArray("list");
 
-                JsonArray jsonArray=jsonObject.getAsJsonArray("list");
-
-                Gson gson=new Gson();
-                ArrayList<CommentBean> commentlist=new ArrayList<>();
-                for (JsonElement bean:jsonArray){
-                    CommentBean comment=gson.fromJson(bean,new TypeToken<CommentBean>(){ }.getType());
-                    commentlist.add(comment);
+                    Gson gson=new Gson();
+                    ArrayList<CommentBean> commentlist=new ArrayList<>();
+                    for (JsonElement bean:jsonArray){
+                        CommentBean comment=gson.fromJson(bean,new TypeToken<CommentBean>(){ }.getType());
+                        commentlist.add(comment);
+                    }
+                    vhView.setCommentListView(commentlist);
+                    vhView.commentListView.setVisibility(View.VISIBLE);
                 }
-                vhView.setCommentListView(commentlist);
-                vhView.commentListView.setVisibility(View.VISIBLE);
+
             }
 
             @Override

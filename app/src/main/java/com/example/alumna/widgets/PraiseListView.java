@@ -15,6 +15,7 @@ import android.text.style.BackgroundColorSpan;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
@@ -81,7 +82,6 @@ public class PraiseListView extends TextView {
             }
         }
         setText(builder);
-        //setMovementMethod(LinkMovementMethod.getInstance());
         setMovementMethod(new PraiseListViewMethod());
 
     }

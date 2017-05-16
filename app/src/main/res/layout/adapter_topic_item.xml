@@ -121,6 +121,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:minHeight="10dip"
+                android:visibility="gone"
                 android:orientation="vertical"
                 android:paddingBottom="8dip"
                 android:paddingLeft="12dip"
@@ -129,6 +130,7 @@
 
                 <com.example.alumna.widgets.PraiseListView
                     android:id="@+id/praiseList"
+                    android:visibility="gone"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
@@ -137,6 +139,7 @@
 
                 <View
                     android:id="@+id/line"
+                    android:visibility="gone"
                     android:layout_width="fill_parent"
                     android:layout_height="1dip"
                     android:layout_marginBottom="5dip"

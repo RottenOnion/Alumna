@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewStub;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.alumna.MyApplication;
@@ -42,6 +43,7 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
     public TextView deleteBtn;
     public ImageView snsBtn;
 
+    public LinearLayout commentBody;
     //点赞列表
     public PraiseListView praiseListView;
     public View line;
@@ -71,6 +73,7 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
 
         snsBtn=(ImageView)itemView.findViewById(R.id.snsBtn);
 
+        commentBody=(LinearLayout)itemView.findViewById(R.id.CommentBody);
         praiseListView=(PraiseListView)itemView.findViewById(R.id.praiseList);
         line=(View)itemView.findViewById(R.id.line);
         commentListView=(CommentListView)itemView.findViewById(R.id.commentList);
@@ -78,7 +81,6 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
         popupWindow=new SnsPopupWindow(itemView.getContext());
         editTextPopupWindow=new EditTextPopupWindow(itemView.getContext());
 
-        line.setVisibility(View.GONE);
     }
 
     public abstract void initSubView(int viewType, ViewStub viewStub);
@@ -89,33 +91,38 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
         name.setText(topic.getUsername());
         location.setText(topic.getLocation());
         time.setText(StringParseTime(topic.getTime()));
-
+        commentBody.setVisibility(View.VISIBLE);
+        line.setVisibility(View.GONE);
         //加载头像
         ImageUtil.displayImage(this.head,topic.getHead());
 
         //删除按钮
-        if(topic.getUid()== MyApplication.getcurUser().getUid()){
-            deleteBtn.setVisibility(View.GONE);
+        if(topic.getUid()== MyApplication.getcurUser().getUid()) {
+            deleteBtn.setVisibility(View.VISIBLE);
         }
 
-        if(topic.getCommentNum()>0||topic.getLikeNum()>0){
+        if (topic.getLikeNum()>0 && topic.getCommentNum() > 0){
             line.setVisibility(View.VISIBLE);
-            //处理点赞列表
-            if(topic.getLikeNum()>0){
-                presenter.loadLikeList(topic.getTid());
-            }else {
-                praiseListView.setVisibility(View.GONE);
-            }
-
-            //处理评论列表
-            if(topic.getCommentNum()>0){
-                presenter.loadCommentList(topic.getTid());
-            }else {
-                commentListView.setVisibility(View.GONE);
-            }
+        }
+        //处理点赞列表
+        if (topic.getLikeNum() > 0) {
+            presenter.loadLikeList(topic.getTid());
+            praiseListView.setVisibility(View.VISIBLE);
+        } else {
+            praiseListView.setText("");
+            praiseListView.setVisibility(View.GONE);
         }
 
+        //处理评论列表
+        if (topic.getCommentNum() > 0) {
+            presenter.loadCommentList(topic.getTid());
+            commentListView.setVisibility(View.VISIBLE);
+        } else {
+            commentListView.removeAllViews();
+            praiseListView.setVisibility(View.GONE);
+        }
     }
+
 
     public void initPopupWindow(final int tid) {
         snsBtn.setOnClickListener(new View.OnClickListener() {
