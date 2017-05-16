@@ -6,12 +6,13 @@ package com.example.alumna.presenter.Interface;
 
 public interface PublishPresenterImpl {
 
-    /*获取上一个页面的选择的图片*/
-    void loadSelectedImage();
+    /*上传图片*/
+    void publishImageType(final String imfor,final String location);
 
     /*发布动态*/
-    void publish(String topic);
+    void publish(int type);
 
     /*获取定位*/
     void getLocation();
+
 }

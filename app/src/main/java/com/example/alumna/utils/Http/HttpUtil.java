@@ -67,7 +67,8 @@ public class HttpUtil {
         for (ImageItem img:imgs){
             File file=new File(img.path);
             if (file!=null){
-                builder.addFormDataPart("img", file.getName(), RequestBody.create(MEDIA_TYPE_PNG, file));
+                //请求body要和服务器一致
+                builder.addFormDataPart("file", file.getName(), RequestBody.create(MEDIA_TYPE_PNG, file));
             }
         }
 
@@ -90,7 +91,6 @@ public class HttpUtil {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 if (response!=null&&response.isSuccessful()){
-                    Log.i(this.getClass().getName(),"request successful");
                     String result=response.body().string();
                    onSuccessJsonStringMethod(result,callback);
                 }

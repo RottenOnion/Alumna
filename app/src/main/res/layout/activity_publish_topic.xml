@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -30,6 +29,7 @@
         android:layout_gravity="end"
         android:layout_marginEnd="10dp"
         android:text="发送" />
+
 </android.support.v7.widget.Toolbar>
 
     <EditText
@@ -47,16 +47,17 @@
         android:textColor="@color/black"
         android:textSize="16dp" />
 
-    <com.example.alumna.widgets.ImageListView
-        android:id="@+id/img_list_view"
-        android:visibility="gone"
-        android:layout_marginBottom="10dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </com.example.alumna.widgets.ImageListView>
+
+        <com.example.alumna.widgets.ImageShower
+            android:id="@+id/img_list_view"
+            android:visibility="gone"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </com.example.alumna.widgets.ImageShower>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -79,6 +80,11 @@
             android:text="所在位置"
             android:textColor="@color/black" />
     </LinearLayout>
-
-
+    <android.support.v4.widget.ContentLoadingProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        />
 </LinearLayout>

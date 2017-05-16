@@ -3,19 +3,16 @@ package com.example.alumna.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.alumna.R;
 import com.example.alumna.presenter.SelectPhotoPresenter;
-import com.example.alumna.utils.Image.GlideImageLoader;
 import com.example.alumna.view.Interface.SelectPhotoViewImpl;
-import com.example.alumna.widgets.ImageListView;
+import com.example.alumna.widgets.ImageShower;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
-import com.lzy.imagepicker.view.CropImageView;
 
 import java.util.ArrayList;
 
@@ -25,7 +22,7 @@ import java.util.ArrayList;
 
 public class SelectPhotoActivity extends AppCompatActivity implements View.OnClickListener, SelectPhotoViewImpl {
 
-    ImageListView imageListView;
+    ImageShower imageListView;
 
     //private Button select;
     private SelectPhotoPresenter presenter;
@@ -33,7 +30,7 @@ public class SelectPhotoActivity extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.image_list_view);
-        imageListView=(ImageListView)findViewById(R.id.img_list);
+        imageListView=(ImageShower)findViewById(R.id.img_list);
 
         Intent intent = new Intent(this, ImageGridActivity.class);
         startActivityForResult(intent, IMAGE_PICKER);
@@ -47,6 +44,7 @@ public class SelectPhotoActivity extends AppCompatActivity implements View.OnCli
                 imageListView.notifyDataSetChanged(images);
             } else {
                 Toast.makeText(this, "没有数据", Toast.LENGTH_SHORT).show();
+
             }
         }
     }

@@ -1,5 +1,10 @@
 package com.example.alumna.model.Interface;
+import com.example.alumna.utils.Http.HttpRequestCallback;
+import com.example.alumna.utils.Http.HttpUtil;
+import com.lzy.imagepicker.bean.ImageItem;
+
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/4/25.
@@ -7,9 +12,7 @@ import java.util.ArrayList;
 
 public interface PublishModelImpl {
 
-    ArrayList<String> getSelectedImage();
+    void uploadImage(List<ImageItem> imgs, HttpRequestCallback<String> callback);
 
-    void getLocation();
-
-    void PublishTopic();
+    void PublishTopic(String imfor, String location, int type, String imagepath, HttpRequestCallback<String> callback);
 }

@@ -36,6 +36,9 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
     private MainPresenter presenter;
     private Button publishBtn;
 
+    private final static boolean TYPE_TEXT=false;
+    private static final boolean TYPE_IMAGE=true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,18 +53,26 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
             @Override
             public void onClick(View v) {
                 Intent i=new Intent(MainActivity.this,PublishActivity.class);
+                i.putExtra("flag",TYPE_IMAGE);
                 MainActivity.this.startActivity(i);
             }
         });
+        publishBtn.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Intent i=new Intent(MainActivity.this,PublishActivity.class);
+                i.putExtra("flag",TYPE_TEXT);
+                MainActivity.this.startActivity(i);
+                return false;
+            }
+        });
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-
         setSupportActionBar(toolbar);
-
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
 
         /*
          初始化左侧滑菜单Item
@@ -95,11 +106,13 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(OrientationHelper.VERTICAL);
         topiclist.setLayoutManager(layoutManager);
-        presenter.loadTopicList(MyApplication.getcurUser().getUid());
-
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.loadTopicList(MyApplication.getcurUser().getUid());
+    }
 
     private void loadLeftDatas() {
         mLeftDatas = new ArrayList<>();
@@ -141,6 +154,5 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
         adapter=new FriendCircleAdapter(MyApplication.getContext(),list);
         topiclist.setAdapter(adapter);
     }
-
 
 }

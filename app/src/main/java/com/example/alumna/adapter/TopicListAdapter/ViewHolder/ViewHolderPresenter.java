@@ -52,7 +52,7 @@ public class ViewHolderPresenter implements ViewHolderPresenterImpl{
             @Override
             public void onResponse(String result) {
                 JsonObject jsonObject=new JsonParser().parse(result).getAsJsonObject();
-                JsonArray jsonArray=jsonObject.getAsJsonArray("List");
+                JsonArray jsonArray=jsonObject.getAsJsonArray("list");
                 Gson gson=new Gson();
                 ArrayList<UserBean> likeList=new ArrayList<>();
                 for (JsonElement bean:jsonArray){

@@ -90,10 +90,10 @@ public class FriendCircleAdapter extends BaseRecycleViewAdapter {
 
         switch (holder.viewType){
             case TopicListViewHolder.TYPE_IMAGE://图片
-                Glide.with(MyApplication.getContext()).
-                        load(R.drawable.test_touxiang).override(500,500).
-                        placeholder(R.drawable.ic_loading).
-                        into(((ImageViewHolder)holder).imageView);
+//                Glide.with(MyApplication.getContext()).
+//                        load(R.drawable.test_touxiang).override(500,500).
+//                        placeholder(R.drawable.ic_loading).
+//                        into(((ImageViewHolder)holder).imageView);
                 break;
             default:
                 break;

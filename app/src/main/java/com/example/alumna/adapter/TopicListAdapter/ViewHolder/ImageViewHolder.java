@@ -9,13 +9,14 @@ import com.bumptech.glide.Glide;
 import com.example.alumna.MyApplication;
 import com.example.alumna.R;
 import com.example.alumna.utils.Image.ImageUtil;
+import com.example.alumna.widgets.ImageShower;
 
 /**
  * Created by Leebobo on 2017/5/3.
  */
 
 public class ImageViewHolder extends TopicListViewHolder {
-    public ImageView imageView;
+    public ImageShower image_shower;
     public ImageViewHolder(View itemView) {
         super(itemView, TYPE_IMAGE);
     }
@@ -27,9 +28,9 @@ public class ImageViewHolder extends TopicListViewHolder {
         }
         viewStub.setLayoutResource(R.layout.viewstub_image);
         View subView=viewStub.inflate();
-        ImageView imageView=(ImageView) subView.findViewById(R.id.imageview);
-        if (imageView!=null){
-            this.imageView=imageView;
+        ImageShower view=(ImageShower) subView.findViewById(R.id.image_shower);
+        if (view!=null){
+            this.image_shower=view;
         }
     }
 }
