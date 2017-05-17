@@ -270,7 +270,7 @@
                 android:src="@drawable/icon_wechat" />
 
             <EditText
-                android:id="@+id/wechat_text"
+                android:id="@+id/text_wechat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/wechat_infor"

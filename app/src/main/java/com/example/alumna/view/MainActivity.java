@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
                         MainActivity.this.startActivity(i);
                         break;
                     case 1:
-                        i=new Intent(MainActivity.this,InformActivity.class);
+                        i=new Intent(MainActivity.this,MemberActivity.class);
                         MainActivity.this.startActivity(i);
                         break;
                     case 2:

@@ -4,52 +4,47 @@ package com.example.alumna.model;
 import com.example.alumna.bean.TopicBean;
 import com.example.alumna.bean.UserBean;
 import com.example.alumna.model.Interface.MemberModelImpl;
+import com.example.alumna.presenter.Interface.OnMemberListener;
+import com.example.alumna.utils.Http.HttpRequestCallback;
 
 import java.util.ArrayList;
 
+import okhttp3.Call;
+
 public class MemberModel implements MemberModelImpl {
 
-    @Override
-    public void setUid(int id) {
+    OnMemberListener mListener;
 
-    }
-
-    @Override
-    public void setHead(String head) {
-
-    }
-
-    @Override
-    public void setUserName(String name) {
-
-    }
-
-    @Override
-    public void setSex(String sex) {
-
-    }
-
-    @Override
-    public void setLocation(String location) {
-
-    }
-
-    @Override
-    public void setPhone(String phone) {
-
+    public MemberModel(OnMemberListener memberListener) {
+        this.mListener = memberListener;
     }
 
     @Override
     public UserBean getUser(int id) {
 
-        //http���󣬷���һ��json����������һ��user����
-        UserBean test = new UserBean(id);
-        test.setLocation("scut");
-        test.setSex("male");
-        test.setUsername("testfor1");
-        test.setPhone("12312313");
+        new HttpRequestCallback<String>() {
+            @Override
+            public void onStart() {
 
-        return test;
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+
+            @Override
+            public void onResponse(String s) {
+                mListener.onUserSuccess(new UserBean(123));
+            }
+
+            @Override
+            public void onFailure(Call call) {
+
+            }
+        };
+
+        return null;
     }
 
     public ArrayList<TopicBean> getTopicList(int uid) {
