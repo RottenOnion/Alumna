@@ -65,4 +65,16 @@ public class UserBean {
     public void setUid(int uid) {
         this.uid = uid;
     }
+
+    @Override
+    public String toString() {
+        return "UserBean{" +
+                "uid=" + uid +
+                ", head='" + head + '\'' +
+                ", username='" + username + '\'' +
+                ", sex='" + sex + '\'' +
+                ", location='" + location + '\'' +
+                ", phone='" + phone + '\'' +
+                '}';
+    }
 }

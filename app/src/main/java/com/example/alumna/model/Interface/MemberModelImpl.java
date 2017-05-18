@@ -7,17 +7,7 @@ import java.util.ArrayList;
 
 public interface MemberModelImpl {
 
-    void setUid(int id);
 
-    void setUserName(String name);
-
-    void setHead(String head);
-
-    void setSex(String sex);
-
-    void setLocation(String location);
-
-    void setPhone(String phone);
 
     UserBean getUser(int id);
 

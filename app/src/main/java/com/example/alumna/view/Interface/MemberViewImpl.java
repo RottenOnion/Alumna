@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public interface MemberViewImpl {
 
-    void showUserImfor(UserBean user);
+    void showUserInform(UserBean user);
 
     void showTopicList(ArrayList<TopicBean> list);
 }

@@ -194,7 +194,7 @@
 
 
             <TextView
-                android:id="@+id/wechat_text"
+                android:id="@+id/text_wechat"
                 android:layout_toRightOf="@id/icon_wechat"
                 android:layout_alignTop="@id/icon_wechat"
                 android:layout_width="wrap_content"

@@ -1,11 +1,16 @@
 package com.example.alumna.view;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-
+import com.example.alumna.R;
 import com.example.alumna.bean.TopicBean;
 import com.example.alumna.bean.UserBean;
 import com.example.alumna.presenter.MemberPresenter;
@@ -17,15 +22,22 @@ import java.util.ArrayList;
 public class MemberActivity extends Activity implements OnClickListener, MemberViewImpl {
 
     private MemberPresenter presenter;
+    private ImageView headView;
+    private TextView textName,textSchool,textLocation,textSignature,textWechat;
+    private Button btnGender,btnGrade;
+    private String mUid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_member);
 
         //findview
+        initView();
 
-
-        //set listener
+        //get Uid
+        Intent intent = getIntent();
+        mUid = intent.getStringExtra("uid");
 
 
         presenter = new MemberPresenter(this);
@@ -35,6 +47,17 @@ public class MemberActivity extends Activity implements OnClickListener, MemberV
         presenter.loadUser(1);
         presenter.loadTopicList(1);
 
+    }
+
+    private void initView() {
+        headView = (ImageView) findViewById(R.id.head_view);
+        textName = (TextView) findViewById(R.id.text_name);
+        textSchool = (TextView) findViewById(R.id.text_school);
+        textLocation = (TextView) findViewById(R.id.text_location);
+        textSignature = (TextView) findViewById(R.id.text_signature);
+        textWechat = (TextView) findViewById(R.id.text_wechat);
+        btnGender = (Button) findViewById(R.id.btn_gender);
+        btnGrade = (Button) findViewById(R.id.btn_grade);
     }
 
 
@@ -50,8 +73,8 @@ public class MemberActivity extends Activity implements OnClickListener, MemberV
 
 
     @Override
-    public void showUserImfor(UserBean user) {
-
+    public void showUserInform(UserBean user) {
+        Log.d("ccl",user.toString());
     }
 
     @Override

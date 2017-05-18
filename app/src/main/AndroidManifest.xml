@@ -64,7 +64,7 @@
             android:theme="@style/ImagePickerThemeFullScreen"/>
 
         <activity
-            android:name=".view.InformActivity"
+            android:name=".view.MemberActivity"
             android:label="@string/no_string">
         </activity>
 
