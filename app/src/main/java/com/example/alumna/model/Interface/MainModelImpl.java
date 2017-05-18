@@ -17,14 +17,12 @@ public interface MainModelImpl {
 
     UserBean getImfor(int uid);
 
-    void getTopicList(int uid, HttpRequestCallback callback);
+    //void getTopicList(int uid, HttpRequestCallback callback);
 
-    void setLike(int uid, int tid);
+    ArrayList<TopicBean> getTopicList(int uid);
 
     ArrayList<UserBean> getLikeList(int tid);
 
-    void setComment(int uid, int tid, String comment);
-
-    void getComment(int tid,HttpRequestCallback callback);
+    ArrayList<CommentBean> getComment(int tid);
 
 }

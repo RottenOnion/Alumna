@@ -6,7 +6,8 @@ import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.Property;
 import org.greenrobot.greendao.annotation.Generated;
 
-@Entity
+import java.util.ArrayList;
+
 public class TopicBean {
     public static String TYPE_TEXT="1";
     public static String TYPE_IMAGE="2";
@@ -43,7 +44,9 @@ public class TopicBean {
 
     @Property(nameInDb = "HEAD")
     private String head;
-    
+
+    private ArrayList<UserBean>likeList;
+    private ArrayList<CommentBean>commentList;
 
     @Generated(hash = 1961217991)
     public TopicBean() {
@@ -160,5 +163,21 @@ public class TopicBean {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public ArrayList<UserBean> getLikeList() {
+        return likeList;
+    }
+
+    public void setLikeList(ArrayList<UserBean> likeList) {
+        this.likeList = likeList;
+    }
+
+    public ArrayList<CommentBean> getCommentList() {
+        return commentList;
+    }
+
+    public void setCommentList(ArrayList<CommentBean> commentList) {
+        this.commentList = commentList;
     }
 }

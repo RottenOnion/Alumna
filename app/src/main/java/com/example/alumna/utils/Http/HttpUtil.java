@@ -52,6 +52,7 @@ public class HttpUtil {
         return instance;
     }
 
+    //异步post请求
     public void PostRequest(final String url, final Map<String, Object> params, final HttpRequestCallback callback){
         String data= ParseUtil.MapParseString(params);
         final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
@@ -61,6 +62,23 @@ public class HttpUtil {
         client.newCall(request).enqueue(getCallBack(callback));
     }
 
+    //同步post请求
+    public void PostRequest(final String url, final Map<String, Object> params,Listen listen){
+        String data= ParseUtil.MapParseString(params);
+        final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        RequestBody body = RequestBody.create(JSON, data);
+
+        Request request = new Request.Builder().url(url).post(body).build();
+        try {
+            Response response=client.newCall(request).execute();
+            String result=response.body().string();
+            listen.getResult(result);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //异步上传图片
     public void UploadImage(final String url, final List<ImageItem> imgs,final HttpRequestCallback callback){
         final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/png");
         MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
@@ -114,4 +132,7 @@ public class HttpUtil {
         });
     }
 
+    public interface  Listen{
+        void getResult(String result);
+    }
 }

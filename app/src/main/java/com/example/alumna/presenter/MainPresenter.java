@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.alumna.DBHelper.DateBaseHelper;
 import com.example.alumna.bean.CommentBean;
 import com.example.alumna.bean.TopicBean;
+import com.example.alumna.bean.UserBean;
 import com.example.alumna.model.Interface.MainModelImpl;
 import com.example.alumna.model.MainModel;
 import com.example.alumna.presenter.Interface.MainPresenterImpl;
@@ -37,42 +38,56 @@ public class MainPresenter implements MainPresenterImpl {
     }
 
     @Override
-    public void loadTopicList(int uid) {
-        mModel.getTopicList(uid,new HttpRequestCallback<String>() {
-            @Override
-            public void onStart() {
-                mView.showProgressBar();
-            }
+    public void loadTopicList(final int uid) {
+        mView.showProgressBar();
 
-            @Override
-            public void onFinish() {
-                mView.hideProgressBar();
-            }
+        ArrayList<TopicBean> topicList=mModel.getTopicList(uid);
+        for (TopicBean topic:topicList){
+            int tid=topic.getTid();
+            if (topic.getLikeNum()>0)topic.setLikeList(mModel.getLikeList(tid));
+            if (topic.getCommentNum()>0)topic.setCommentList(mModel.getComment(tid));
+        }
 
-            @Override
-            public void onResponse(String result) {
-
-                JsonObject jsonObject=new JsonParser().parse(result).getAsJsonObject();
-                JsonArray jsonArray=jsonObject.getAsJsonArray("list");
-                Gson gson=new Gson();
-                ArrayList<TopicBean>list=new ArrayList<>();
-                for (JsonElement bean:jsonArray){
-                    TopicBean topic=gson.fromJson(bean,new TypeToken<TopicBean>(){ }.getType());
-                    list.add(topic);
-                    //helper.update(topic);
-                }
-                //helper.insertAll(list);
-                mView.showTopicList(list);
-            }
-
-            @Override
-            public void onFailure(Call call) {
-                DateBaseHelper helper=DateBaseHelper.getInstance();
-                List<TopicBean> list=helper.queryAll();
-                mView.showTopicList((ArrayList<TopicBean>)list);
-            }
-        });
+        mView.showTopicList(topicList);
+        mView.hideProgressBar();
     }
+
+//    @Override
+//    public void loadTopicList(int uid) {
+//        mModel.getTopicList(uid,new HttpRequestCallback<String>() {
+//            @Override
+//            public void onStart() {
+//                mView.showProgressBar();
+//            }
+//
+//            @Override
+//            public void onFinish() {
+//                mView.hideProgressBar();
+//            }
+//
+//            @Override
+//            public void onResponse(String result) {
+//
+//                JsonObject jsonObject=new JsonParser().parse(result).getAsJsonObject();
+//                JsonArray jsonArray=jsonObject.getAsJsonArray("list");
+//                Gson gson=new Gson();
+//                ArrayList<TopicBean>list=new ArrayList<>();
+//                for (JsonElement bean:jsonArray){
+//                    TopicBean topic=gson.fromJson(bean,new TypeToken<TopicBean>(){ }.getType());
+//                    list.add(topic);
+//                }
+//                mView.showTopicList(list);
+//                onFinish();
+//            }
+//
+//            @Override
+//            public void onFailure(Call call) {
+//                DateBaseHelper helper=DateBaseHelper.getInstance();
+//                List<TopicBean> list=helper.queryAll();
+//                mView.showTopicList((ArrayList<TopicBean>)list);
+//            }
+//        });
+//    }
 
 
 }

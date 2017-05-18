@@ -73,6 +73,10 @@ public class MyApplication extends Application{
 
     public static UserBean getcurUser(){
         //读取本地用户信息，如果没有，跳去登录
+        if (curUser==null){
+            curUser=new UserBean(1);
+            curUser.setUsername("未登录");
+        }
         return curUser;
     }
 

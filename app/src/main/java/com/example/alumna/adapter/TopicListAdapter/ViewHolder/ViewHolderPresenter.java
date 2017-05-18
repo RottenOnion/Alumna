@@ -37,8 +37,7 @@ public class ViewHolderPresenter implements ViewHolderPresenterImpl{
         vhModel.getLikeList(tid, new HttpRequestCallback<String>() {
             @Override
             public void onStart() {
-                vhView.praiseListView.setText("");
-                vhView.praiseListView.setVisibility(View.GONE);
+
             }
 
             @Override
@@ -75,8 +74,7 @@ public class ViewHolderPresenter implements ViewHolderPresenterImpl{
         vhModel.getCommentList(tid, new HttpRequestCallback<String>() {
             @Override
             public void onStart() {
-                vhView.commentListView.removeAllViews();
-                vhView.commentListView.setVisibility(View.GONE);
+
             }
 
             @Override

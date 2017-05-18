@@ -105,22 +105,24 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
             line.setVisibility(View.VISIBLE);
         }
         //处理点赞列表
-        if (topic.getLikeNum() > 0) {
-            presenter.loadLikeList(topic.getTid());
-            praiseListView.setVisibility(View.VISIBLE);
-        } else {
-            praiseListView.setText("");
-            praiseListView.setVisibility(View.GONE);
-        }
+        praiseListView.notifyDataSetChanged(topic.getLikeList());
+//        if (topic.getLikeNum() > 0) {
+//            presenter.loadLikeList(topic.getTid());
+//            praiseListView.setVisibility(View.VISIBLE);
+//        } else {
+//            praiseListView.setText("");
+//            praiseListView.setVisibility(View.GONE);
+//        }
 
         //处理评论列表
-        if (topic.getCommentNum() > 0) {
-            presenter.loadCommentList(topic.getTid());
-            commentListView.setVisibility(View.VISIBLE);
-        } else {
-            commentListView.removeAllViews();
-            praiseListView.setVisibility(View.GONE);
-        }
+        commentListView.notifyDataSetChanged(topic.getCommentList());
+//        if (topic.getCommentNum() > 0) {
+//            presenter.loadCommentList(topic.getTid());
+//            commentListView.setVisibility(View.VISIBLE);
+//        } else {
+//            commentListView.removeAllViews();
+//            praiseListView.setVisibility(View.GONE);
+//        }
     }
 
 

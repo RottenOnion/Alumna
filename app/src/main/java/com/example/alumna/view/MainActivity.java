@@ -2,8 +2,10 @@ package com.example.alumna.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -37,6 +39,9 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
     private MainPresenter presenter;
     private Button publishBtn;
     private LinearLayout layoutCircle;
+    private SwipeRefreshLayout refreshLayout;
+    private Toolbar toolbar;
+    private DrawerLayout drawer;
 
     private final static boolean TYPE_TEXT=false;
     private static final boolean TYPE_IMAGE=true;
@@ -47,40 +52,17 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
         setContentView(R.layout.activity_main);
         presenter=new MainPresenter(this);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         mLeftRvView = (RecyclerView) findViewById(R.id.main_left_recycler);
         topiclist = (RecyclerView) findViewById(R.id.topiclist);
         publishBtn=(Button)findViewById(R.id.publish_Btn) ;
+        refreshLayout=(SwipeRefreshLayout)findViewById(R.id.refresh_layout);
         layoutCircle = (LinearLayout) findViewById(R.id.friend_circle);
-        publishBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i=new Intent(MainActivity.this,PublishActivity.class);
-                i.putExtra("flag",TYPE_IMAGE);
-                MainActivity.this.startActivity(i);
-            }
-        });
-        publishBtn.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                Intent i=new Intent(MainActivity.this,PublishActivity.class);
-                i.putExtra("flag",TYPE_TEXT);
-                MainActivity.this.startActivity(i);
-                return false;
-            }
-        });
-        layoutCircle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent =new Intent(MainActivity.this,NearbyActivity.class);
-                MainActivity.this.startActivity(intent);
-            }
-        });
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -91,6 +73,44 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
         LeftDrawerAdapter leftAdapter = new LeftDrawerAdapter(mLeftDatas);
         mLeftRvView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         mLeftRvView.setAdapter(leftAdapter);
+
+        /*
+        初始化朋友圈
+         */
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(OrientationHelper.VERTICAL);
+        topiclist.setLayoutManager(layoutManager);
+        presenter.loadTopicList(MyApplication.getcurUser().getUid());
+
+
+        //listener
+        publishBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(MainActivity.this,PublishActivity.class);
+                i.putExtra("flag",TYPE_IMAGE);
+                MainActivity.this.startActivity(i);
+            }
+        });
+
+        publishBtn.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Intent i=new Intent(MainActivity.this,PublishActivity.class);
+                i.putExtra("flag",TYPE_TEXT);
+                MainActivity.this.startActivity(i);
+                return false;
+            }
+        });
+
+        layoutCircle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(MainActivity.this,NearbyActivity.class);
+                MainActivity.this.startActivity(intent);
+            }
+        });
+
         leftAdapter.setListener(new onItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
@@ -110,18 +130,12 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
             }
         });
 
-        /*
-        初始化朋友圈
-         */
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(OrientationHelper.VERTICAL);
-        topiclist.setLayoutManager(layoutManager);
-        presenter.loadTopicList(MyApplication.getcurUser().getUid());
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener(){
+            @Override
+            public void onRefresh() {
+                presenter.loadTopicList(MyApplication.getcurUser().getUid());
+            }
+        });
     }
 
     private void loadLeftDatas() {
@@ -151,12 +165,12 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
 
     @Override
     public void showProgressBar() {
-
+        refreshLayout.setRefreshing(true);
     }
 
     @Override
     public void hideProgressBar() {
-
+        refreshLayout.setRefreshing(false);
     }
 
     @Override
