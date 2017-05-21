@@ -96,8 +96,47 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_below="@id/text_school"
-                android:layout_marginBottom="10dp"
                 android:layout_marginTop="20dp"
+                android:background="#edeaea"
+
+                />
+
+            <LinearLayout
+                android:layout_below="@id/divider_1"
+                android:id="@+id/layout_friend_circle"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="horizontal"
+                android:clickable="true"
+                android:background="?attr/selectableItemBackground"
+                >
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/icon_friend_circle"
+                    android:scaleType="centerCrop"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/menu_friend"
+                    android:textSize="16sp"
+                    android:textColor="#818385"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="40dp"/>
+
+            </LinearLayout>
+
+            <View
+
+                android:id="@+id/divider_3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/layout_friend_circle"
+                android:layout_marginBottom="10dp"
                 android:background="#edeaea"
 
                 />
@@ -106,7 +145,7 @@
                 android:id="@+id/tip_inform"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/divider_1"
+                android:layout_below="@id/divider_3"
                 android:layout_marginBottom="20dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="15dp"

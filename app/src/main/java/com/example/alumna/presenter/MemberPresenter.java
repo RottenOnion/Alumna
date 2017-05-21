@@ -24,7 +24,7 @@ public class MemberPresenter implements MemberPresenterImpl,OnMemberListener {
     @Override
     public void loadUser(int id) {
 
-        UserBean user = mModel.getUser(id);
+        mModel.getUser(id);
 
     }
 

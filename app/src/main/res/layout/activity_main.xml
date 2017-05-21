@@ -15,12 +15,13 @@
         android:layout_height="match_parent" />
 
     <LinearLayout
+        android:id="@+id/left_drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity = "start"
         android:orientation="vertical"
         android:fitsSystemWindows="true"
-        android:background="@drawable/ic_blackground">
+        android:background="#2c2626">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,6 +31,7 @@
             android:gravity="center">
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/left_head_view"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:src="@drawable/test_touxiang"/>
@@ -39,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/left_drawer_name"
-                android:textSize="20sp"
+                android:textSize="19sp"
                 android:textColor="#ddffffff"
                 android:textStyle="bold"
                 android:layout_marginBottom="10dp"
@@ -65,10 +67,12 @@
     </LinearLayout>
 
     <include
+        android:id="@+id/right_drawer_layout"
         layout="@layout/right_drawer_main"
         android:layout_gravity = "end"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
+        android:fitsSystemWindows="true"
 
         />
 
