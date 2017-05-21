@@ -55,6 +55,7 @@ public class HttpUtil {
     //异步post请求
     public void PostRequest(final String url, final Map<String, Object> params, final HttpRequestCallback callback){
         String data= ParseUtil.MapParseString(params);
+
         final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         RequestBody body = RequestBody.create(JSON, data);
 
@@ -63,7 +64,7 @@ public class HttpUtil {
     }
 
     //同步post请求
-    public void PostRequest(final String url, final Map<String, Object> params,Listen listen){
+    public void PostRequest(final String url, final Map<String, Object> params){
         String data= ParseUtil.MapParseString(params);
         final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         RequestBody body = RequestBody.create(JSON, data);
@@ -72,7 +73,6 @@ public class HttpUtil {
         try {
             Response response=client.newCall(request).execute();
             String result=response.body().string();
-            listen.getResult(result);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -110,7 +110,7 @@ public class HttpUtil {
             public void onResponse(Call call, Response response) throws IOException {
                 if (response!=null&&response.isSuccessful()){
                     String result=response.body().string();
-                   onSuccessJsonStringMethod(result,callback);
+                    onSuccessJsonStringMethod(result,callback);
                 }
             }
         };
@@ -132,7 +132,4 @@ public class HttpUtil {
         });
     }
 
-    public interface  Listen{
-        void getResult(String result);
-    }
 }

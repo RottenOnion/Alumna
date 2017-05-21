@@ -95,7 +95,7 @@ public class TopicBeanDao extends AbstractDao<TopicBean, Long> {
             stmt.bindString(6, type);
         }
  
-        String imfor = entity.getImfor();
+        String imfor = entity.getInfor();
         if (imfor != null) {
             stmt.bindString(7, imfor);
         }
@@ -139,7 +139,7 @@ public class TopicBeanDao extends AbstractDao<TopicBean, Long> {
             stmt.bindString(6, type);
         }
  
-        String imfor = entity.getImfor();
+        String imfor = entity.getInfor();
         if (imfor != null) {
             stmt.bindString(7, imfor);
         }
@@ -188,7 +188,7 @@ public class TopicBeanDao extends AbstractDao<TopicBean, Long> {
         entity.setUsername(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setLocation(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setType(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setImfor(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setInfor(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
         entity.setTime(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
         entity.setLikeNum(cursor.getInt(offset + 8));
         entity.setCommentNum(cursor.getInt(offset + 9));

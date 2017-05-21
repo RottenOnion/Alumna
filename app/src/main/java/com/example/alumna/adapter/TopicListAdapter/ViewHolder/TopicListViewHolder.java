@@ -1,6 +1,7 @@
 package com.example.alumna.adapter.TopicListAdapter.ViewHolder;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewStub;
 import android.widget.ImageView;
@@ -105,7 +106,10 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
             line.setVisibility(View.VISIBLE);
         }
         //处理点赞列表
-        praiseListView.notifyDataSetChanged(topic.getLikeList());
+        if (topic.getLikeNum()>0){
+            praiseListView.setVisibility(View.VISIBLE);
+            setPraiseListView(topic.getLikeList());
+        }
 //        if (topic.getLikeNum() > 0) {
 //            presenter.loadLikeList(topic.getTid());
 //            praiseListView.setVisibility(View.VISIBLE);
@@ -115,14 +119,13 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
 //        }
 
         //处理评论列表
-        commentListView.notifyDataSetChanged(topic.getCommentList());
-//        if (topic.getCommentNum() > 0) {
-//            presenter.loadCommentList(topic.getTid());
-//            commentListView.setVisibility(View.VISIBLE);
-//        } else {
-//            commentListView.removeAllViews();
-//            praiseListView.setVisibility(View.GONE);
-//        }
+        if (topic.getCommentNum() > 0) {
+            commentListView.setVisibility(View.VISIBLE);
+            setCommentListView(topic.getCommentList());
+        } else {
+            commentListView.removeAllViews();
+            praiseListView.setVisibility(View.GONE);
+        }
     }
 
 

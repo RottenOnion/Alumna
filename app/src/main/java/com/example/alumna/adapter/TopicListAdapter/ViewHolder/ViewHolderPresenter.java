@@ -49,7 +49,7 @@ public class ViewHolderPresenter implements ViewHolderPresenterImpl{
             public void onResponse(String result) {
                 JsonObject jsonObject=new JsonParser().parse(result).getAsJsonObject();
                 int status=jsonObject.get("status").getAsInt();
-                if (status==-1){
+                if (status==1){
                     JsonArray jsonArray=jsonObject.getAsJsonArray("list");
                     Gson gson=new Gson();
                     ArrayList<UserBean> likeList=new ArrayList<>();

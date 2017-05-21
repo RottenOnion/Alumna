@@ -1,8 +1,6 @@
 package com.example.alumna.bean;
 
-import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
-import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.Property;
 import org.greenrobot.greendao.annotation.Generated;
 
@@ -149,14 +147,6 @@ public class TopicBean {
         this.head = head;
     }
 
-    public String getImfor() {
-        return this.imfor;
-    }
-
-    public void setImfor(String imfor) {
-        this.imfor = imfor;
-    }
-
     public Long getId() {
         return this.id;
     }
@@ -179,5 +169,14 @@ public class TopicBean {
 
     public void setCommentList(ArrayList<CommentBean> commentList) {
         this.commentList = commentList;
+    }
+
+    @Override
+    public String toString() {
+        return "TopicBean{" +
+                "tid=" + tid +
+                ", username='" + username + '\'' +
+                ", imfor='" + imfor + '\'' +
+                '}';
     }
 }

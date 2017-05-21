@@ -6,6 +6,7 @@ import com.example.alumna.bean.CommentBean;
 import com.example.alumna.bean.TopicBean;
 import com.example.alumna.bean.UserBean;
 import com.example.alumna.model.Interface.MainModelImpl;
+import com.example.alumna.presenter.Interface.OnMainListener;
 import com.example.alumna.utils.DataUtils;
 import com.example.alumna.utils.Http.HttpRequestCallback;
 import com.example.alumna.utils.Http.HttpUtil;
@@ -30,6 +31,12 @@ import okhttp3.Call;
 
 public class MainModel implements MainModelImpl {
 
+    OnMainListener mListener;
+    private ArrayList<UserBean> list = new ArrayList<>();
+
+    public MainModel(OnMainListener mainListener){
+        this.mListener=mainListener;
+    }
     @Override
     public String getBackground(int uid) {
         //先查找本地，找到就返回，然后后台访问服务器获取背景图路径
@@ -42,30 +49,47 @@ public class MainModel implements MainModelImpl {
     }
 
     @Override
-    public ArrayList<TopicBean> getTopicList(int uid) {
+    public void getTopicList(int uid) {
         //发送uid和时间戳给服务器，返回动态列表
         String url=new String(DataUtils.BASEURL+DataUtils.INIT);
 
         Map<String,Object> params=new HashMap<>();
         params.put("uid",uid);
         params.put("location","123");
-        params.put("time","149317700000");
+        params.put("time","1493177167");
 
         HttpUtil gettopic=HttpUtil.getInstance();
 
-        gettopic.PostRequest(url, params, new HttpUtil.Listen() {
+        gettopic.PostRequest(url, params, new HttpRequestCallback<String>() {
             @Override
-            public void getResult(String result) {
+            public void onStart() {
 
-                if (!result.equals("")){
-                    JsonObject jsonObject=new JsonParser().parse(result).getAsJsonObject();
-                    JsonArray jsonArray=jsonObject.getAsJsonArray("list");
-                    Gson gson=new Gson();
-                    for (JsonElement bean:jsonArray){
-                        TopicBean topic=gson.fromJson(bean,new TypeToken<TopicBean>(){ }.getType());
-                        list.add(topic);
-                    }
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+
+            @Override
+            public void onResponse(String result) {
+
+                JsonObject jsonObject = new JsonParser().parse(result).getAsJsonObject();
+                JsonArray jsonArray = jsonObject.get("list").getAsJsonArray();
+                Gson gson = new Gson();
+                ArrayList<TopicBean> list = new ArrayList<>();
+                for (JsonElement bean : jsonArray) {
+                    TopicBean topic = gson.fromJson(bean, new TypeToken<TopicBean>() {
+                    }.getType());
+
+                    list.add(topic);
                 }
+                mListener.TopicSuccess(list);
+            }
+
+            @Override
+            public void onFailure(Call call) {
+
             }
         });
 
@@ -75,61 +99,97 @@ public class MainModel implements MainModelImpl {
 
     @Override
     /*返回该动态下点赞的人的列表*/
-    public ArrayList<UserBean> getLikeList(int tid) {
+    public void getLikeList(final int tid, final OnLikeListResult listener) {
+
         String url = new String(DataUtils.BASEURL + DataUtils.GETLIKE);
         Map<String, Object> params = new HashMap<>();
         params.put("tid", tid);
 
         HttpUtil getlikelist = HttpUtil.getInstance();
-        String result = getlikelist.PostRequest(url, params);
-        ArrayList<UserBean> likeList = new ArrayList<>();
-        Log.i(""+tid,result);
+        getlikelist.PostRequest(url, params, new HttpRequestCallback<String>() {
+            @Override
+            public void onStart() {
 
-        if (!result.equals("")) {
-            JsonObject jsonObject = new JsonParser().parse(result).getAsJsonObject();
-            int status = jsonObject.get("status").getAsInt();
-            if (status == -1) {
-                JsonArray jsonArray = jsonObject.getAsJsonArray("list");
-                Gson gson = new Gson();
-                for (JsonElement bean : jsonArray) {
-                    UserBean user = gson.fromJson(bean, new TypeToken<UserBean>() {
-                    }.getType());
-                    likeList.add(user);
+            }
+
+            @Override
+            public void onFinish() {
+            }
+
+            @Override
+            public void onResponse(String result) {
+                JsonObject jsonObject = new JsonParser().parse(result).getAsJsonObject();
+                int status = jsonObject.get("status").getAsInt();
+                if (status == 1) {
+                    JsonArray jsonArray = jsonObject.getAsJsonArray("list");
+                    Gson gson = new Gson();
+                    ArrayList<UserBean> likeList = new ArrayList<>();
+                    for (JsonElement bean : jsonArray) {
+                        UserBean user = gson.fromJson(bean, new TypeToken<UserBean>() {
+                        }.getType());
+                        likeList.add(user);
+                    }
+                    listener.success(likeList);
                 }
             }
-        }
-        return likeList;
+
+            @Override
+            public void onFailure(Call call) {
+                mListener.onError();
+            }
+        });
     }
+
 
 
     @Override
     /*返回该动态下的评论列表*/
-    public ArrayList<CommentBean> getComment(int tid) {
+    public void getComment(final int tid,final OnCommentResult listener) {
         String url = new String(DataUtils.BASEURL + DataUtils.GETCOMMENT);
 
         Map<String, Object> params = new HashMap<>();
         params.put("tid", tid);
 
         HttpUtil getComment = HttpUtil.getInstance();
-        String result = getComment.PostRequest(url, params);
-        ArrayList<CommentBean> commentList = new ArrayList<>();
+        getComment.PostRequest(url, params, new HttpRequestCallback<String>() {
+            @Override
+            public void onStart() {
 
-        Log.i(""+tid,result);
-        if (!result.equals("")) {
-            JsonObject jsonObject=new JsonParser().parse(result).getAsJsonObject();
-            int status=jsonObject.get("status").getAsInt();
-            if (status == 1) {
-                JsonArray jsonArray = jsonObject.getAsJsonArray("list");
+            }
 
-                Gson gson = new Gson();
-                for (JsonElement bean : jsonArray) {
-                    CommentBean comment = gson.fromJson(bean, new TypeToken<CommentBean>() {
-                    }.getType());
-                    commentList.add(comment);
+            @Override
+            public void onFinish() {
+
+            }
+
+            @Override
+            public void onResponse(String result) {
+                JsonObject jsonObject=new JsonParser().parse(result).getAsJsonObject();
+                int status=jsonObject.get("status").getAsInt();
+                if (status == 1) {
+                    JsonArray jsonArray = jsonObject.getAsJsonArray("list");
+                    ArrayList<CommentBean> commentList = new ArrayList<>();
+                    Gson gson = new Gson();
+                    for (JsonElement bean : jsonArray) {
+                        CommentBean comment = gson.fromJson(bean, new TypeToken<CommentBean>() {
+                        }.getType());
+                        commentList.add(comment);
+                    }
+                    listener.success(commentList);
                 }
             }
-        }
-        return commentList;
+
+            @Override
+            public void onFailure(Call call) {
+
+            }
+        });
+    }
+    public interface OnLikeListResult{
+        void success(ArrayList<UserBean> list);
     }
 
+    public interface OnCommentResult{
+        void success(ArrayList<CommentBean> list);
+    }
 }

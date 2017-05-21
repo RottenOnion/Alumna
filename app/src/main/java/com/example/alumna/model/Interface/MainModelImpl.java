@@ -4,6 +4,7 @@ package com.example.alumna.model.Interface;
 import com.example.alumna.bean.CommentBean;
 import com.example.alumna.bean.TopicBean;
 import com.example.alumna.bean.UserBean;
+import com.example.alumna.model.MainModel;
 import com.example.alumna.utils.Http.HttpRequestCallback;
 
 import java.util.ArrayList;
@@ -19,10 +20,12 @@ public interface MainModelImpl {
 
     //void getTopicList(int uid, HttpRequestCallback callback);
 
-    ArrayList<TopicBean> getTopicList(int uid);
+    void getTopicList(int uid);
 
-    ArrayList<UserBean> getLikeList(int tid);
+    void getLikeList(int tid, MainModel.OnLikeListResult listResult);
 
-    ArrayList<CommentBean> getComment(int tid);
+    //void getLikeList(int tid);
+
+    void getComment(int tid,MainModel.OnCommentResult listResult);
 
 }
