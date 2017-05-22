@@ -37,16 +37,6 @@ public class MainModel implements MainModelImpl {
     public MainModel(OnMainListener mainListener){
         this.mListener=mainListener;
     }
-    @Override
-    public String getBackground(int uid) {
-        //先查找本地，找到就返回，然后后台访问服务器获取背景图路径
-        return null;
-    }
-
-    @Override
-    public UserBean getImfor(int uid) {
-        return null;
-    }
 
     @Override
     public void getTopicList(int uid) {
@@ -58,9 +48,7 @@ public class MainModel implements MainModelImpl {
         params.put("location","123");
         params.put("time","1493177167");
 
-        HttpUtil gettopic=HttpUtil.getInstance();
-
-        gettopic.PostRequest(url, params, new HttpRequestCallback<String>() {
+        HttpUtil.getInstance().PostRequest(url, params, new HttpRequestCallback<String>() {
             @Override
             public void onStart() {
 
@@ -79,9 +67,24 @@ public class MainModel implements MainModelImpl {
                 Gson gson = new Gson();
                 ArrayList<TopicBean> list = new ArrayList<>();
                 for (JsonElement bean : jsonArray) {
-                    TopicBean topic = gson.fromJson(bean, new TypeToken<TopicBean>() {
-                    }.getType());
+                    final TopicBean topic = gson.fromJson(bean, new TypeToken<TopicBean>() {}.getType());
 
+                    if(topic.getLikeNum()>0){
+                        getLikeList(topic.getTid(),new OnLikeListResult(){
+                            @Override
+                            public void success(ArrayList<UserBean> likelist) {
+                                topic.setLikeList(likelist);
+                            }
+                        });
+                    }
+                    if (topic.getCommentNum()>0){
+                        getComment(topic.getTid(), new OnCommentResult() {
+                            @Override
+                            public void success(ArrayList<CommentBean> commentlist) {
+                                topic.setCommentList(commentlist);
+                            }
+                        });
+                    }
                     list.add(topic);
                 }
                 mListener.TopicSuccess(list);
@@ -96,7 +99,6 @@ public class MainModel implements MainModelImpl {
     }
 
 
-
     @Override
     /*返回该动态下点赞的人的列表*/
     public void getLikeList(final int tid, final OnLikeListResult listener) {
@@ -105,8 +107,7 @@ public class MainModel implements MainModelImpl {
         Map<String, Object> params = new HashMap<>();
         params.put("tid", tid);
 
-        HttpUtil getlikelist = HttpUtil.getInstance();
-        getlikelist.PostRequest(url, params, new HttpRequestCallback<String>() {
+        HttpUtil.getInstance().PostRequest(url, params, new HttpRequestCallback<String>() {
             @Override
             public void onStart() {
 
@@ -150,8 +151,7 @@ public class MainModel implements MainModelImpl {
         Map<String, Object> params = new HashMap<>();
         params.put("tid", tid);
 
-        HttpUtil getComment = HttpUtil.getInstance();
-        getComment.PostRequest(url, params, new HttpRequestCallback<String>() {
+        HttpUtil.getInstance().PostRequest(url, params, new HttpRequestCallback<String>() {
             @Override
             public void onStart() {
 
@@ -164,6 +164,7 @@ public class MainModel implements MainModelImpl {
 
             @Override
             public void onResponse(String result) {
+
                 JsonObject jsonObject=new JsonParser().parse(result).getAsJsonObject();
                 int status=jsonObject.get("status").getAsInt();
                 if (status == 1) {
@@ -171,8 +172,7 @@ public class MainModel implements MainModelImpl {
                     ArrayList<CommentBean> commentList = new ArrayList<>();
                     Gson gson = new Gson();
                     for (JsonElement bean : jsonArray) {
-                        CommentBean comment = gson.fromJson(bean, new TypeToken<CommentBean>() {
-                        }.getType());
+                        CommentBean comment = gson.fromJson(bean, new TypeToken<CommentBean>() {}.getType());
                         commentList.add(comment);
                     }
                     listener.success(commentList);

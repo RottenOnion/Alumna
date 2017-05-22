@@ -1,5 +1,7 @@
 package com.example.alumna.presenter;
 
+import android.util.Log;
+
 import com.example.alumna.bean.TopicBean;
 import com.example.alumna.bean.UserBean;
 import com.example.alumna.model.Interface.MemberModelImpl;
@@ -30,12 +32,12 @@ public class MemberPresenter implements MemberPresenterImpl,OnMemberListener {
 
     @Override
     public void loadTopicList(int uid) {
-        ArrayList<TopicBean> list = mModel.getTopicList(uid);
     }
 
 
     @Override
     public void onUserSuccess(UserBean user) {
+
         mView.showUserInform(user);
     }
 

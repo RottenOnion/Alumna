@@ -4,9 +4,14 @@ public class UserBean {
     private int uid;
     private String head;
     private String username;
-    private String sex;
+    private int sex;
     private String location;
     private String phone;
+    private String signature;
+    private String background;
+    private String wechat;
+    private String school;
+    private String grade;
 
     public UserBean(int id) {
         uid = id;
@@ -28,11 +33,11 @@ public class UserBean {
         this.username = username;
     }
 
-    public String getSex() {
+    public int getSex() {
         return sex;
     }
 
-    public void setSex(String sex) {
+    public void setSex(int sex) {
         this.sex = sex;
     }
 
@@ -76,5 +81,45 @@ public class UserBean {
                 ", location='" + location + '\'' +
                 ", phone='" + phone + '\'' +
                 '}';
+    }
+
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature;
+    }
+
+    public String getBackground() {
+        return background;
+    }
+
+    public void setBackground(String background) {
+        this.background = background;
+    }
+
+    public String getWechat() {
+        return wechat;
+    }
+
+    public void setWechat(String wechat) {
+        this.wechat = wechat;
+    }
+
+    public String getSchool() {
+        return school;
+    }
+
+    public void setSchool(String school) {
+        this.school = school;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
     }
 }

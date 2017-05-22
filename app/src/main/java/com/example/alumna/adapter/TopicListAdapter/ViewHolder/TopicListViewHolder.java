@@ -1,5 +1,7 @@
 package com.example.alumna.adapter.TopicListAdapter.ViewHolder;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +17,7 @@ import com.example.alumna.bean.TopicBean;
 import com.example.alumna.bean.UserBean;
 import com.example.alumna.utils.DataUtils;
 import com.example.alumna.utils.Image.ImageUtil;
+import com.example.alumna.view.MemberActivity;
 import com.example.alumna.widgets.CommentListView;
 import com.example.alumna.widgets.EditTextPopupWindow;
 import com.example.alumna.widgets.PraiseListView;
@@ -109,6 +112,9 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
         if (topic.getLikeNum()>0){
             praiseListView.setVisibility(View.VISIBLE);
             setPraiseListView(topic.getLikeList());
+//            for (UserBean user:topic.getLikeList()){
+//                Log.i("log:"+topic.getTid(),user.getUsername());
+//            }
         }
 //        if (topic.getLikeNum() > 0) {
 //            presenter.loadLikeList(topic.getTid());
@@ -122,10 +128,8 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
         if (topic.getCommentNum() > 0) {
             commentListView.setVisibility(View.VISIBLE);
             setCommentListView(topic.getCommentList());
-        } else {
-            commentListView.removeAllViews();
-            praiseListView.setVisibility(View.GONE);
         }
+
     }
 
 
@@ -146,7 +150,11 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
         praiseListView.setOnItemClickListener(new PraiseListView.OnItemClickListener() {
             @Override
             public void onClick(int position) {
-                presenter.getUserImfor(list.get(position).getUid());
+                Intent intent=new Intent();
+                Activity curActivity=(Activity)view.getContext();
+                intent.setClass(curActivity, MemberActivity.class);
+                intent.putExtra("uid",""+list.get(position).getUid());
+                curActivity.startActivity(intent);
             }
         });
     }
@@ -204,4 +212,5 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
             }
         }
     }
+
 }

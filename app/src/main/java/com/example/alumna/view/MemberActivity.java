@@ -3,7 +3,6 @@ package com.example.alumna.view;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -11,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.alumna.R;
 import com.example.alumna.bean.TopicBean;
 import com.example.alumna.bean.UserBean;
@@ -27,6 +27,7 @@ public class MemberActivity extends Activity implements OnClickListener, MemberV
     private TextView textName,textSchool,textLocation,textSignature,textWechat;
     private Button btnGender,btnGrade;
     private String mUid;
+    private int uid;
     private LinearLayout layoutCircle;
 
     @Override
@@ -40,14 +41,14 @@ public class MemberActivity extends Activity implements OnClickListener, MemberV
         //get Uid
         Intent intent = getIntent();
         mUid = intent.getStringExtra("uid");
-
+        uid=Integer.parseInt(mUid);
 
         presenter = new MemberPresenter(this);
 
 
         //load
-        presenter.loadUser(1);
-        presenter.loadTopicList(1);
+        presenter.loadUser(uid);
+        //presenter.loadTopicList(1);
 
     }
 
@@ -77,7 +78,32 @@ public class MemberActivity extends Activity implements OnClickListener, MemberV
 
     @Override
     public void showUserInform(UserBean user) {
-        Log.d("ccl",user.toString());
+        textName.setText(user.getUsername());
+        textSchool.setText(user.getSchool());
+        textLocation.setText(user.getLocation());
+        textSignature.setText(user.getSignature());
+        textWechat.setText(user.getWechat());
+
+        //head
+        Glide.with(this).load(user.getHead()).into(headView);
+
+        //gender
+        if (user.getSex()==1){
+            btnGender.setText("男");
+            btnGender.setBackground(getResources().getDrawable(R.drawable.button_male_shape));
+        }else if (user.getSex()==2){
+            btnGender.setText("女");
+            btnGender.setBackground(getResources().getDrawable(R.drawable.button_female_shape));
+        }
+
+        //grade
+        switch (user.getGrade()){
+            case "1":btnGrade.setText("大一");break;
+            case "2":btnGrade.setText("大二");break;
+            case "3":btnGrade.setText("大三");break;
+            case "4":btnGrade.setText("大四");break;
+            default:btnGender.setText(user.getGrade());
+        }
     }
 
     @Override

@@ -33,7 +33,7 @@ public class UserInforSP {
         UserBean user=new UserBean(0);
         user.setUid((int)sp.getData("uid",0));
         user.setHead((String)sp.getData("head",""));
-        user.setSex((String)sp.getData("head",""));
+        user.setSex((int)sp.getData("sex",""));
         user.setUsername((String)sp.getData("username",""));
         user.setLocation((String)sp.getData("location",""));
         user.setPhone((String)sp.getData("phone",""));

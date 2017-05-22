@@ -18,5 +18,6 @@ public class DataUtils {
     public static final String GETUSER="getuser";//获取某用户信息
     public static final String SENDPIC="sendpic";//发送图片
     public static final String NEWTOPIC="newtopic";//发布新的动态
+    public static final String MEMBER="getuserall";//查看用户信息
 
 }

@@ -1,8 +1,8 @@
 package com.example.alumna.presenter;
 
-import com.example.alumna.bean.CommentBean;
+import android.os.Handler;
+
 import com.example.alumna.bean.TopicBean;
-import com.example.alumna.bean.UserBean;
 import com.example.alumna.model.Interface.MainModelImpl;
 import com.example.alumna.model.MainModel;
 import com.example.alumna.presenter.Interface.MainPresenterImpl;
@@ -34,38 +34,15 @@ public class MainPresenter implements MainPresenterImpl ,OnMainListener{
 
     @Override
     public void TopicSuccess(final ArrayList<TopicBean> list) {
-        for (final TopicBean topic:list){
-            if(topic.getLikeNum()>0){
-                mModel.getLikeList(topic.getTid(),new MainModel.OnLikeListResult(){
-                    @Override
-                    public void success(ArrayList<UserBean> likelist) {
-                        topic.setLikeList(likelist);
-                    }
-                });
+        //避免数据未装载就返回票圈，这里给延时3秒
+        new Handler().postDelayed(new Runnable(){
+            public void run() {
+                mView.showTopicList(list);
+                mView.hideProgressBar();
             }
-            if (topic.getCommentNum()>0){
-                mModel.getComment(topic.getTid(), new MainModel.OnCommentResult() {
-                    @Override
-                    public void success(ArrayList<CommentBean> commentlist) {
-                        topic.setCommentList(commentlist);
-                    }
-                });
-            }
-        }
-        mView.showTopicList(list);
-        mView.hideProgressBar();
+        }, 3000);
     }
 
-    @Override
-    public void LikeListSuccess(ArrayList<UserBean> list) {
-
-    }
-
-
-    @Override
-    public void CommentListSuccess(ArrayList<CommentBean> list) {
-
-    }
 
     @Override
     public void onError() {

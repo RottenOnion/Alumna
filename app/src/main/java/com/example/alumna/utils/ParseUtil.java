@@ -2,8 +2,11 @@ package com.example.alumna.utils;
 
 import android.util.Log;
 
+import com.lzy.imagepicker.bean.ImageItem;
+
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -53,5 +56,17 @@ public class  ParseUtil {
         Date date = new Date(lt);
         time= simpleDateFormat.format(date);
         return time;
+    }
+
+    public static ArrayList<ImageItem> StringParseImage(String urls){
+        ArrayList<ImageItem> imgs=new ArrayList<>();
+        String [] tmp=urls.split(",") ;
+        for (int i=0;i<tmp.length;++i){
+            ImageItem img=new ImageItem();
+            img.name=tmp[i];
+            img.path=tmp[i];
+            imgs.add(img);
+        }
+        return imgs;
     }
 }

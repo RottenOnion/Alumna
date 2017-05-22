@@ -45,6 +45,7 @@ public class TopicBean {
 
     private ArrayList<UserBean>likeList;
     private ArrayList<CommentBean>commentList;
+    private String image;
 
     @Generated(hash = 1961217991)
     public TopicBean() {
@@ -178,5 +179,13 @@ public class TopicBean {
                 ", username='" + username + '\'' +
                 ", imfor='" + imfor + '\'' +
                 '}';
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

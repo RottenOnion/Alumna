@@ -14,7 +14,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,15 +22,16 @@ import okhttp3.Call;
 public class MemberModel implements MemberModelImpl {
 
     OnMemberListener mListener;
-    final String mUrl = DataUtils.BASEURL + DataUtils.GETUSER;
 
     public MemberModel(OnMemberListener memberListener) {
         this.mListener = memberListener;
     }
 
     @Override
-    public UserBean getUser(int id) {
+    public void getUser(int id) {
         Map<String,Object> map = new HashMap<>();
+        final String mUrl = DataUtils.BASEURL + DataUtils.MEMBER;
+
         map.put("uid",id);
         HttpUtil.getInstance().PostRequest(mUrl, map, new HttpRequestCallback<String>() {
             @Override
@@ -46,29 +46,25 @@ public class MemberModel implements MemberModelImpl {
 
             @Override
             public void onResponse(String result) {
-                Log.d("ccl","onResponse");
-                Log.d("ccl",result);
                 JsonObject jsonObject = new JsonParser().parse(result).getAsJsonObject();
-                String userString = jsonObject.get("user").getAsString();
-                Log.d("ccl","test");
-                Gson gson = new Gson();
-                //UserBean userBean = gson.fromJson(userString,UserBean.class);
-                Log.d("ccl",userString);
-
+                int status=jsonObject.get("status").getAsInt();
+                if (status==1){
+                    JsonObject userString = jsonObject.get("userall").getAsJsonObject();
+                    Gson gson = new Gson();
+                    UserBean userBean = gson.fromJson(userString,UserBean.class);
+                    mListener.onUserSuccess(userBean);
+                }
             }
 
             @Override
             public void onFailure(Call call) {
-                Log.d("ccl",call.toString());
             }
         });
 
-        return null;
     }
 
-    public ArrayList<TopicBean> getTopicList(int uid) {
+    public void getTopicList(int uid) {
 
-        return null;
     }
 
 }

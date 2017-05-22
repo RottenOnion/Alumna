@@ -9,8 +9,8 @@ public interface MemberModelImpl {
 
 
 
-    UserBean getUser(int id);
+    void getUser(int id);
 
-    ArrayList<TopicBean> getTopicList(int uid);
+    void getTopicList(int uid);
 
 }

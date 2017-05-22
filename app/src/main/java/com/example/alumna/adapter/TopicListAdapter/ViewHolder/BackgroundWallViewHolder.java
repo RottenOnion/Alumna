@@ -39,27 +39,27 @@ public class BackgroundWallViewHolder extends RecyclerView.ViewHolder {
 
     public void init(UserBean curUser) {
 
-        Glide.with(MyApplication.getContext()).load(curUser.getHead()).asBitmap().into(new SimpleTarget<Bitmap>() {
-            @Override
-            public void onResourceReady(Bitmap inputBitmap, GlideAnimation<? super Bitmap> glideAnimation) {
-
-                headTv.setImageBitmap(inputBitmap);
-                /*裁剪图片，适应侧滑菜单大小*/
-
-                int width = inputBitmap.getWidth(),height = inputBitmap.getHeight();
-                Bitmap cropBitmap = Bitmap.createBitmap(inputBitmap,width/4,height/6,width/4*2,height/4*3);
-                /*模糊图片*/
-                Bitmap blurBitmap = ImageUtil.blurBitmap(MyApplication.getContext(), cropBitmap);
-                Drawable outputDrawable = new BitmapDrawable(MyApplication.getMyResource(),blurBitmap);
-                /*加入灰色遮罩层，避免图片过亮影响其他控件*/
-                outputDrawable.setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
-                backgroundIv.setImageDrawable(outputDrawable);
-
-            }
-        });
+//        Glide.with(MyApplication.getContext()).load(curUser.getHead()).asBitmap().into(new SimpleTarget<Bitmap>() {
+//            @Override
+//            public void onResourceReady(Bitmap inputBitmap, GlideAnimation<? super Bitmap> glideAnimation) {
+//
+//                headTv.setImageBitmap(inputBitmap);
+//                /*裁剪图片，适应侧滑菜单大小*/
+//
+//                int width = inputBitmap.getWidth(),height = inputBitmap.getHeight();
+//                Bitmap cropBitmap = Bitmap.createBitmap(inputBitmap,width/4,height/6,width/4*2,height/4*3);
+//                /*模糊图片*/
+//                Bitmap blurBitmap = ImageUtil.blurBitmap(MyApplication.getContext(), cropBitmap);
+//                Drawable outputDrawable = new BitmapDrawable(MyApplication.getMyResource(),blurBitmap);
+//                /*加入灰色遮罩层，避免图片过亮影响其他控件*/
+//                outputDrawable.setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
+//                backgroundIv.setImageDrawable(outputDrawable);
+//
+//            }
+//        });
 
         //设置头像
-        //ImageUtil.displayImage(headTv, curUser.getHead());
+        ImageUtil.displayImage(headTv, curUser.getHead());
         nameTv.setText(curUser.getUsername());
     }
 }

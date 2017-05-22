@@ -14,17 +14,10 @@ import java.util.ArrayList;
  */
 
 public interface MainModelImpl {
-    String getBackground(int uid);
-
-    UserBean getImfor(int uid);
-
-    //void getTopicList(int uid, HttpRequestCallback callback);
 
     void getTopicList(int uid);
 
     void getLikeList(int tid, MainModel.OnLikeListResult listResult);
-
-    //void getLikeList(int tid);
 
     void getComment(int tid,MainModel.OnCommentResult listResult);
 
