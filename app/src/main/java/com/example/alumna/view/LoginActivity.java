@@ -1,6 +1,7 @@
 package com.example.alumna.view;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -48,6 +49,8 @@ public class LoginActivity extends AppCompatActivity implements LoginViewImpl ,O
         progressView = (ProgressBar) findViewById(R.id.login_progress);
         forgetpassword=(TextView)findViewById(R.id.foggetpassword) ;
         register=(TextView)findViewById(R.id.register);
+
+        forgetpassword.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 
         signBtn.setOnClickListener(this);
         forgetpassword.setOnClickListener(this);

@@ -2,6 +2,7 @@ package com.example.alumna;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.res.Resources;
 import android.text.TextUtils;
 
 import com.example.alumna.bean.UserBean;
@@ -22,11 +23,14 @@ public class MyApplication extends Application{
 
     private static Context context;
     private static UserBean curUser;
+    private static Resources resources;
+
 
     public void onCreate() {
         // TODO Auto-generated method stub
         super.onCreate();
         context = getApplicationContext();
+        resources = getResources();
 
         ImagePicker imagePicker = ImagePicker.getInstance();
         imagePicker.setImageLoader(new GlideSelectImageLoader());
@@ -83,5 +87,9 @@ public class MyApplication extends Application{
     public static void setCurUser(UserBean user){
         curUser=user;
         //保存到本地
+    }
+
+    public static Resources getMyResource() {
+        return resources;
     }
 }

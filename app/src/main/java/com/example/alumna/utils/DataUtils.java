@@ -7,8 +7,7 @@ package com.example.alumna.utils;
 
 public class DataUtils {
 
-    public static final String BASEURL="http://125.216.246.159:8080/Myservlet/";
-    // public static final String BASEURL="http://123.207.66.152:8080/Myservlet/";//服务器
+    public static final String BASEURL="http://123.207.32.248:8080/Myservlet/";//服务器
     public static final String LOGININ="login";//登录
     public static final String INIT="init";//加载朋友圈
     public static final String GETTOPIC="gettopic";//获取某用户的动态

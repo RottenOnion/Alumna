@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.alumna.R;
@@ -26,6 +27,7 @@ public class MemberActivity extends Activity implements OnClickListener, MemberV
     private TextView textName,textSchool,textLocation,textSignature,textWechat;
     private Button btnGender,btnGrade;
     private String mUid;
+    private LinearLayout layoutCircle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +60,7 @@ public class MemberActivity extends Activity implements OnClickListener, MemberV
         textWechat = (TextView) findViewById(R.id.text_wechat);
         btnGender = (Button) findViewById(R.id.btn_gender);
         btnGrade = (Button) findViewById(R.id.btn_grade);
+        layoutCircle = (LinearLayout) findViewById(R.id.layout_friend_circle);
     }
 
 

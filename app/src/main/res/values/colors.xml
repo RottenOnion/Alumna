@@ -16,9 +16,9 @@
     <color name="halftransparent">#0f000000</color>
     <color name="transparent">#00000000</color>
     <color name="default_clickable_color">#cccccc</color>
-    <color name="listview_bg_color">#faefef</color>
-    <color name="listview_clickable_color">#cccccc</color>
-    <color name="username_font_front_color">#1500fe</color>
+    <color name="listview_bg_color">#efefef</color>
+    <color name="listview_clickable_color">#e3e3e3</color>
+    <color name="username_font_front_color">#4d73ad</color>
 
     <color name="colorMale">#2782dd</color>
     <color name="colorFemale">#cf6790</color>
@@ -26,6 +26,8 @@
     <color name="loginYellow">#f5e06a</color>
 
     <color name="wechatGreen">#62b900</color>
+
+    <color name="imageGray">#313030</color>
 
 
 </resources>
