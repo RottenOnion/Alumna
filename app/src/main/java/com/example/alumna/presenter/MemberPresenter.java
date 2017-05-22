@@ -1,13 +1,11 @@
 package com.example.alumna.presenter;
 
-import android.util.Log;
-
 import com.example.alumna.bean.TopicBean;
 import com.example.alumna.bean.UserBean;
 import com.example.alumna.model.Interface.MemberModelImpl;
 import com.example.alumna.model.MemberModel;
 import com.example.alumna.presenter.Interface.MemberPresenterImpl;
-import com.example.alumna.presenter.Interface.OnMemberListener;
+import com.example.alumna.presenter.listener.OnMemberListener;
 import com.example.alumna.view.Interface.MemberViewImpl;
 
 import java.util.ArrayList;

@@ -78,7 +78,7 @@ public class ImageShower extends GridLayout{
         if(list!=null&&list.size()>0){
             imgs=list;
             //这里应该获取父容器的宽度，暂时不做
-            MAX_WIDTH=DensityUtil.dip2px(MyApplication.getContext(),280);
+            MAX_WIDTH=DensityUtil.dip2px(MyApplication.getContext(),250);
             showImageList();
         }
     }

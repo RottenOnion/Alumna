@@ -6,7 +6,7 @@ import com.example.alumna.bean.TopicBean;
 import com.example.alumna.model.Interface.MainModelImpl;
 import com.example.alumna.model.MainModel;
 import com.example.alumna.presenter.Interface.MainPresenterImpl;
-import com.example.alumna.presenter.Interface.OnMainListener;
+import com.example.alumna.presenter.listener.OnMainListener;
 import com.example.alumna.view.Interface.MainViewImpl;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * Created by Administrator on 2017/4/25.
  */
 
-public class MainPresenter implements MainPresenterImpl ,OnMainListener{
+public class MainPresenter implements MainPresenterImpl ,OnMainListener {
 
     private MainViewImpl mView;
     private MainModelImpl mModel;
@@ -46,7 +46,7 @@ public class MainPresenter implements MainPresenterImpl ,OnMainListener{
 
     @Override
     public void onError() {
-
+        mView.hideProgressBar();
     }
 
 

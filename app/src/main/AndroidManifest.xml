@@ -42,7 +42,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.UpdateImforActivity"
+            android:name=".view.InformModifyActivity"
             android:label="@string/no_string">
         </activity>
         <activity
