@@ -35,8 +35,11 @@
             android:scaleType="centerCrop"
             android:src="@drawable/test_touxiang" />
 
+        <!--这里让这个view率先获得焦点，使得跳转时输入法不会自动弹出来-->
         <View
             android:layout_width="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:layout_height="1dp"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
@@ -76,13 +79,12 @@
                 android:hint="@string/name"
                 android:textColor="@android:color/black"
                 android:textColorHint="@color/textHintGray"
-                android:focusable="false"
                 android:background="@null"
                 android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/home_layout"
+            android:id="@+id/gender_layout"
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:layout_marginBottom="15dp"
@@ -99,12 +101,10 @@
                 android:src="@drawable/icon_male" />
 
             <EditText
-                android:id="@+id/home_text"
+                android:id="@+id/gender_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="添加性别信息"
-                android:focusable="false"
-
                 android:textColor="@android:color/black"
                 android:textColorHint="@color/textHintGray"
                 android:background="@null"
@@ -134,8 +134,6 @@
                 android:hint="@string/school"
                 android:textColor="@android:color/black"
                 android:textColorHint="@color/textHintGray"
-                android:focusable="false"
-
                 android:background="@null"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -161,8 +159,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/grade"
-                android:focusable="false"
-
                 android:textColor="@android:color/black"
                 android:textColorHint="@color/textHintGray"
                 android:background="@null"
@@ -194,8 +190,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/freq_location"
-                android:focusable="false"
-
                 android:textColor="@android:color/black"
                 android:textColorHint="@color/textHintGray"
                 android:background="@null"
@@ -224,8 +218,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/signature"
-                android:focusable="false"
-
                 android:textColor="@android:color/black"
                 android:textColorHint="@color/textHintGray"
                 android:background="@null"

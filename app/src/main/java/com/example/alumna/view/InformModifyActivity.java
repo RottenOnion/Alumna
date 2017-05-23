@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -33,7 +34,7 @@ public class InformModifyActivity extends AppCompatActivity implements View.OnCl
 
     private InformModifyPresenter presenter;
     private CircleImageView head_view;
-    private EditText name_text,school_text,grade_text,location_text,signature_text;
+    private EditText name_text,gender_text,school_text,grade_text,location_text,signature_text;
     private static final int HEAD_PICKER=0x01;
 
     private Toolbar toolbar;
@@ -46,6 +47,7 @@ public class InformModifyActivity extends AppCompatActivity implements View.OnCl
         //findview
         head_view=(CircleImageView)findViewById(R.id.head_view);
         name_text=(EditText)findViewById(R.id.name_text) ;
+        gender_text=(EditText)findViewById(R.id.gender_text);
         school_text=(EditText)findViewById(R.id.school_text);
         grade_text=(EditText)findViewById(R.id.grade_text);
         location_text=(EditText)findViewById(R.id.location_text);
@@ -56,7 +58,6 @@ public class InformModifyActivity extends AppCompatActivity implements View.OnCl
 
         //set listener
         head_view.setOnClickListener(this);
-        location_text.setOnClickListener(this);
         presenter = new InformModifyPresenter(this);
 
 
@@ -78,14 +79,13 @@ public class InformModifyActivity extends AppCompatActivity implements View.OnCl
                 Intent intent = new Intent(this, ImageGridActivity.class);
                 startActivityForResult(intent, HEAD_PICKER);
                 break;
-            case R.id.location_text:
             default:break;
         }
     }
 
     @Override
     public void showImfor(UserBean user) {
-        Glide.with(this).load(user.getHead()).into(head_view);
+        Glide.with(this).load(user.getHead()).placeholder(R.drawable.ic_default_head).into(head_view);
         name_text.setText(user.getUsername());
 
         school_text.setText(user.getSchool());
