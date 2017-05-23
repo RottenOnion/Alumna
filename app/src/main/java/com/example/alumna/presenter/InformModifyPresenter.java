@@ -1,23 +1,16 @@
 package com.example.alumna.presenter;
 
 
-import android.util.Log;
-
 import com.example.alumna.bean.UserBean;
 import com.example.alumna.model.Interface.InformModifyModelImpl;
 import com.example.alumna.model.InformModifyModel;
 import com.example.alumna.presenter.Interface.InformModifyPresenterImpl;
 import com.example.alumna.presenter.listener.OnModifyListener;
-import com.example.alumna.utils.Http.HttpRequestCallback;
 import com.example.alumna.view.Interface.InformModifyViewImpl;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.lzy.imagepicker.bean.ImageItem;
 
+import java.util.HashMap;
 import java.util.List;
-
-import okhttp3.Call;
 
 /**
  * Created by Administrator on 2017/4/25.
@@ -39,8 +32,10 @@ public class InformModifyPresenter implements InformModifyPresenterImpl,OnModify
 
 
     @Override
-    public void UpdateImfor(UserBean user) {
-        uModel.setUser(user);
+    public void UpdateImfor(int uid) {
+        HashMap<String,Object>params=uView.modifyInform();
+        params.put("uid",uid);
+        uModel.InformModify(params);
     }
 
     @Override
@@ -50,17 +45,18 @@ public class InformModifyPresenter implements InformModifyPresenterImpl,OnModify
 
     @Override
     public void OnLoadUserSuccess(UserBean user) {
-        uView.showImfor(user);
+        uView.showInform(user);
     }
 
     @Override
-    public void OnUploadImageSuccess() {
-
+    public void OnUploadImageSuccess(String url) {
+        uView.ImageViewSetTag(url);
+        uView.showToast("头像上传成功");
     }
 
     @Override
     public void OnModifyInformSuccess() {
-
+        uView.showToast("个人信息修改成功");
     }
 
     @Override

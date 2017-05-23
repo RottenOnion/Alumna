@@ -10,7 +10,7 @@ import java.util.List;
  */
 
 public interface PublishViewImpl {
-    void setLocationText(String location);
+    void setLocationText(String location,String coordinate);
 
     String getLocation();
 

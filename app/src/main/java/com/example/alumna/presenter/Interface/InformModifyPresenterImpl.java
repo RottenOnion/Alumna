@@ -14,7 +14,7 @@ public interface InformModifyPresenterImpl {
     void loadImfor(int uid);
 
     /*更新用户信息*/
-    void UpdateImfor(UserBean user);
+    void UpdateImfor(int uid);
 
     /*后台传输图片*/
     void UploadImage(List<ImageItem> imgs);

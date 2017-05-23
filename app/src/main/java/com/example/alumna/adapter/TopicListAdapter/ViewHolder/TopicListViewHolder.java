@@ -94,6 +94,9 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
         imfor.setText(topic.getInfor());
         name.setText(topic.getUsername());
         location.setText(topic.getLocation());
+        if (topic.getLocation()!=null){
+            Log.i("loca",topic.getLocation());
+        }
         time.setText(StringParseTime(topic.getTime()));
         commentBody.setVisibility(View.VISIBLE);
         line.setVisibility(View.GONE);
@@ -132,7 +135,6 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
 
     }
 
-
     public void initPopupWindow(final int tid) {
         snsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,7 +144,6 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
         });
         popupWindow.setItemClickListener(new PopupItemClickListener(tid));
 
-
     }
 
     public void setPraiseListView(final ArrayList<UserBean> list){
@@ -150,11 +151,7 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
         praiseListView.setOnItemClickListener(new PraiseListView.OnItemClickListener() {
             @Override
             public void onClick(int position) {
-                Intent intent=new Intent();
-                Activity curActivity=(Activity)view.getContext();
-                intent.setClass(curActivity, MemberActivity.class);
-                intent.putExtra("uid",""+list.get(position).getUid());
-                curActivity.startActivity(intent);
+                StartMemberActivity(list.get(position).getUid());
             }
         });
     }
@@ -165,6 +162,12 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onItemClick(int position) {
                 //评论
+            }
+        });
+        commentListView.setOnSpanClickListener(new CommentListView.OnSpanClickListener() {
+            @Override
+            public void onSpanClick(int position) {
+                StartMemberActivity(list.get(position).getUser().getUid());
             }
         });
     }
@@ -213,4 +216,11 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
         }
     }
 
+    private void StartMemberActivity(final int uid){
+        Intent intent=new Intent();
+        Activity curActivity=(Activity)view.getContext();
+        intent.setClass(curActivity, MemberActivity.class);
+        intent.putExtra("uid",""+uid);
+        curActivity.startActivity(intent);
+    }
 }

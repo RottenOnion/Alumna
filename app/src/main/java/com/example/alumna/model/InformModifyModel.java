@@ -1,6 +1,8 @@
 package com.example.alumna.model;
 
 
+import android.util.Log;
+
 import com.example.alumna.bean.UserBean;
 import com.example.alumna.model.Interface.InformModifyModelImpl;
 import com.example.alumna.presenter.listener.OnModifyListener;
@@ -66,17 +68,8 @@ public class InformModifyModel implements InformModifyModelImpl {
     }
 
     @Override
-    public void setUser(UserBean user) {
+    public void InformModify(HashMap<String,Object> params) {
         String url=DataUtils.BASEURL+DataUtils.MODIFY;
-        Map<String,Object> params=new HashMap<>();
-        params.put("uid",user.getUid());
-        params.put("username",user.getUsername());
-        params.put("sex",user.getSex());
-        params.put("school",user.getSchool());
-        params.put("grade",user.getGrade());
-        params.put("location",user.getLocation());
-        params.put("signature",user.getSignature());
-        params.put("wechat",user.getWechat());
 
         HttpUtil.getInstance().PostRequest(url, params, new HttpRequestCallback<String>() {
             @Override
@@ -91,6 +84,7 @@ public class InformModifyModel implements InformModifyModelImpl {
 
             @Override
             public void onResponse(String result) {
+                Log.i("result",result);
                 mListener.OnModifyInformSuccess();
             }
 
@@ -118,7 +112,9 @@ public class InformModifyModel implements InformModifyModelImpl {
 
             @Override
             public void onResponse(String result) {
-                mListener.OnUploadImageSuccess();
+                JsonObject jsonObject=new JsonParser().parse(result).getAsJsonObject();
+                String imageurl=jsonObject.get("url").getAsString();
+                mListener.OnUploadImageSuccess(imageurl);
             }
 
             @Override

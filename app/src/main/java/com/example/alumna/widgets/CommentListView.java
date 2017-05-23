@@ -39,7 +39,7 @@ public class CommentListView extends LinearLayout{
     private LayoutInflater layoutInflater ;
 
     private OnItemClickListener onItemClickListener;
-    private OnItemLongClickListener onItemLongClickListener;
+    private OnSpanClickListener onSpanClickListener;
 
     private final static int FONT_FRONT_COLOR = R.color.username_font_front_color;
     private final static int BACKGROUND=R.color.listview_bg_color;
@@ -63,20 +63,20 @@ public class CommentListView extends LinearLayout{
         this.onItemClickListener = onItemClickListener;
     }
 
-    public OnItemLongClickListener getOnItemLongClickListener() {
-        return onItemLongClickListener;
+    public OnSpanClickListener getOnSpanClickListener() {
+        return onSpanClickListener;
+    }
+
+    public void setOnSpanClickListener(OnSpanClickListener onSpanClickListener) {
+        this.onSpanClickListener = onSpanClickListener;
     }
 
     public static interface OnItemClickListener{
         public void onItemClick(int position);
     }
 
-    public void setOnItemLongClickListener(OnItemLongClickListener onItemLongClickListener) {
-        this.onItemLongClickListener = onItemLongClickListener;
-    }
-
-    public static interface OnItemLongClickListener{
-        public void onItemLongClick(int position);
+    public static interface OnSpanClickListener{
+        public void onSpanClick(int position);
     }
 
     public void notifyDataSetChanged(List<CommentBean> data){
@@ -136,7 +136,9 @@ public class CommentListView extends LinearLayout{
         SpanText.setSpan(new ClickableSpan() {
                              @Override
                              public void onClick(View widget) {
-                                 Toast.makeText(MyApplication.getContext(), textStr , Toast.LENGTH_SHORT).show();
+                                 if(onSpanClickListener!=null){
+                                     onSpanClickListener.onSpanClick(position);
+                                 }
                              }
                              public void updateDrawState(TextPaint ds) {
                                  ds.setUnderlineText(false);

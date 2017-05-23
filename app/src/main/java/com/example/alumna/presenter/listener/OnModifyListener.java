@@ -8,7 +8,7 @@ import com.example.alumna.bean.UserBean;
 
 public interface OnModifyListener {
     void OnLoadUserSuccess(UserBean user);
-    void OnUploadImageSuccess();
+    void OnUploadImageSuccess(String url);
     void OnModifyInformSuccess();
     void OnError();
 }
