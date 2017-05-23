@@ -36,7 +36,7 @@
                     android:layout_height="wrap_content"
                     android:singleLine="true"
                     android:text="hins"
-                    android:textSize="17sp"
+                    android:textSize="16sp"
                     android:textColor="@color/username_font_front_color"/>
 
             </LinearLayout>
@@ -76,8 +76,8 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -86,7 +86,8 @@
                     android:layout_height="wrap_content"
                     android:singleLine="true"
                     android:text=""
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:layout_gravity="center_vertical"/>
 
                 <TextView
                     android:id="@+id/locationTv"
@@ -95,7 +96,8 @@
                     android:layout_marginLeft="10dp"
                     android:singleLine="true"
                     android:text="scut"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:layout_gravity="center_vertical"/>
 
                 <TextView
                     android:id="@+id/deleteBtn"
@@ -106,7 +108,8 @@
                     android:paddingRight="3dp"
                     android:text="删除"
                     android:textSize="12sp"
-                    android:visibility="gone" />
+                    android:visibility="gone"
+                    android:layout_gravity="center_vertical"/>
 
                 <View
                     android:layout_width="0dip"
@@ -114,22 +117,27 @@
                     android:layout_weight="1" />
 
                 <ImageView
+
                     android:id="@+id/snsBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/im_sns" />
+                    android:layout_marginTop="5dp"
+                    android:layout_width="25dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="12dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/im_sns"
+                    />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/CommentBody"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
-                android:minHeight="10dip"
                 android:visibility="gone"
                 android:orientation="vertical"
-                android:paddingBottom="8dp"
-                android:paddingRight="12dp"
-                android:paddingTop="12dp">
+                android:layout_marginBottom="8dp"
+                android:layout_marginRight="12dp"
+                android:background="@color/listview_bg_color"
+                android:layout_marginTop="12dp">
 
                 <com.example.alumna.widgets.PraiseListView
                     android:id="@+id/praiseList"

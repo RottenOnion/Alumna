@@ -34,7 +34,7 @@ public class ImageUtil {
      * @param 最大模糊度(在0.0到25.0之间)
      */
     private static final float BITMAP_SCALE = 0.125f;
-    private static final float BLUR_RADIUS = 10f;
+    private static final float BLUR_RADIUS = 0.5f;
     public static Bitmap blurBitmap(Context context, Bitmap image) {
         // 计算图片缩小后的长宽
         int width = Math.round(image.getWidth() * BITMAP_SCALE);
