@@ -23,7 +23,7 @@ public class ImageUtil {
         Glide.with(MyApplication.getContext())
                 .load(path)
                 .placeholder(R.drawable.ic_loading)
-                .error(R.drawable.ic_error)
+                .error(R.drawable.ic_default_head)
                 .into(view);
     }
 

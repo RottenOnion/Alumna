@@ -1,12 +1,10 @@
 package com.example.alumna.model;
 
-import android.util.Log;
-
 import com.example.alumna.bean.CommentBean;
 import com.example.alumna.bean.TopicBean;
 import com.example.alumna.bean.UserBean;
 import com.example.alumna.model.Interface.MainModelImpl;
-import com.example.alumna.presenter.Interface.OnMainListener;
+import com.example.alumna.presenter.listener.OnMainListener;
 import com.example.alumna.utils.DataUtils;
 import com.example.alumna.utils.Http.HttpRequestCallback;
 import com.example.alumna.utils.Http.HttpUtil;
@@ -92,7 +90,7 @@ public class MainModel implements MainModelImpl {
 
             @Override
             public void onFailure(Call call) {
-
+                mListener.onError();
             }
         });
 

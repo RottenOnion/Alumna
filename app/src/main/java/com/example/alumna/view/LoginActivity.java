@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.alumna.MyApplication;
 import com.example.alumna.R;
 import com.example.alumna.presenter.LoginPresenter;
+import com.example.alumna.presenter.RegisterPresenter;
 import com.example.alumna.view.Interface.LoginViewImpl;
 
 import java.util.HashMap;
@@ -32,7 +33,7 @@ public class LoginActivity extends AppCompatActivity implements LoginViewImpl ,O
     private View LoginView;
     private Button signBtn;
     private TextView forgetpassword;
-    private TextView register;
+    private Button registerBtn;
 
     //presenter
     LoginPresenter presenter;
@@ -48,13 +49,13 @@ public class LoginActivity extends AppCompatActivity implements LoginViewImpl ,O
         signBtn = (Button) findViewById(R.id.loginBtn);
         progressView = (ProgressBar) findViewById(R.id.login_progress);
         forgetpassword=(TextView)findViewById(R.id.foggetpassword) ;
-        register=(TextView)findViewById(R.id.register);
+        registerBtn=(Button) findViewById(R.id.registerBtn);
 
         forgetpassword.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 
         signBtn.setOnClickListener(this);
         forgetpassword.setOnClickListener(this);
-        register.setOnClickListener(this);
+        registerBtn.setOnClickListener(this);
     }
 
     @Override
@@ -88,11 +89,18 @@ public class LoginActivity extends AppCompatActivity implements LoginViewImpl ,O
         LoginActivity.this.finish();
     }
 
+    public void StartRegisterActivity(){
+        Intent i=new Intent();
+        i.setClass(this,RegisterActivity.class);
+        startActivity(i);
+        LoginActivity.this.finish();
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.register:
-                Toast.makeText(MyApplication.getContext(),"注册",Toast.LENGTH_SHORT).show();
+            case R.id.registerBtn:
+                StartRegisterActivity();
                 break;
             case R.id.foggetpassword:
                 Toast.makeText(MyApplication.getContext(),"忘记密码",Toast.LENGTH_SHORT).show();

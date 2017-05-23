@@ -1,11 +1,10 @@
 package com.example.alumna.model;
 
-
 import android.util.Log;
 
 import com.example.alumna.bean.UserBean;
-import com.example.alumna.model.Interface.MemberModelImpl;
-import com.example.alumna.presenter.listener.OnMemberListener;
+import com.example.alumna.model.Interface.RegisterModelImpl;
+import com.example.alumna.presenter.listener.OnRegisterListener;
 import com.example.alumna.utils.DataUtils;
 import com.example.alumna.utils.Http.HttpRequestCallback;
 import com.example.alumna.utils.Http.HttpUtil;
@@ -14,28 +13,28 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.util.HashMap;
-import java.util.Map;
 
 import okhttp3.Call;
 
-public class MemberModel implements MemberModelImpl {
+/**
+ * Created by Leebobo on 2017/5/23.
+ */
 
-    OnMemberListener mListener;
+public class RegisterModel implements RegisterModelImpl{
+    private String tag="registerModel";
+    OnRegisterListener mListener;
 
-    public MemberModel(OnMemberListener memberListener) {
-        this.mListener = memberListener;
-    }
+   public RegisterModel(OnRegisterListener registerListener){
+       mListener=registerListener;
+   }
 
     @Override
-    public void getUser(int id) {
-        Map<String,Object> map = new HashMap<>();
-        final String mUrl = DataUtils.BASEURL + DataUtils.MEMBER;
-
-        map.put("uid",id);
-        HttpUtil.getInstance().PostRequest(mUrl, map, new HttpRequestCallback<String>() {
+    public void register(HashMap<String, Object> params) {
+        String url= DataUtils.BASEURL+DataUtils.REGISTER;
+        HttpUtil.getInstance().PostRequest(url, params, new HttpRequestCallback<String>() {
             @Override
             public void onStart() {
-                Log.d("ccl","onStart");
+
             }
 
             @Override
@@ -48,22 +47,18 @@ public class MemberModel implements MemberModelImpl {
                 JsonObject jsonObject = new JsonParser().parse(result).getAsJsonObject();
                 int status=jsonObject.get("status").getAsInt();
                 if (status==1){
-                    JsonObject userString = jsonObject.get("userall").getAsJsonObject();
+                    JsonObject userString = jsonObject.get("user").getAsJsonObject();
                     Gson gson = new Gson();
-                    UserBean userBean = gson.fromJson(userString,UserBean.class);
-                    mListener.onUserSuccess(userBean);
+                    UserBean user = gson.fromJson(userString,UserBean.class);
+                    mListener.onRegisterSuccess(user);
                 }
+                mListener.onRegisterFailure(status);
             }
 
             @Override
             public void onFailure(Call call) {
+                mListener.onError();
             }
         });
-
     }
-
-    public void getTopicList(int uid) {
-
-    }
-
 }

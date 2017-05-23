@@ -9,7 +9,7 @@ import java.util.List;
  * Created by Administrator on 2017/4/25.
  */
 
-public interface UpdateImforPresenterImpl {
+public interface InformModifyPresenterImpl {
     /*初始化用户信息*/
     void loadImfor(int uid);
 

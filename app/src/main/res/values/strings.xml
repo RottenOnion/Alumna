@@ -41,4 +41,11 @@
     <string name="register">注册</string>
     <string name="fotgetpsw">忘记密码?</string>
 
+    <string name="phone">手机号码</string>
+    <string name="password1">请输入密码</string>
+    <string name="password2">确认密码</string>
+    <string name="back_to_login">已有帐号，马上登录</string>
+    <string name="modify_inform">不知所措，完善信息</string>
+    <string name="jump_button">不了不了,马上使用</string>
+    <string name="welcome_text">恭喜你，注册成功</string>
 </resources>

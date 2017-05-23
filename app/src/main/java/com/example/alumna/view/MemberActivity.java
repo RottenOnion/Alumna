@@ -85,7 +85,8 @@ public class MemberActivity extends Activity implements OnClickListener, MemberV
         textWechat.setText(user.getWechat());
 
         //head
-        Glide.with(this).load(user.getHead()).into(headView);
+        Glide.with(this).load(user.getHead()).error(R.drawable.ic_default_head).into(headView);
+
 
         //gender
         if (user.getSex()==1){

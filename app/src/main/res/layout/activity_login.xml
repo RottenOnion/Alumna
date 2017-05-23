@@ -15,13 +15,12 @@
         app:popupTheme="@style/AppTheme.PopupOverlay">
 
         <TextView
-            android:id="@+id/register"
             android:layout_gravity="center"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="登录"/>
+            android:text="@string/action_sign_in"/>
     </android.support.v7.widget.Toolbar>
 
 
