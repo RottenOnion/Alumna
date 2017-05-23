@@ -18,5 +18,5 @@ public interface InformModifyViewImpl {
     void showToast(String str);
 
     //为imageview设置tag
-    void ImageViewSetTag(String url);
+    void ImageUploadSuccess(String url);
 }

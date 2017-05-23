@@ -2,12 +2,10 @@ package com.example.alumna.adapter.TopicListAdapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bumptech.glide.Glide;
 import com.example.alumna.MyApplication;
 import com.example.alumna.R;
 import com.example.alumna.adapter.TopicListAdapter.ViewHolder.BackgroundWallViewHolder;
@@ -16,13 +14,8 @@ import com.example.alumna.adapter.TopicListAdapter.ViewHolder.TextViewHolder;
 import com.example.alumna.adapter.TopicListAdapter.ViewHolder.TopicListViewHolder;
 import com.example.alumna.bean.TopicBean;
 import com.example.alumna.bean.UserBean;
-import com.example.alumna.utils.DataUtils;
-import com.example.alumna.utils.Image.ImageUtil;
-import com.example.alumna.widgets.SnsPopupWindow;
 
 import java.util.ArrayList;
-
-import static com.example.alumna.utils.ParseUtil.StringParseTime;
 
 
 public class FriendCircleAdapter extends BaseRecycleViewAdapter {

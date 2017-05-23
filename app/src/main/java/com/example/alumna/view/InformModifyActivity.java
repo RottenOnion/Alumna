@@ -37,7 +37,7 @@ public class InformModifyActivity extends AppCompatActivity implements View.OnCl
 
     private InformModifyPresenter presenter;
     private CircleImageView head_view;
-    private EditText name_text,gender_text,school_text,grade_text,location_text,signature_text;
+    private EditText name_text,gender_text,school_text,grade_text,location_text,signature_text,wechat_text;
     private static final int HEAD_PICKER=0x01;
 
     private Toolbar toolbar;
@@ -55,6 +55,8 @@ public class InformModifyActivity extends AppCompatActivity implements View.OnCl
         grade_text=(EditText)findViewById(R.id.grade_text);
         location_text=(EditText)findViewById(R.id.location_text);
         signature_text=(EditText)findViewById(R.id.signature_text);
+        wechat_text=(EditText)findViewById(R.id.text_wechat);
+
         toolbar=(Toolbar)findViewById(R.id.toolbar);
         backBtn=(Button) findViewById(R.id.back_Btn) ;
         setSupportActionBar(toolbar);
@@ -74,11 +76,6 @@ public class InformModifyActivity extends AppCompatActivity implements View.OnCl
         super.onDestroy();
         presenter.UpdateImfor(MyApplication.getcurUser().getUid());
         Log.i("tag","正在上传");
-        new Handler().postDelayed(new Runnable(){
-            public void run() {
-
-            }
-        }, 3000);
     }
 
     private void initImagePicker() {
@@ -103,7 +100,7 @@ public class InformModifyActivity extends AppCompatActivity implements View.OnCl
         Glide.with(this).load(user.getHead()).error(R.drawable.ic_default_head).into(head_view);
         head_view.setTag(R.id.image_url,user.getHead());
         name_text.setText(user.getUsername());
-        gender_text.setText(user.getSex());
+        //gender_text.setText(user.getSex());
         school_text.setText(user.getSchool());
         grade_text.setText(user.getGrade());
         location_text.setText(user.getLocation());
@@ -120,6 +117,7 @@ public class InformModifyActivity extends AppCompatActivity implements View.OnCl
         params.put("grade",grade_text.getText().toString());
         params.put("location",location_text.getText().toString());
         params.put("signature",signature_text.getText().toString());
+        params.put("wechat",wechat_text.getText().toString());
         return params;
     }
 
@@ -129,7 +127,7 @@ public class InformModifyActivity extends AppCompatActivity implements View.OnCl
     }
 
     @Override
-    public void ImageViewSetTag(String url) {
+    public void ImageUploadSuccess(String url) {
         head_view.setTag(R.id.image_url,url);
     }
 

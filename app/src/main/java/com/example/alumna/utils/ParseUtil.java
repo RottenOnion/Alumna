@@ -21,7 +21,7 @@ public class  ParseUtil {
     /**
      * 把key-value的map转化成String格式的工具类
      */
-    public static String MapParseString(final Map<String, Object> params) {
+    public static String Map2String(final Map<String, Object> params) {
 
         StringBuffer builder = new StringBuffer();
         if(null!=params &&!params.isEmpty())
@@ -49,7 +49,7 @@ public class  ParseUtil {
  * Time:long时间戳
  * time:yyyy-MM-dd HH:mm:ss的格式
  * */
-    public static String StringParseTime(String Time){
+    public static String String2Time(String Time){
         String time;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         long lt = new Long(Time);
@@ -57,8 +57,10 @@ public class  ParseUtil {
         time= simpleDateFormat.format(date);
         return time;
     }
-
-    public static ArrayList<ImageItem> StringParseImage(String urls){
+/*
+把用“,”分割的String 转化成 image数组
+ */
+    public static ArrayList<ImageItem> String2Image(String urls){
         ArrayList<ImageItem> imgs=new ArrayList<>();
         String [] tmp=urls.split(",") ;
         for (int i=0;i<tmp.length;++i){
@@ -68,5 +70,14 @@ public class  ParseUtil {
             imgs.add(img);
         }
         return imgs;
+    }
+
+    public static void Coordinate2Location(String coordinate){
+        String [] tmp=coordinate.split(",") ;
+        double latitue=Double.parseDouble(tmp[0]);
+        double longitude=Double.parseDouble(tmp[1]);
+        Log.i("double",""+latitue);
+        Log.i("double",""+longitude);
+
     }
 }

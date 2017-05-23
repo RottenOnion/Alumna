@@ -57,11 +57,6 @@ public class UserBean {
         this.phone = phone;
     }
 
-    public void Print(){
-        System.out.println("head="+getHead());
-        System.out.println("username="+getUsername());
-        System.out.println("phone="+getPhone());
-    }
 
     public int getUid() {
         return uid;
@@ -71,17 +66,6 @@ public class UserBean {
         this.uid = uid;
     }
 
-    @Override
-    public String toString() {
-        return "UserBean{" +
-                "uid=" + uid +
-                ", head='" + head + '\'' +
-                ", username='" + username + '\'' +
-                ", sex='" + sex + '\'' +
-                ", location='" + location + '\'' +
-                ", phone='" + phone + '\'' +
-                '}';
-    }
 
     public String getSignature() {
         return signature;
