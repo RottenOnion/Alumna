@@ -87,7 +87,6 @@ public class MemberActivity extends Activity implements OnClickListener, MemberV
         //head
         Glide.with(this).load(user.getHead()).error(R.drawable.ic_default_head).into(headView);
 
-
         //gender
         if (user.getSex()==1){
             btnGender.setText("男");
@@ -95,7 +94,7 @@ public class MemberActivity extends Activity implements OnClickListener, MemberV
         }else if (user.getSex()==2){
             btnGender.setText("女");
             btnGender.setBackground(getResources().getDrawable(R.drawable.button_female_shape));
-        }
+        }else btnGender.setVisibility(View.GONE);
 
         //grade
         switch (user.getGrade()){
@@ -103,7 +102,7 @@ public class MemberActivity extends Activity implements OnClickListener, MemberV
             case "2":btnGrade.setText("大二");break;
             case "3":btnGrade.setText("大三");break;
             case "4":btnGrade.setText("大四");break;
-            default:btnGender.setText(user.getGrade());
+            default:btnGrade.setVisibility(View.GONE);
         }
     }
 
@@ -111,6 +110,5 @@ public class MemberActivity extends Activity implements OnClickListener, MemberV
     public void showTopicList(ArrayList<TopicBean> list) {
 
     }
-
 
 }

@@ -6,13 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.alumna.R;
 import com.example.alumna.presenter.PublishPresenter;
@@ -131,13 +129,14 @@ public class PublishActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     @Override
-    public void setLocationText(String location) {
+    public void setLocationText(String location,String coordinate) {
         locationTv.setText(location);
+        locationTv.setTag(R.id.coordinate,coordinate);
     }
 
     @Override
     public String getLocation() {
-        return locationTv.getText().toString();
+        return locationTv.getTag(R.id.coordinate).toString();
     }
 
     @Override

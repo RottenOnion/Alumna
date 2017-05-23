@@ -18,7 +18,6 @@ public class LocationUtil {
 
     public AMapLocationClientOption mLocationOption = null;
     public AMapLocationClient  mLocationClient=null;
-    private String location;
 
     private static LocationUtil instance;
 
@@ -66,10 +65,12 @@ public class LocationUtil {
                 if (amapLocation != null) {
                     if (amapLocation.getErrorCode() == 0) {
                         //定位成功回调信息，设置相关消息
-//                        amapLocation.getLatitude();//获取纬度
-//                        amapLocation.getLongitude();//获取经度
-                        location=amapLocation.getCity()+amapLocation.getDistrict()+amapLocation.getStreet()+amapLocation.getStreetNum();
-                        callback.onSuccess(location);
+                        StringBuilder coordinate=new StringBuilder();
+                        coordinate.append(amapLocation.getLatitude());//获取纬度
+                        coordinate.append(",");
+                        coordinate.append(amapLocation.getLongitude());//获取经度
+                        String location=amapLocation.getCity()+amapLocation.getDistrict()+amapLocation.getStreet()+amapLocation.getStreetNum();
+                        callback.onSuccess(location,coordinate.toString());
                     } else {
                         //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
                         Log.e("AmapError", "location Error, ErrCode:"
@@ -87,7 +88,7 @@ public class LocationUtil {
     public interface getLocationCallback{
         void onStart();
         void onFinish();
-        void onSuccess(String result);
+        void onSuccess(String location,String coordinate);
         void onFailure(String result);
     }
 

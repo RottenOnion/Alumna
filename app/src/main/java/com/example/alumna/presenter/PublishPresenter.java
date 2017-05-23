@@ -78,26 +78,25 @@ public class PublishPresenter implements PublishPresenterImpl {
 
     @Override
     public void getLocation(){
-        final LocationUtil lo = LocationUtil.getInstance();
-        lo.getLocation(new LocationUtil.getLocationCallback() {
+        LocationUtil.getInstance().getLocation(new LocationUtil.getLocationCallback() {
             @Override
             public void onStart() {
-                pView.setLocationText("定位中...");
+                pView.setLocationText("定位中...","");
             }
 
             @Override
             public void onFinish() {
-                lo.stop();
+                LocationUtil.getInstance().stop();
             }
 
             @Override
-            public void onSuccess(String result) {
-                pView.setLocationText(result);
+            public void onSuccess(String location,String coordinate) {
+                pView.setLocationText(location,coordinate);
             }
 
             @Override
             public void onFailure(String result) {
-                pView.setLocationText(result);
+                pView.setLocationText(result,"");
             }
         });
     }

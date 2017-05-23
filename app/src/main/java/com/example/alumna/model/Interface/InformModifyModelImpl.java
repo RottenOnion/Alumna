@@ -4,6 +4,7 @@ import com.example.alumna.bean.UserBean;
 import com.example.alumna.utils.Http.HttpRequestCallback;
 import com.lzy.imagepicker.bean.ImageItem;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -15,7 +16,7 @@ public interface InformModifyModelImpl {
     /*获取用户信息*/
     void getUser(int uid);
 
-    void setUser(UserBean user);
+    void InformModify(HashMap<String,Object> params);
 
     void UploadImage(List<ImageItem>imgs);
 }
