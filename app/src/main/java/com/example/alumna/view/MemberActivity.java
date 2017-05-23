@@ -58,7 +58,7 @@ public class MemberActivity extends Activity implements OnClickListener, MemberV
         textSchool = (TextView) findViewById(R.id.text_school);
         textLocation = (TextView) findViewById(R.id.text_location);
         textSignature = (TextView) findViewById(R.id.text_signature);
-        textWechat = (TextView) findViewById(R.id.text_wechat);
+        textWechat = (TextView) findViewById(R.id.wechat_text);
         btnGender = (Button) findViewById(R.id.btn_gender);
         btnGrade = (Button) findViewById(R.id.btn_grade);
         layoutCircle = (LinearLayout) findViewById(R.id.layout_friend_circle);

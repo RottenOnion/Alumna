@@ -29,5 +29,7 @@
 
     <color name="imageGray">#313030</color>
 
+    <color name="grayDivider">#e2e2e2</color>
+
 
 </resources>

@@ -93,7 +93,7 @@
                 android:layout_height="1dp"
                 android:layout_below="@id/text_school"
                 android:layout_marginTop="20dp"
-                android:background="#edeaea"
+                android:background="@color/grayDivider"
 
                 />
 
@@ -133,7 +133,7 @@
                 android:layout_height="1dp"
                 android:layout_below="@id/layout_friend_circle"
                 android:layout_marginBottom="10dp"
-                android:background="#edeaea"
+                android:background="@color/grayDivider"
 
                 />
 
@@ -200,7 +200,7 @@
                 android:layout_height="1dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="20dp"
-                android:background="#edeaea"
+                android:background="@color/grayDivider"
 
                 />
 
@@ -229,7 +229,7 @@
 
 
             <TextView
-                android:id="@+id/text_wechat"
+                android:id="@+id/wechat_text"
                 android:layout_toRightOf="@id/icon_wechat"
                 android:layout_alignTop="@id/icon_wechat"
                 android:layout_width="wrap_content"
@@ -245,7 +245,7 @@
                 android:layout_height="1dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="20dp"
-                android:background="#edeaea" />
+                android:background="@color/grayDivider" />
 
 
 
