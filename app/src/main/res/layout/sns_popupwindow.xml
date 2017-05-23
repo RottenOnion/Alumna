@@ -3,7 +3,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
-    android:background="@color/colorPrimary">
+    android:background="@drawable/sns_pop_shape">
 
     <TableRow
         android:id="@+id/digBtn"
@@ -32,11 +32,12 @@
 
     <View
         android:layout_width="1dp"
-        android:layout_height="match_parent"
+        android:layout_height="20dp"
         android:layout_marginBottom="2dp"
         android:layout_marginTop="2dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/black"
         />
+
     <TableRow
         android:id="@+id/commentBtn"
         android:layout_width="wrap_content"

@@ -17,12 +17,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay">
-            <Button
-                android:id="@+id/back_Btn"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:background="@drawable/ic_back"
-                />
+
         </android.support.v7.widget.Toolbar>
 
 
@@ -42,7 +37,7 @@
             android:layout_height="1dp"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
-            android:background="#edeaea" />
+            android:background="@color/grayDivider" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -71,10 +66,10 @@
                 android:layout_marginRight="30dp"
                 android:src="@drawable/icon_name" />
 
-            <EditText
+            <TextView
                 android:id="@+id/name_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:hint="@string/name"
                 android:textColor="@android:color/black"
                 android:textColorHint="@color/textHintGray"
@@ -99,9 +94,9 @@
                 android:layout_marginRight="30dp"
                 android:src="@drawable/icon_male" />
 
-            <EditText
+            <TextView
                 android:id="@+id/gender_text"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="添加性别信息"
                 android:textColor="@android:color/black"
@@ -126,9 +121,9 @@
                 android:layout_marginRight="30dp"
                 android:src="@drawable/icon_school" />
 
-            <EditText
+            <TextView
                 android:id="@+id/school_text"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/school"
                 android:textColor="@android:color/black"
@@ -153,9 +148,9 @@
                 android:layout_marginRight="30dp"
                 android:src="@drawable/icon_grade" />
 
-            <EditText
+            <TextView
                 android:id="@+id/grade_text"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/grade"
                 android:textColor="@android:color/black"
@@ -184,9 +179,9 @@
                 android:layout_marginRight="30dp"
                 android:src="@drawable/icon_location" />
 
-            <EditText
+            <TextView
                 android:id="@+id/location_text"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/freq_location"
                 android:textColor="@android:color/black"
@@ -212,9 +207,9 @@
                 android:layout_marginRight="30dp"
                 android:src="@drawable/icon_work" />
 
-            <EditText
+            <TextView
                 android:id="@+id/signature_text"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/signature"
                 android:textColor="@android:color/black"
@@ -229,12 +224,12 @@
             android:layout_height="1dp"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
-            android:background="#edeaea"
+            android:background="@color/grayDivider"
 
             />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:layout_marginLeft="10dp"
@@ -260,9 +255,9 @@
                 android:layout_marginRight="30dp"
                 android:src="@drawable/icon_wechat" />
 
-            <EditText
-                android:id="@+id/text_wechat"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/wechat_text"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/wechat_infor"
                 android:textColor="@android:color/black"
@@ -277,7 +272,7 @@
             android:layout_height="1dp"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="20dp"
-            android:background="#edeaea" />
+            android:background="@color/grayDivider" />
 
 
 
