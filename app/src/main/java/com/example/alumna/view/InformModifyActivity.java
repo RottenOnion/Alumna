@@ -116,8 +116,10 @@ public class InformModifyActivity extends AppCompatActivity implements View.OnCl
                         int w = genderChoiceListener.getWhich();
                         if (w == 0) {
                             gender_text.setText("男");
+                            gender_text.setTag(R.id.gender_id,1);
                         } else if (w == 1) {
                             gender_text.setText("女");
+                            gender_text.setTag(R.id.gender_id,2);
                         }
                     }
 
@@ -191,6 +193,11 @@ public class InformModifyActivity extends AppCompatActivity implements View.OnCl
         super.onDestroy();
         presenter.UpdateImfor(MyApplication.getcurUser().getUid());
         Log.i("tag","正在上传");
+        new Handler().postDelayed(new Runnable(){
+            public void run() {
+
+            }
+        }, 3000);
     }
 
     private void initImagePicker() {
@@ -244,7 +251,12 @@ public class InformModifyActivity extends AppCompatActivity implements View.OnCl
         Glide.with(this).load(user.getHead()).error(R.drawable.ic_default_head).into(head_view);
         head_view.setTag(R.id.image_url,user.getHead());
         name_text.setText(user.getUsername());
-
+        gender_text.setTag(R.id.gender_id,user.getSex());
+        if(user.getSex()==1){
+            gender_text.setText("男");
+        }else if (user.getSex()==2){
+            gender_text.setText("女");
+        }
         school_text.setText(user.getSchool());
         grade_text.setText(user.getGrade());
         location_text.setText(user.getLocation());
@@ -256,7 +268,7 @@ public class InformModifyActivity extends AppCompatActivity implements View.OnCl
         HashMap<String,Object>params =new HashMap<>();
         params.put("head",head_view.getTag(R.id.image_url).toString());
         params.put("username",name_text.getText().toString());
-        params.put("sex",gender_text.getText().toString());
+        params.put("sex",gender_text.getTag(R.id.gender_id).toString());
         params.put("school",school_text.getText().toString());
         params.put("grade",grade_text.getText().toString());
         params.put("location",location_text.getText().toString());
