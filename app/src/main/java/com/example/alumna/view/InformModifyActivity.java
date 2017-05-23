@@ -85,7 +85,7 @@ public class InformModifyActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void showImfor(UserBean user) {
-        Glide.with(this).load(user.getHead()).placeholder(R.drawable.ic_default_head).into(head_view);
+        Glide.with(this).load(user.getHead()).error(R.drawable.ic_default_head).into(head_view);
         name_text.setText(user.getUsername());
 
         school_text.setText(user.getSchool());
