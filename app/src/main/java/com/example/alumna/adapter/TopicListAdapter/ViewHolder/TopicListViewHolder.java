@@ -93,11 +93,6 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
         imfor.setText(topic.getInfor());
         name.setText(topic.getUsername());
         location.setText(topic.getLocation());
-        if (topic.getLocation()==null){
-            location.setVisibility(View.GONE);
-        }else {
-            ParseUtil.Coordinate2Location(topic.getLocation());
-        }
         time.setText(String2Time(topic.getTime()));
         commentBody.setVisibility(View.VISIBLE);
         line.setVisibility(View.GONE);

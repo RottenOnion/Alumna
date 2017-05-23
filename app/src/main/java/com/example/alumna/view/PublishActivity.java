@@ -136,7 +136,7 @@ public class PublishActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public String getLocation() {
-        return locationTv.getTag(R.id.coordinate).toString();
+        return locationTv.getText().toString();
     }
 
     @Override
