@@ -1,5 +1,6 @@
 package com.example.alumna.view;
 
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,7 +24,7 @@ public class MemberCircleActivity extends AppCompatActivity implements MemberCir
     private SwipeRefreshLayout refreshLayout;
     private MemberCirclePresenter presenter;
 
-    private int uid=6;
+    private int uid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +32,12 @@ public class MemberCircleActivity extends AppCompatActivity implements MemberCir
         presenter=new MemberCirclePresenter(this);
         init();
 
+        //get Uid
+        Intent intent = getIntent();
+        String mUid = intent.getStringExtra("uid");
+        uid=Integer.parseInt(mUid);
+
+        presenter.loadUser(uid);
         presenter.loadUserCircle(uid);
 
     }

@@ -1,6 +1,7 @@
 package com.example.alumna.view;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -12,6 +13,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
@@ -23,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
@@ -39,14 +42,21 @@ import com.example.alumna.bean.UserBean;
 import com.example.alumna.presenter.MainPresenter;
 import com.example.alumna.utils.Image.ImageUtil;
 import com.example.alumna.view.Interface.MainViewImpl;
+
 import com.example.alumna.widgets.RecycleViewDivider;
+
+import com.lzy.imagepicker.ImagePicker;
+import com.lzy.imagepicker.bean.ImageItem;
+import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.mingle.widget.LoadingView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class MainActivity extends AppCompatActivity implements MainViewImpl {
 
+    private static final int BG_PICKER = 0x01;
     private RecyclerView mLeftRvView;
     private ArrayList<LeftBean> mLeftDatas;
 
@@ -76,6 +86,11 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
     //加载view
     private LoadingView loadingView;
 
+    //背景墙
+    public ImageView bg_backgroundIv;
+    public ImageView bg_headTv;
+    public TextView bg_nameTv;
+
     private final static boolean TYPE_TEXT=false;
     private static final boolean TYPE_IMAGE=true;
 
@@ -96,6 +111,10 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
 
         loadingView = (LoadingView) findViewById(R.id.loading_view);
 
+        bg_backgroundIv=(ImageView)findViewById(R.id.backgroundIv);
+        bg_headTv=(ImageView)findViewById(R.id.headIv) ;
+        bg_nameTv=(TextView)findViewById(R.id.nameTv);
+
         loadingView.setVisibility(View.VISIBLE);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -111,6 +130,9 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
         leftHeadView = (ImageView) findViewById(R.id.left_head_view);
         rightLayout = (RelativeLayout) findViewById(R.id.right_drawer_layout);
 
+        /**
+         * 发布动态
+         */
         publishBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,6 +152,9 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
             }
         });
 
+        /**
+         * 右滑菜单
+         */
         layoutCircle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -138,6 +163,9 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
             }
         });
 
+        /**
+         * 下拉刷新
+         */
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener(){
             @Override
             public void onRefresh() {
@@ -145,14 +173,17 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
             }
         });
 
+        /**
+         * 填充用户个人信息
+         */
+        nametv.setText(MyApplication.getcurUser().getUsername());
+        bg_nameTv.setText(MyApplication.getcurUser().getUsername());
+        Glide.with(this).load(MyApplication.getcurUser().getHead()).into(bg_headTv);
+        Glide.with(this).load(MyApplication.getcurUser().getBackground()).into(bg_backgroundIv);
 
         /**
          根据初始化左右侧滑菜单背景，菜单背景为头像的高斯模糊
          */
-
-
-        nametv.setText(MyApplication.getcurUser().getUsername());
-
         Glide.with(this).load(MyApplication.getcurUser().getHead())
                 .asBitmap()
                 .into(new SimpleTarget<Bitmap>() {
@@ -173,8 +204,6 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
 
                     }
                 });
-
-
 
         /**
          * 初始化左侧滑菜单Item
@@ -211,19 +240,47 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(OrientationHelper.VERTICAL);
         topiclist.setLayoutManager(layoutManager);
-        presenter.loadTopicList(MyApplication.getcurUser().getUid());
 
         /**
          * 初始化好友列表
          */
         friendRV.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         friendRV.addItemDecoration(new RecycleViewDivider(this,LinearLayoutManager.VERTICAL,3,getResources().getColor(R.color.grayDivider)));
+
+        /**
+         * 初始化背景墙选择dialog
+         */
+        final AlertDialog dialog = new AlertDialog
+            .Builder(this)
+            .setItems(new String[]{"更换相册封面"}, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    if (which == 0) {
+                        ImagePicker imagePicker = ImagePicker.getInstance();
+                        imagePicker.setSelectLimit(1);    //选中数量限制
+                        Intent intent = new Intent(getContext(), ImageGridActivity.class);
+                        startActivityForResult(intent, BG_PICKER);
+                        Toast.makeText(getContext(),"成功",Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }).create();
+
+        bg_backgroundIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.show();
+                dialog.getWindow().setLayout(800,280);
+            }
+        });
     }
 
     @Override
     protected void onResume() {
+
         presenter.loadFriendList(MyApplication.getcurUser().getUid());
+        presenter.loadTopicList(MyApplication.getcurUser().getUid());
         super.onResume();
+
     }
 
     private void loadLeftDatas() {
@@ -278,4 +335,17 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
         return this;
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
+            if (data != null && requestCode == BG_PICKER) {
+                ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
+                Glide.with(getContext()).load(images.get(0).path).into(bg_backgroundIv);
+                presenter.uploadBackground(MyApplication.getcurUser().getUid(),images);
+           } else {
+                Toast.makeText(this, "没有数据", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 }

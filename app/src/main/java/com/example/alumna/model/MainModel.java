@@ -16,6 +16,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
+import com.lzy.imagepicker.bean.ImageItem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -86,7 +87,7 @@ public class MainModel implements MainModelImpl {
                     }
                     list.add(topic);
                 }
-                mListener.onTopicSuccess(list);
+                mListener.TopicSuccess(list);
             }
 
             @Override
@@ -186,6 +187,7 @@ public class MainModel implements MainModelImpl {
     }
 
 
+
     /**
      * 获取好友列表
      * @param uid
@@ -193,8 +195,8 @@ public class MainModel implements MainModelImpl {
     @Override
     public void getFriend(int uid) {
         //获得好友列表
-        Map<String,Object> map = new HashMap<>();
-        map.put("uid",uid);
+        Map<String, Object> map = new HashMap<>();
+        map.put("uid", uid);
         HttpUtil.getInstance().PostRequest(DataUtils.BASEURL + DataUtils.MYFRIEND, map,
                 new HttpRequestCallback<String>() {
                     @Override
@@ -222,7 +224,7 @@ public class MainModel implements MainModelImpl {
                             }
                             mListener.onFriendSuccess(userList);
 
-                            Log.d("cao","好友列表拿到");
+                            Log.d("cao", "好友列表拿到");
                         } else {
 
                         }
@@ -233,6 +235,67 @@ public class MainModel implements MainModelImpl {
 
                     }
                 });
+    }
+
+    @Override
+    public void uploadImage(ArrayList<ImageItem> imgs) {
+        String url=DataUtils.BASEURL+DataUtils.SENDPIC;
+        HttpUtil.getInstance().UploadImage(url, imgs, new HttpRequestCallback<String>() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+
+            @Override
+            public void onResponse(String result) {
+                JsonObject jsonObject=new JsonParser().parse(result).getAsJsonObject();
+                String imageurl=jsonObject.get("url").getAsString();
+                mListener.UploadSuccess(imageurl);
+            }
+
+            @Override
+            public void onFailure(Call call) {
+
+            }
+        });
+    }
+
+    @Override
+    public void updateBg(int uid, String img) {
+        String url=DataUtils.BASEURL+DataUtils.SETBACKGROUND;
+        HashMap<String,Object>params=new HashMap<>();
+        params.put("uid",uid);
+        params.put("background",img);
+        HttpUtil.getInstance().PostRequest(url, params, new HttpRequestCallback<String>() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+
+            @Override
+            public void onResponse(String result) {
+                Log.i("updatebg",result);
+                JsonObject jsonObject=new JsonParser().parse(result).getAsJsonObject();
+                int status=jsonObject.get("status").getAsInt();
+                if (status==1)mListener.UploadSuccess();
+            }
+
+            @Override
+            public void onFailure(Call call) {
+
+            }
+        });
+
     }
 
     public interface OnLikeListResult{

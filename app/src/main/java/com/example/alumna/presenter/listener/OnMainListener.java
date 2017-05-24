@@ -11,7 +11,10 @@ import java.util.List;
  */
 
 public interface OnMainListener {
-    void onTopicSuccess(ArrayList<TopicBean> list);
+
     void onFriendSuccess(List<UserBean> list);
+    void TopicSuccess(ArrayList<TopicBean> list);
+    void UploadSuccess(String url);
+    void UploadSuccess();
     void onError();
 }

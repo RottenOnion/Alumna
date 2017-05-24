@@ -25,5 +25,6 @@ public class DataUtils {
     public static final String MAKEFRIEND = "makefriend"; //添加好友
     public static final String MYFRIEND = "getfriend"; //获取好友列表
     public static final String NEARBY = "nearby"; //附近的人
+    public static final String SETBACKGROUND="setbg";//设置背景墙
 
 }
