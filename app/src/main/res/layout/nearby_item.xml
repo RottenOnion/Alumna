@@ -9,9 +9,7 @@
         android:layout_width="320dp"
         android:layout_height="320dp"
         android:layout_alignParentTop="true"
-        android:scaleType="centerCrop"
-        android:src="@drawable/test_touxiang"
-        />
+        android:scaleType="centerCrop" />
 
     <TextView
         android:id="@+id/text_name"
@@ -21,49 +19,70 @@
         android:layout_below="@id/head_view"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
-        android:text="张敬轩"
+        android:text="123"
         android:textColor="@android:color/black"
         android:textSize="16sp" />
 
-
-    <Button
-        android:id="@+id/btn_gender"
-        android:layout_width="35dp"
-        android:layout_height="20dp"
+    <LinearLayout
+        android:id="@+id/btn_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignLeft="@id/text_name"
         android:layout_below="@id/text_name"
         android:layout_marginTop="7dp"
-        android:background="@drawable/button_male_shape"
-        android:clickable="false"
-        android:text="男"
-        android:textSize="12sp"
-        android:textColor="@android:color/white" />
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btn_grade"
-        android:layout_width="35dp"
-        android:layout_height="20dp"
-        android:layout_below="@id/text_name"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="7dp"
-        android:layout_toRightOf="@id/btn_gender"
-        android:background="@drawable/button_grade_shape"
-        android:clickable="false"
-        android:text="大三"
-        android:textSize="12sp"
-        android:textColor="@android:color/white" />
+        <Button
+            android:id="@+id/btn_gender"
+            android:layout_width="35dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/button_male_shape"
+            android:clickable="false"
+            android:layout_marginRight="10dp"
+            android:textColor="@android:color/white"
+            android:textSize="12sp" />
 
-    <TextView
-        android:id="@+id/text_school"
+        <Button
+            android:id="@+id/btn_grade"
+            android:layout_width="35dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+
+            android:background="@drawable/button_grade_shape"
+            android:clickable="false"
+            android:textColor="@android:color/white"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/text_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/btn_gender"
-        android:layout_below="@id/btn_gender"
-        android:layout_marginTop="7dp"
+        android:layout_alignLeft="@id/text_name"
+        android:layout_below="@id/btn_layout"
         android:layout_marginBottom="10dp"
-        android:text="华南理工大学"
-        android:textColor="@color/textHintGray"
-        android:textSize="14sp" />
+        android:layout_marginTop="7dp">
+
+        <TextView
+            android:id="@+id/text_school"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textHintGray"
+            android:layout_marginRight="30dp"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/text_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textHintGray"
+            android:textSize="14sp"
+            />
+
+    </LinearLayout>
 
 
 </RelativeLayout>

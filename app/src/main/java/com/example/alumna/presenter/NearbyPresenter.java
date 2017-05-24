@@ -1,6 +1,6 @@
 package com.example.alumna.presenter;
 
-import com.example.alumna.bean.UserBean;
+import com.example.alumna.bean.NearbyUserBean;
 import com.example.alumna.model.Interface.NearbyModelImpl;
 import com.example.alumna.model.NearbyModel;
 import com.example.alumna.presenter.Interface.NearbyPresenterImpl;
@@ -33,12 +33,14 @@ public class NearbyPresenter implements onNearbyListener,NearbyPresenterImpl {
     }
 
     @Override
-    public void Like() {
-
+    public void Like(int uid,int fid) {
+        nModel.addFriend(uid, fid);
     }
 
+
+
     @Override
-    public void onSuccess(List<UserBean> userList) {
+    public void onSuccess(List<NearbyUserBean> userList) {
         nView.showNearby(userList);
     }
 

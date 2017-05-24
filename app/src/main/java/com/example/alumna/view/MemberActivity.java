@@ -1,6 +1,7 @@
 package com.example.alumna.view;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -29,6 +30,7 @@ public class MemberActivity extends Activity implements OnClickListener, MemberV
     private String mUid;
     private int uid;
     private LinearLayout layoutCircle;
+    private ProgressDialog mLoadingProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +64,10 @@ public class MemberActivity extends Activity implements OnClickListener, MemberV
         btnGender = (Button) findViewById(R.id.btn_gender);
         btnGrade = (Button) findViewById(R.id.btn_grade);
         layoutCircle = (LinearLayout) findViewById(R.id.layout_friend_circle);
+        mLoadingProgress = new ProgressDialog(this);
+        mLoadingProgress.setCancelable(false);
+        mLoadingProgress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mLoadingProgress.setMessage("加载中");
     }
 
 
@@ -105,4 +111,13 @@ public class MemberActivity extends Activity implements OnClickListener, MemberV
 
     }
 
+    @Override
+    public void showProgress() {
+        mLoadingProgress.show();
+    }
+
+    @Override
+    public void hideProgress() {
+        mLoadingProgress.hide();
+    }
 }

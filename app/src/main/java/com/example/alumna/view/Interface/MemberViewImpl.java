@@ -11,4 +11,8 @@ public interface MemberViewImpl {
     void showUserInform(UserBean user);
 
     void showTopicList(ArrayList<TopicBean> list);
+
+    void showProgress();
+
+    void hideProgress();
 }

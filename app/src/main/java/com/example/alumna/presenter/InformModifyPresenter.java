@@ -28,6 +28,7 @@ public class InformModifyPresenter implements InformModifyPresenterImpl,OnModify
 
     @Override
     public void loadImfor(int uid) {
+        uView.showProgress();
         uModel.getUser(uid);
     }
 
@@ -46,6 +47,7 @@ public class InformModifyPresenter implements InformModifyPresenterImpl,OnModify
 
     @Override
     public void OnLoadUserSuccess(UserBean user) {
+        uView.hideProgress();
         uView.showInform(user);
     }
 

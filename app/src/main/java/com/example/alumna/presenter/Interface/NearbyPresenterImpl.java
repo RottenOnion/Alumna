@@ -13,5 +13,5 @@ public interface NearbyPresenterImpl {
     void Block();
 
     //喜欢
-    void Like();
+    void Like(int uid,int fid);
 }

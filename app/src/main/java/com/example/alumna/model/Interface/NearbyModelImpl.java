@@ -9,5 +9,7 @@ public interface NearbyModelImpl {
 
     void getNearby(int uid,String location);
 
+    void addFriend(int uid,int fid);
+
 
 }

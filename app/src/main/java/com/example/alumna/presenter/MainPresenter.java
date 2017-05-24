@@ -3,6 +3,7 @@ package com.example.alumna.presenter;
 import android.os.Handler;
 
 import com.example.alumna.bean.TopicBean;
+import com.example.alumna.bean.UserBean;
 import com.example.alumna.model.Interface.MainModelImpl;
 import com.example.alumna.model.MainModel;
 import com.example.alumna.presenter.Interface.MainPresenterImpl;
@@ -10,6 +11,7 @@ import com.example.alumna.presenter.listener.OnMainListener;
 import com.example.alumna.view.Interface.MainViewImpl;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -28,25 +30,33 @@ public class MainPresenter implements MainPresenterImpl ,OnMainListener {
 
     @Override
     public void loadTopicList(final int uid) {
-        mView.showProgressBar();
         mModel.getTopicList(uid);
     }
 
     @Override
-    public void TopicSuccess(final ArrayList<TopicBean> list) {
+    public void loadFriendList(int uid) {
+        mModel.getFriend(uid);
+    }
+
+    @Override
+    public void onTopicSuccess(final ArrayList<TopicBean> list) {
         //避免数据未装载就返回票圈，这里给延时3秒
         new Handler().postDelayed(new Runnable(){
             public void run() {
                 mView.showFriendCircle(list);
-                mView.hideProgressBar();
+                mView.hideProgress();
             }
         }, 3000);
     }
 
+    @Override
+    public void onFriendSuccess(List<UserBean> list) {
+        mView.showFriend(list);
+    }
 
     @Override
     public void onError() {
-        mView.hideProgressBar();
+        mView.hideProgress();
     }
 
 

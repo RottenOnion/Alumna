@@ -21,4 +21,8 @@ public interface InformModifyViewImpl {
 
     //为imageview设置tag
     void ImageUploadSuccess(String url);
+
+    void showProgress();
+
+    void hideProgress();
 }

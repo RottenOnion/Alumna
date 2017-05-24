@@ -1,10 +1,5 @@
 package com.example.alumna.presenter.Interface;
 
-import com.example.alumna.bean.TopicBean;
-import com.example.alumna.utils.Http.HttpRequestCallback;
-
-import java.util.ArrayList;
-
 /**
  * Created by Administrator on 2017/4/25.
  */
@@ -12,5 +7,7 @@ import java.util.ArrayList;
 public interface MainPresenterImpl {
 
     void loadTopicList(int uid);
+
+    void loadFriendList(int uid);
 
 }
