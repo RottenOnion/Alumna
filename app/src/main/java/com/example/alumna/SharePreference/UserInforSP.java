@@ -1,6 +1,7 @@
 package com.example.alumna.SharePreference;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.alumna.bean.UserBean;
 import com.example.alumna.utils.SharedPreferencesUtil;
@@ -25,7 +26,6 @@ public class UserInforSP {
         sp.saveData("sex",user.getSex());
         sp.saveData("location",user.getLocation());
         sp.saveData("phone",user.getPhone());
-        sp=null;
     }
 
     public UserBean loadCurUserData(){

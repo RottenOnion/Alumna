@@ -34,7 +34,7 @@
                 android:id="@+id/left_head_view"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:src="@drawable/test_touxiang"/>
+                android:src="@drawable/ic_default_head"/>
 
             <TextView
                 android:id="@+id/main_left_self_name"

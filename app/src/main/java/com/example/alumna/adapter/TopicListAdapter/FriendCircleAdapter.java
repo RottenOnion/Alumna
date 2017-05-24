@@ -23,6 +23,7 @@ import com.example.alumna.adapter.TopicListAdapter.ViewHolder.TextViewHolder;
 import com.example.alumna.adapter.TopicListAdapter.ViewHolder.TopicListViewHolder;
 import com.example.alumna.bean.TopicBean;
 import com.example.alumna.bean.UserBean;
+
 import com.example.alumna.utils.Image.ImageUtil;
 
 import java.util.ArrayList;
@@ -84,12 +85,13 @@ public class FriendCircleAdapter extends BaseRecycleViewAdapter {
         if(position==TYPE_BGWALL){
             BackgroundWallViewHolder holder=(BackgroundWallViewHolder)viewHolder;
             holder.nameTv.setText(curUser.getUsername());
-            if (backgroundDra == null && headBitmap == null) {
-                initBackground(holder);
-            } else {
-                holder.backgroundIv.setImageDrawable(backgroundDra);
-                holder.headTv.setImageBitmap(headBitmap);
-            }
+            Glide.with(context).load(curUser.getHead()).into(holder.headTv);
+//            if (backgroundDra == null && headBitmap == null) {
+//                initBackground(holder);
+//            } else {
+//                holder.backgroundIv.setImageDrawable(backgroundDra);
+//                holder.headTv.setImageBitmap(headBitmap);
+//            }
             return;
         }
 

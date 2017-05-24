@@ -3,7 +3,6 @@ package com.example.alumna.adapter.TopicListAdapter.ViewHolder;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewStub;
 import android.widget.ImageView;
@@ -15,8 +14,8 @@ import com.example.alumna.R;
 import com.example.alumna.bean.CommentBean;
 import com.example.alumna.bean.TopicBean;
 import com.example.alumna.bean.UserBean;
-import com.example.alumna.utils.DataUtils;
 import com.example.alumna.utils.Image.ImageUtil;
+import com.example.alumna.utils.ParseUtil;
 import com.example.alumna.view.MemberActivity;
 import com.example.alumna.widgets.CommentListView;
 import com.example.alumna.widgets.EditTextPopupWindow;
@@ -26,7 +25,7 @@ import com.example.alumna.widgets.SnsPopupWindow;
 import java.util.ArrayList;
 
 
-import static com.example.alumna.utils.ParseUtil.StringParseTime;
+import static com.example.alumna.utils.ParseUtil.String2Time;
 
 /**
  * Created by Leebobo on 2017/5/3.
@@ -94,10 +93,7 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
         imfor.setText(topic.getInfor());
         name.setText(topic.getUsername());
         location.setText(topic.getLocation());
-        if (topic.getLocation()!=null){
-            Log.i("loca",topic.getLocation());
-        }
-        time.setText(StringParseTime(topic.getTime()));
+        time.setText(String2Time(topic.getTime()));
         commentBody.setVisibility(View.VISIBLE);
         line.setVisibility(View.GONE);
         //加载头像

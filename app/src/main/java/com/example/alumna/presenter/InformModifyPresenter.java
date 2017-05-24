@@ -1,6 +1,7 @@
 package com.example.alumna.presenter;
 
 
+import com.example.alumna.MyApplication;
 import com.example.alumna.bean.UserBean;
 import com.example.alumna.model.Interface.InformModifyModelImpl;
 import com.example.alumna.model.InformModifyModel;
@@ -50,12 +51,13 @@ public class InformModifyPresenter implements InformModifyPresenterImpl,OnModify
 
     @Override
     public void OnUploadImageSuccess(String url) {
-        uView.ImageViewSetTag(url);
+        uView.ImageUploadSuccess(url);
         uView.showToast("头像上传成功");
     }
 
     @Override
-    public void OnModifyInformSuccess() {
+    public void OnModifyInformSuccess(UserBean user) {
+        MyApplication.setCurUser(user);
         uView.showToast("个人信息修改成功");
     }
 

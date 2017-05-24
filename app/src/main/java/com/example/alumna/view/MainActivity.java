@@ -21,7 +21,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.alumna.MyApplication;
 import com.example.alumna.R;
 import com.example.alumna.adapter.LeftDrawerAdapter;
@@ -59,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
     //左侧菜单头像
     private ImageView leftHeadView;
 
+    private TextView nametv;
 
     private final static boolean TYPE_TEXT=false;
     private static final boolean TYPE_IMAGE=true;
@@ -75,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
         refreshLayout=(SwipeRefreshLayout)findViewById(R.id.refresh_layout);
         layoutCircle = (LinearLayout) findViewById(R.id.friend_circle);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        nametv=(TextView)findViewById(R.id.main_left_self_name) ;
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
@@ -127,6 +131,9 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
         /**
          根据初始化左右侧滑菜单背景，菜单背景为头像的高斯模糊
          */
+
+        Glide.with(this).load(MyApplication.getcurUser().getHead()).into(leftHeadView);
+        nametv.setText(MyApplication.getcurUser().getUsername());
 
         /*裁剪图片，适应侧滑菜单大小*/
         Bitmap inputBitmap = ((BitmapDrawable)leftHeadView.getDrawable()).getBitmap();

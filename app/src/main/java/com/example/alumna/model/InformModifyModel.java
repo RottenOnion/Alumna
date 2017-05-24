@@ -54,8 +54,8 @@ public class InformModifyModel implements InformModifyModelImpl {
                 if (status==1){
                     JsonObject userString = jsonObject.get("userall").getAsJsonObject();
                     Gson gson = new Gson();
-                    UserBean userBean = gson.fromJson(userString,UserBean.class);
-                    mListener.OnLoadUserSuccess(userBean);
+                    UserBean user = gson.fromJson(userString,UserBean.class);
+                    mListener.OnLoadUserSuccess(user);
                 }
             }
 
@@ -84,8 +84,14 @@ public class InformModifyModel implements InformModifyModelImpl {
 
             @Override
             public void onResponse(String result) {
-                Log.i("result",result);
-                mListener.OnModifyInformSuccess();
+                JsonObject jsonObject = new JsonParser().parse(result).getAsJsonObject();
+                int status=jsonObject.get("status").getAsInt();
+                if (status==1){
+                    JsonObject userString = jsonObject.get("user").getAsJsonObject();
+                    Gson gson = new Gson();
+                    UserBean user = gson.fromJson(userString,UserBean.class);
+                    mListener.OnModifyInformSuccess(user);
+                }
             }
 
             @Override

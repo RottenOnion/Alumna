@@ -54,7 +54,7 @@ public class HttpUtil {
 
     //异步post请求
     public void PostRequest(final String url, final Map<String, Object> params, final HttpRequestCallback callback){
-        String data= ParseUtil.MapParseString(params);
+        String data= ParseUtil.Map2String(params);
 
         final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         RequestBody body = RequestBody.create(JSON, data);
@@ -65,7 +65,7 @@ public class HttpUtil {
 
     //同步post请求
     public void PostRequest(final String url, final Map<String, Object> params){
-        String data= ParseUtil.MapParseString(params);
+        String data= ParseUtil.Map2String(params);
         final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         RequestBody body = RequestBody.create(JSON, data);
 

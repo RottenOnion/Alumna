@@ -53,6 +53,7 @@ public class InformModifyActivity extends AppCompatActivity implements View.OnCl
 
         //findview
         head_view=(CircleImageView)findViewById(R.id.head_view);
+
         name_text=(TextView)findViewById(R.id.name_text) ;
         gender_text=(TextView)findViewById(R.id.gender_text);
         school_text=(TextView)findViewById(R.id.school_text);
@@ -60,6 +61,7 @@ public class InformModifyActivity extends AppCompatActivity implements View.OnCl
         location_text=(TextView)findViewById(R.id.location_text);
         signature_text=(TextView)findViewById(R.id.signature_text);
         wechat_text = (TextView)findViewById(R.id.wechat_text);
+
         toolbar=(Toolbar)findViewById(R.id.toolbar);
         backBtn=(Button) findViewById(R.id.back_Btn) ;
 
@@ -114,8 +116,10 @@ public class InformModifyActivity extends AppCompatActivity implements View.OnCl
                         int w = genderChoiceListener.getWhich();
                         if (w == 0) {
                             gender_text.setText("男");
+                            gender_text.setTag(R.id.gender_id,1);
                         } else if (w == 1) {
                             gender_text.setText("女");
+                            gender_text.setTag(R.id.gender_id,2);
                         }
                     }
 
@@ -247,7 +251,12 @@ public class InformModifyActivity extends AppCompatActivity implements View.OnCl
         Glide.with(this).load(user.getHead()).error(R.drawable.ic_default_head).into(head_view);
         head_view.setTag(R.id.image_url,user.getHead());
         name_text.setText(user.getUsername());
-       // gender_text.setText(user.getSex());
+        gender_text.setTag(R.id.gender_id,user.getSex());
+        if(user.getSex()==1){
+            gender_text.setText("男");
+        }else if (user.getSex()==2){
+            gender_text.setText("女");
+        }
         school_text.setText(user.getSchool());
         grade_text.setText(user.getGrade());
         location_text.setText(user.getLocation());
@@ -259,11 +268,12 @@ public class InformModifyActivity extends AppCompatActivity implements View.OnCl
         HashMap<String,Object>params =new HashMap<>();
         params.put("head",head_view.getTag(R.id.image_url).toString());
         params.put("username",name_text.getText().toString());
-        params.put("sex",gender_text.getText().toString());
+        params.put("sex",gender_text.getTag(R.id.gender_id).toString());
         params.put("school",school_text.getText().toString());
         params.put("grade",grade_text.getText().toString());
         params.put("location",location_text.getText().toString());
         params.put("signature",signature_text.getText().toString());
+        params.put("wechat",wechat_text.getText().toString());
         return params;
     }
 
@@ -273,7 +283,7 @@ public class InformModifyActivity extends AppCompatActivity implements View.OnCl
     }
 
     @Override
-    public void ImageViewSetTag(String url) {
+    public void ImageUploadSuccess(String url) {
         head_view.setTag(R.id.image_url,url);
     }
 

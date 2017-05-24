@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.text.TextUtils;
 
+import com.example.alumna.SharePreference.UserInforSP;
 import com.example.alumna.bean.UserBean;
 import com.example.alumna.widgets.GlideSelectImageLoader;
 import com.lzy.imagepicker.ImagePicker;
@@ -76,10 +77,10 @@ public class MyApplication extends Application{
     }
 
     public static UserBean getcurUser(){
-        //读取本地用户信息，如果没有，跳去登录
         if (curUser==null){
-            curUser=new UserBean(1);
-            curUser.setUsername("未登录");
+            //读取本地用户信息，如果没有，跳去登录
+            UserInforSP load=new UserInforSP(context);
+            curUser=load.loadCurUserData();
         }
         return curUser;
     }
@@ -87,6 +88,8 @@ public class MyApplication extends Application{
     public static void setCurUser(UserBean user){
         curUser=user;
         //保存到本地
+        UserInforSP save=new UserInforSP(context);
+        save.saveCurUserData(user);
     }
 
     public static Resources getMyResource() {
