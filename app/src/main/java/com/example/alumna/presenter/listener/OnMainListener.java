@@ -10,5 +10,7 @@ import java.util.ArrayList;
 
 public interface OnMainListener {
     void TopicSuccess(ArrayList<TopicBean> list);
+    void UploadSuccess(String url);
+    void UploadSuccess();
     void onError();
 }

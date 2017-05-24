@@ -1,5 +1,7 @@
 package com.example.alumna.model;
 
+import android.util.Log;
+
 import com.example.alumna.bean.CommentBean;
 import com.example.alumna.bean.TopicBean;
 import com.example.alumna.bean.UserBean;
@@ -14,6 +16,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
+import com.lzy.imagepicker.bean.ImageItem;
 
 
 import java.util.ArrayList;
@@ -182,6 +185,67 @@ public class MainModel implements MainModelImpl {
             }
         });
     }
+
+    @Override
+    public void uploadImage(ArrayList<ImageItem> imgs) {
+        String url=DataUtils.BASEURL+DataUtils.SENDPIC;
+        HttpUtil.getInstance().UploadImage(url, imgs, new HttpRequestCallback<String>() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+
+            @Override
+            public void onResponse(String result) {
+                JsonObject jsonObject=new JsonParser().parse(result).getAsJsonObject();
+                String imageurl=jsonObject.get("url").getAsString();
+                mListener.UploadSuccess(imageurl);
+            }
+
+            @Override
+            public void onFailure(Call call) {
+
+            }
+        });
+    }
+
+    @Override
+    public void updateBg(int uid, String img) {
+        String url=DataUtils.BASEURL+DataUtils.SETBACKGROUND;
+        HashMap<String,Object>params=new HashMap<>();
+        params.put("uid",uid);
+        params.put("background",img);
+        HttpUtil.getInstance().PostRequest(url, params, new HttpRequestCallback<String>() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+
+            @Override
+            public void onResponse(String result) {
+                Log.i("updatebg",result);
+                JsonObject jsonObject=new JsonParser().parse(result).getAsJsonObject();
+                int status=jsonObject.get("status").getAsInt();
+                if (status==1)mListener.UploadSuccess();
+            }
+
+            @Override
+            public void onFailure(Call call) {
+
+            }
+        });
+    }
+
     public interface OnLikeListResult{
         void success(ArrayList<UserBean> list);
     }

@@ -22,5 +22,6 @@ public class DataUtils {
     public static final String NEWTOPIC="newtopic";//发布新的动态
     public static final String MEMBER="getuserall";//查看用户信息
     public static final String MODIFY="updateimfor";//更改用户信息
+    public static final String SETBACKGROUND="setbg";//设置背景墙
 
 }

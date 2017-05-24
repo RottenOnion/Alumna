@@ -3,6 +3,7 @@ package com.example.alumna.adapter.TopicListAdapter.ViewHolder;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewStub;
 import android.widget.ImageView;
@@ -89,6 +90,7 @@ public abstract class BaseViewHolder extends RecyclerView.ViewHolder {
     public abstract void initSubView(int viewType, ViewStub viewStub);
 
     public void setData(TopicBean topic){
+
         viewType=Integer.valueOf(topic.getType());
         imfor.setText(topic.getInfor());
         name.setText(topic.getUsername());

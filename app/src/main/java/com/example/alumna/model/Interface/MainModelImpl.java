@@ -6,6 +6,7 @@ import com.example.alumna.bean.TopicBean;
 import com.example.alumna.bean.UserBean;
 import com.example.alumna.model.MainModel;
 import com.example.alumna.utils.Http.HttpRequestCallback;
+import com.lzy.imagepicker.bean.ImageItem;
 
 import java.util.ArrayList;
 
@@ -20,5 +21,9 @@ public interface MainModelImpl {
     void getLikeList(int tid, MainModel.OnLikeListResult listResult);
 
     void getComment(int tid,MainModel.OnCommentResult listResult);
+
+    void uploadImage(ArrayList<ImageItem>imgs);
+
+    void updateBg(final int uid,final String img);
 
 }

@@ -1,7 +1,9 @@
 package com.example.alumna.presenter;
 
 import android.os.Handler;
+import android.util.Log;
 
+import com.example.alumna.MyApplication;
 import com.example.alumna.bean.TopicBean;
 import com.example.alumna.model.Interface.MainModelImpl;
 import com.example.alumna.model.MainModel;
@@ -35,7 +37,7 @@ public class MainPresenter implements MainPresenterImpl ,OnMainListener {
 
     @Override
     public void uploadBackground(int uid, ArrayList<ImageItem> img) {
-
+        mModel.uploadImage(img);
     }
 
     @Override
@@ -47,6 +49,17 @@ public class MainPresenter implements MainPresenterImpl ,OnMainListener {
                 mView.hideProgressBar();
             }
         }, 3000);
+    }
+
+    @Override
+    public void UploadSuccess(String url) {
+        Log.i("url",url);
+        mModel.updateBg(MyApplication.getcurUser().getUid(),url);
+    }
+
+    @Override
+    public void UploadSuccess() {
+        //背景上传成功
     }
 
 
