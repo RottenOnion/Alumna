@@ -1,7 +1,9 @@
 package com.example.alumna.adapter.TopicListAdapter.ViewHolder;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -10,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.alumna.R;
+import com.lzy.imagepicker.ImagePicker;
+import com.lzy.imagepicker.ui.ImageGridActivity;
 
 /**
  * Created by Leebobo on 2017/5/10.
@@ -17,6 +21,7 @@ import com.example.alumna.R;
 
 public class BackgroundWallViewHolder extends RecyclerView.ViewHolder {
 
+    public static final int BG_PICKER = 0x01;
     private View view;
     public ImageView backgroundIv;
     public ImageView headTv;
@@ -35,11 +40,13 @@ public class BackgroundWallViewHolder extends RecyclerView.ViewHolder {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (which == 0) {
-                            /**
-                             请在此处填写跳转到选择相片逻辑
-                             */
-                            Toast.makeText(context, "选择相片", Toast.LENGTH_SHORT).show();
-                        }
+                            ImagePicker imagePicker = ImagePicker.getInstance();
+                            imagePicker.setSelectLimit(1);    //选中数量限制
+                            Activity curActivity=(Activity)view.getContext();
+                            Intent intent = new Intent(curActivity, ImageGridActivity.class);
+                            curActivity.startActivityForResult(intent, BG_PICKER);
+                            Toast.makeText(curActivity,"成功",Toast.LENGTH_SHORT).show();
+                     }
                     }
                 })
                 .create();
@@ -52,7 +59,7 @@ public class BackgroundWallViewHolder extends RecyclerView.ViewHolder {
             }
         });
     }
-
-
-
+    public interface changeBackground{
+          void uploadBg();
+    }
 }

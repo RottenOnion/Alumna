@@ -8,6 +8,7 @@ import com.example.alumna.model.MainModel;
 import com.example.alumna.presenter.Interface.MainPresenterImpl;
 import com.example.alumna.presenter.listener.OnMainListener;
 import com.example.alumna.view.Interface.MainViewImpl;
+import com.lzy.imagepicker.bean.ImageItem;
 
 import java.util.ArrayList;
 
@@ -30,6 +31,11 @@ public class MainPresenter implements MainPresenterImpl ,OnMainListener {
     public void loadTopicList(final int uid) {
         mView.showProgressBar();
         mModel.getTopicList(uid);
+    }
+
+    @Override
+    public void uploadBackground(int uid, ArrayList<ImageItem> img) {
+
     }
 
     @Override

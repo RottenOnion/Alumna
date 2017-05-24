@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
@@ -32,14 +33,19 @@ import com.example.alumna.R;
 import com.example.alumna.adapter.LeftDrawerAdapter;
 import com.example.alumna.adapter.LeftDrawerAdapter.onItemClickListener;
 import com.example.alumna.adapter.TopicListAdapter.FriendCircleAdapter;
+import com.example.alumna.adapter.TopicListAdapter.ViewHolder.BackgroundWallViewHolder;
 import com.example.alumna.bean.LeftBean;
 import com.example.alumna.bean.TopicBean;
 import com.example.alumna.presenter.MainPresenter;
 import com.example.alumna.utils.Image.ImageUtil;
 import com.example.alumna.view.Interface.MainViewImpl;
+import com.lzy.imagepicker.ImagePicker;
+import com.lzy.imagepicker.bean.ImageItem;
 import com.mingle.widget.LoadingView;
 
 import java.util.ArrayList;
+
+import static com.example.alumna.adapter.TopicListAdapter.ViewHolder.BackgroundWallViewHolder.BG_PICKER;
 
 public class MainActivity extends AppCompatActivity implements MainViewImpl {
 
@@ -253,4 +259,15 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
         return this;
     }
 
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
+            if (data != null && requestCode == BG_PICKER) {
+                ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
+                presenter.uploadBackground(MyApplication.getcurUser().getUid(),images);
+           } else {
+                Toast.makeText(this, "没有数据", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 }
