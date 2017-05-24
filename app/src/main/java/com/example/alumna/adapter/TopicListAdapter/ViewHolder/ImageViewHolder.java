@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * Created by Leebobo on 2017/5/3.
  */
 
-public class ImageViewHolder extends TopicListViewHolder {
+public class ImageViewHolder extends BaseViewHolder {
     public ImageShower image_shower;
     public ImageViewHolder(View itemView) {
         super(itemView, TYPE_IMAGE);

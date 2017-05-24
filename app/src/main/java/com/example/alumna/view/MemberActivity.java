@@ -97,13 +97,7 @@ public class MemberActivity extends Activity implements OnClickListener, MemberV
         }else btnGender.setVisibility(View.GONE);
 
         //grade
-        switch (user.getGrade()){
-            case "1":btnGrade.setText("大一");break;
-            case "2":btnGrade.setText("大二");break;
-            case "3":btnGrade.setText("大三");break;
-            case "4":btnGrade.setText("大四");break;
-            default:btnGrade.setVisibility(View.GONE);
-        }
+        btnGrade.setText(user.getGrade());
     }
 
     @Override

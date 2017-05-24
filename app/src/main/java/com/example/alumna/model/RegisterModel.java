@@ -52,7 +52,7 @@ public class RegisterModel implements RegisterModelImpl{
                     UserBean user = gson.fromJson(userString,UserBean.class);
                     mListener.onRegisterSuccess(user);
                 }
-                mListener.onRegisterFailure(status);
+                else mListener.onRegisterFailure(status);
             }
 
             @Override

@@ -88,8 +88,8 @@ public class MyApplication extends Application{
     public static void setCurUser(UserBean user){
         curUser=user;
         //保存到本地
-        UserInforSP save=new UserInforSP(context);
-        save.saveCurUserData(user);
+//        UserInforSP save=new UserInforSP(context);
+//        save.saveCurUserData(user);
     }
 
     public static Resources getMyResource() {

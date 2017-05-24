@@ -31,7 +31,7 @@ import static com.example.alumna.utils.ParseUtil.String2Time;
  * Created by Leebobo on 2017/5/3.
  */
 
-public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
+public abstract class BaseViewHolder extends RecyclerView.ViewHolder {
 
     public final static int TYPE_TEXT = 1;
     public final static int TYPE_IMAGE = 2;
@@ -59,7 +59,7 @@ public abstract class TopicListViewHolder extends RecyclerView.ViewHolder {
     //评论窗口
     public EditTextPopupWindow editTextPopupWindow;
 
-    public TopicListViewHolder(View itemView,int type) {
+    public BaseViewHolder(View itemView, int type) {
         super(itemView);
         view=itemView;
         this.viewType=type;

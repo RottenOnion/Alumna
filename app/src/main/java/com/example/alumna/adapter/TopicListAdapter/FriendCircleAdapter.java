@@ -20,7 +20,7 @@ import com.example.alumna.R;
 import com.example.alumna.adapter.TopicListAdapter.ViewHolder.BackgroundWallViewHolder;
 import com.example.alumna.adapter.TopicListAdapter.ViewHolder.ImageViewHolder;
 import com.example.alumna.adapter.TopicListAdapter.ViewHolder.TextViewHolder;
-import com.example.alumna.adapter.TopicListAdapter.ViewHolder.TopicListViewHolder;
+import com.example.alumna.adapter.TopicListAdapter.ViewHolder.BaseViewHolder;
 import com.example.alumna.bean.TopicBean;
 import com.example.alumna.bean.UserBean;
 
@@ -52,9 +52,9 @@ public class FriendCircleAdapter extends BaseRecycleViewAdapter {
         int itemType = 0;
         TopicBean topic = list.get(position-1);
         if (TopicBean.TYPE_TEXT.equals(topic.getType())) {
-            itemType = TopicListViewHolder.TYPE_TEXT;
+            itemType = BaseViewHolder.TYPE_TEXT;
         } else if (TopicBean.TYPE_IMAGE.equals(topic.getType())) {
-            itemType = TopicListViewHolder.TYPE_IMAGE;
+            itemType = BaseViewHolder.TYPE_IMAGE;
         }
         return itemType;
     }
@@ -69,10 +69,10 @@ public class FriendCircleAdapter extends BaseRecycleViewAdapter {
             holder=new BackgroundWallViewHolder(view);
         }else {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_topic_item,parent, false);
-            if (viewType== TopicListViewHolder.TYPE_TEXT) {
+            if (viewType== BaseViewHolder.TYPE_TEXT) {
                 //文本消息
                 holder= new TextViewHolder(view);
-            }else if (viewType== TopicListViewHolder.TYPE_IMAGE){
+            }else if (viewType== BaseViewHolder.TYPE_IMAGE){
                 //图片消息
                 holder=new ImageViewHolder(view);
             }
@@ -95,14 +95,14 @@ public class FriendCircleAdapter extends BaseRecycleViewAdapter {
             return;
         }
 
-        final TopicListViewHolder holder = (TopicListViewHolder) viewHolder;
+        final BaseViewHolder holder = (BaseViewHolder) viewHolder;
         //注意减去Background的位置
         holder.setData(list.get(position-1));
         //popupwindow
         holder.initPopupWindow(list.get(position-1).getTid());
 
         switch (holder.viewType){
-            case TopicListViewHolder.TYPE_IMAGE://图片
+            case BaseViewHolder.TYPE_IMAGE://图片
                 ((ImageViewHolder)holder).show(list.get(position-1));
                 break;
             default:

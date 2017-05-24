@@ -24,10 +24,10 @@ import okhttp3.Call;
 
 public class ViewHolderPresenter implements ViewHolderPresenterImpl{
 
-    private TopicListViewHolder vhView;
+    private BaseViewHolder vhView;
     private ViewHolderModel vhModel;
 
-    ViewHolderPresenter(TopicListViewHolder view){
+    ViewHolderPresenter(BaseViewHolder view){
         vhView=view;
         vhModel=new ViewHolderModel();
     }

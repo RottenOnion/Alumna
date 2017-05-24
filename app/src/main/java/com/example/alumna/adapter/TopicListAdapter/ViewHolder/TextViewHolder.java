@@ -7,7 +7,7 @@ import android.view.ViewStub;
  * Created by Leebobo on 2017/5/3.
  */
 
-public class TextViewHolder extends TopicListViewHolder {
+public class TextViewHolder extends BaseViewHolder {
     public TextViewHolder(View itemView) {
         super(itemView, TYPE_TEXT);
     }
