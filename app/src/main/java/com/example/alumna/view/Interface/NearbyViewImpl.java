@@ -3,7 +3,7 @@ package com.example.alumna.view.Interface;
 
 import com.example.alumna.bean.UserBean;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/4/25.
@@ -11,6 +11,6 @@ import java.util.ArrayList;
 
 public interface NearbyViewImpl {
 
-    void showNearby(ArrayList<UserBean> list);
+    void showNearby(List<UserBean> list);
 
 }
