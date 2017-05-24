@@ -18,9 +18,9 @@ public interface PublishViewImpl {
 
     List<ImageItem> getSelectImg();
 
-    void showprogressbar(String message);
+    void showProgressbar(String string);
 
-    void hideprogressbar();
+    void hideProgressbar();
 
     void FinishAcitvity();
 }

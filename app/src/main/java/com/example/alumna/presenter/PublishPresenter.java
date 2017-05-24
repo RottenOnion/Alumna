@@ -1,27 +1,24 @@
 package com.example.alumna.presenter;
 
-import android.util.Log;
-
+import com.example.alumna.MyApplication;
 import com.example.alumna.model.Interface.PublishModelImpl;
 import com.example.alumna.model.PublishModel;
 import com.example.alumna.presenter.Interface.PublishPresenterImpl;
-import com.example.alumna.utils.Http.HttpRequestCallback;
+import com.example.alumna.presenter.listener.OnPublishListener;
 import com.example.alumna.utils.LocationUtil;
 import com.example.alumna.view.Interface.PublishViewImpl;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.lzy.imagepicker.bean.ImageItem;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
-
-import okhttp3.Call;
 
 
 /**
  * Created by Administrator on 2017/4/25.
  */
 
-public class PublishPresenter implements PublishPresenterImpl {
+public class PublishPresenter implements PublishPresenterImpl,OnPublishListener {
     private PublishViewImpl pView;
     private PublishModelImpl pModel;
     private final static int TYPE_TEXT=1;
@@ -29,50 +26,24 @@ public class PublishPresenter implements PublishPresenterImpl {
 
     public PublishPresenter(PublishViewImpl view) {
         pView = view;
-        pModel = new PublishModel();
+        pModel = new PublishModel(this);
 
     }
 
-    @Override
-    public void publishImageType(final String imfor,final String location) {
+    public void UploadImage() {
+        pView.showProgressbar("图片上传中...");
         //先发图片，获取url后再发动态
         List<ImageItem>imgs=pView.getSelectImg();
-        pModel.uploadImage(imgs, new HttpRequestCallback<String>() {
-            @Override
-            public void onStart() {
-                Log.i(this.getClass().getName(),"图片正上传..");
-                pView.showprogressbar("图片正上传..");
-            }
-
-            @Override
-            public void onFinish() {
-                Log.i(this.getClass().getName(),"图片已上传");
-
-            }
-
-            @Override
-            public void onResponse(String result) {
-                JsonObject jsonObject=new JsonParser().parse(result).getAsJsonObject();
-                String imageurl=jsonObject.get("url").getAsString();
-                Log.i("image",imageurl);
-                sendTopic(imfor,location,TYPE_IMAGE,imageurl);
-            }
-
-            @Override
-            public void onFailure(Call call) {
-                Log.i(this.getClass().getName(),"图片上传失败..");
-            }
-        });
+        pModel.uploadImage(imgs);
     }
+
 
     @Override
     public void publish(int type) {
-        final String imfor = pView.getEditViewText();
-        final String location = pView.getLocation();
         if (type == TYPE_IMAGE) {
-            publishImageType(imfor, location);
+            UploadImage();
         } else if (type == TYPE_TEXT) {
-            sendTopic(imfor, location, TYPE_TEXT, "");
+            sendTopic();
         }
     }
 
@@ -101,31 +72,47 @@ public class PublishPresenter implements PublishPresenterImpl {
         });
     }
 
-    private void sendTopic(String imfor, String location, int type, String imageUrl){
-        pModel.PublishTopic(imfor, location, type, imageUrl, new HttpRequestCallback<String>() {
-            @Override
-            public void onStart() {
-                Log.i(this.getClass().getName(),"topic正上传..");
-                pView.showprogressbar("发送中..");
-            }
+    private void sendTopic() {
+        HashMap<String,Object> params=new HashMap<>();
+        params.put("uid", MyApplication.getcurUser().getUid());
+        params.put("location",pView.getLocation());
+        params.put("type",""+TYPE_TEXT);
+        params.put("image","");
+        params.put("imfor",pView.getEditViewText().toString());
+        params.put("time",""+new Date(System.currentTimeMillis()).getTime());
+        pModel.PublishTopic(params);
+    }
 
-            @Override
-            public void onFinish() {
-                Log.i(this.getClass().getName(),"topic已经上传..");
-                pView.hideprogressbar();
-                pView.FinishAcitvity();
-            }
+    @Override
+    public void OnImageSuccess(String url) {
+        HashMap<String,Object> params=new HashMap<>();
+        params.put("image",url);
+        params.put("uid", MyApplication.getcurUser().getUid());
+        params.put("location",pView.getLocation());
+        params.put("type",""+ TYPE_IMAGE);
+        params.put("imfor",pView.getEditViewText().toString());
+        params.put("time",""+new Date(System.currentTimeMillis()).getTime());
+        pModel.PublishTopic(params);
+    }
 
-            @Override
-            public void onResponse(String s) {
-                Log.i("settopic",s);
-                onFinish();
-            }
+    @Override
+    public void OnPublishSuccess() {
+        pView.hideProgressbar();
+        pView.FinishAcitvity();
+    }
 
-            @Override
-            public void onFailure(Call call) {
+    @Override
+    public void OnError() {
 
-            }
-        });
+    }
+
+    @Override
+    public void OnFailure() {
+        pView.hideProgressbar();
+    }
+
+    @Override
+    public void OnPublishStart() {
+        pView.showProgressbar("动态发送中...");
     }
 }

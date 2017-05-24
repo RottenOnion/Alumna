@@ -17,5 +17,5 @@ public interface MainViewImpl {
 
     void hideProgressBar();
 
-    void showTopicList(ArrayList<TopicBean> list);
+    void showFriendCircle(ArrayList<TopicBean> list);
 }

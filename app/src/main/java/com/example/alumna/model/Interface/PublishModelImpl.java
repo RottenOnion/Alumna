@@ -4,6 +4,7 @@ import com.example.alumna.utils.Http.HttpUtil;
 import com.lzy.imagepicker.bean.ImageItem;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ import java.util.List;
 
 public interface PublishModelImpl {
 
-    void uploadImage(List<ImageItem> imgs, HttpRequestCallback<String> callback);
+    void uploadImage(List<ImageItem> imgs);
 
-    void PublishTopic(String imfor, String location, int type, String imagepath, HttpRequestCallback<String> callback);
+    void PublishTopic(HashMap<String,Object> params);
 }

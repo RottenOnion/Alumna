@@ -78,11 +78,7 @@ public class FriendCircleAdapter extends BaseRecycleViewAdapter {
             BackgroundWallViewHolder holder=(BackgroundWallViewHolder)viewHolder;
             holder.nameTv.setText(curUser.getUsername());
             Glide.with(context).load(curUser.getHead()).into(holder.headTv);
-
-            /**
-             * 背景墙
-             */
-
+            Glide.with(context).load(curUser.getBackground()).into(holder.backgroundIv);
             return;
         }
 

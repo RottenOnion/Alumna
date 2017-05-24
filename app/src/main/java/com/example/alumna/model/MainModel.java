@@ -30,7 +30,6 @@ import okhttp3.Call;
 public class MainModel implements MainModelImpl {
 
     OnMainListener mListener;
-    private ArrayList<UserBean> list = new ArrayList<>();
 
     public MainModel(OnMainListener mainListener){
         this.mListener=mainListener;

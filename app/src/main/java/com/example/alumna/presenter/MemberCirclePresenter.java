@@ -1,6 +1,7 @@
 package com.example.alumna.presenter;
 
 import com.example.alumna.bean.TopicBean;
+import com.example.alumna.bean.UserBean;
 import com.example.alumna.model.Interface.MemberCircleModelImpl;
 import com.example.alumna.model.MemberCircleModel;
 import com.example.alumna.presenter.Interface.MemberCirclePresenterImpl;
@@ -23,8 +24,8 @@ public class MemberCirclePresenter implements OnMemberCircleListener,MemberCircl
         model=new MemberCircleModel(this);
     }
     @Override
-    public void onLoadSuccess(ArrayList<TopicBean> list) {
-
+    public void onLoadCircleSuccess(ArrayList<TopicBean> list) {
+        view.showCircle(list);
     }
 
     @Override
@@ -35,5 +36,21 @@ public class MemberCirclePresenter implements OnMemberCircleListener,MemberCircl
     @Override
     public void onLoadFail() {
 
+    }
+
+    @Override
+    public void onLoadUserSuccess(UserBean user) {
+        view.showUser(user);
+    }
+
+
+    @Override
+    public void loadUser(int uid) {
+        model.getUser(uid);
+    }
+
+    @Override
+    public void loadUserCircle(int uid) {
+        model.getCircle(uid);
     }
 }

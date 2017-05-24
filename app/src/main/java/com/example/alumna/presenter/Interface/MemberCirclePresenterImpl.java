@@ -5,4 +5,6 @@ package com.example.alumna.presenter.Interface;
  */
 
 public interface MemberCirclePresenterImpl {
+    void loadUser(final int uid);
+    void loadUserCircle(final int uid);
 }

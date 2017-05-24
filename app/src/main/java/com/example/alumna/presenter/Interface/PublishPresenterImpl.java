@@ -7,7 +7,7 @@ package com.example.alumna.presenter.Interface;
 public interface PublishPresenterImpl {
 
     /*上传图片*/
-    void publishImageType(final String imfor,final String location);
+    void UploadImage();
 
     /*发布动态*/
     void publish(int type);

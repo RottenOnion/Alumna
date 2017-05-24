@@ -37,7 +37,7 @@ public class MainPresenter implements MainPresenterImpl ,OnMainListener {
         //避免数据未装载就返回票圈，这里给延时3秒
         new Handler().postDelayed(new Runnable(){
             public void run() {
-                mView.showTopicList(list);
+                mView.showFriendCircle(list);
                 mView.hideProgressBar();
             }
         }, 3000);

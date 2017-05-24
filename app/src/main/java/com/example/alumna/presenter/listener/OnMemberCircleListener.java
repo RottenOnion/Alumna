@@ -1,6 +1,7 @@
 package com.example.alumna.presenter.listener;
 
 import com.example.alumna.bean.TopicBean;
+import com.example.alumna.bean.UserBean;
 
 import java.util.ArrayList;
 
@@ -9,7 +10,8 @@ import java.util.ArrayList;
  */
 
 public interface OnMemberCircleListener {
-    void onLoadSuccess(ArrayList<TopicBean> list);
+    void onLoadCircleSuccess(ArrayList<TopicBean> list);
     void onError();
     void onLoadFail();
+    void onLoadUserSuccess(UserBean user);
 }

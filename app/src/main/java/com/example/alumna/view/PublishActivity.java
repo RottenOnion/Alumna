@@ -115,13 +115,14 @@ public class PublishActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     @Override
-    public void showprogressbar(String message) {
+    public void showProgressbar(String message) {
+        mLoadingDialog.setMessage(message);
         mLoadingDialog.show();
         publishBtn.setClickable(false);
     }
 
     @Override
-    public void hideprogressbar() {
+    public void hideProgressbar() {
         mLoadingDialog.dismiss();
         publishBtn.setClickable(true);
     }

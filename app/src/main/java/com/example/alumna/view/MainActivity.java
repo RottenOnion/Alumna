@@ -244,7 +244,7 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
     }
 
     @Override
-    public void showTopicList(ArrayList<TopicBean> list) {
+    public void showFriendCircle(ArrayList<TopicBean> list) {
         adapter=new FriendCircleAdapter(this,list);
         topiclist.setAdapter(adapter);
     }
@@ -252,7 +252,5 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
     public Context getContext() {
         return this;
     }
-
-
 
 }
