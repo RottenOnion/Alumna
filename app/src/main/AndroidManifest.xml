@@ -43,28 +43,29 @@
         </activity>
         <activity
             android:name=".view.InformModifyActivity"
-            android:label="@string/no_string"></activity>
+            android:label="@string/no_string" />
         <activity
             android:name=".view.PublishActivity"
-            android:label="@string/no_string"></activity>
+            android:label="@string/no_string" />
         <activity
             android:name=".view.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".view.SelectPhotoActivity"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".view.SelectPhotoActivity" />
         <activity
             android:name="com.lzy.imagepicker.ui.ImagePreviewDelActivity"
             android:theme="@style/ImagePickerThemeFullScreen" />
         <activity
             android:name=".view.MemberActivity"
-            android:label="@string/no_string"></activity>
+            android:label="@string/no_string" />
         <activity
             android:name=".view.NearbyActivity"
-            android:label=""></activity>
+            android:label="" />
         <activity
             android:name=".view.RegisterActivity"
             android:label="@string/no_string"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".view.MemberCircleActivity"></activity>
     </application>
 
 </manifest>

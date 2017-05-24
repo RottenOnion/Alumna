@@ -79,8 +79,8 @@ public class MyApplication extends Application{
     public static UserBean getcurUser(){
         if (curUser==null){
             //读取本地用户信息，如果没有，跳去登录
-            UserInforSP load=new UserInforSP(context);
-            curUser=load.loadCurUserData();
+            //UserInforSP load=new UserInforSP(context);
+            //curUser=load.loadCurUserData();
         }
         return curUser;
     }
