@@ -52,13 +52,13 @@ public class InformModifyPresenter implements InformModifyPresenterImpl,OnModify
     @Override
     public void OnUploadImageSuccess(String url) {
         uView.ImageUploadSuccess(url);
-        uView.showToast("头像上传成功");
+        uView.showImageToast();
     }
 
     @Override
     public void OnModifyInformSuccess(UserBean user) {
         MyApplication.setCurUser(user);
-        uView.showToast("个人信息修改成功");
+        uView.showInformToast();
     }
 
     @Override

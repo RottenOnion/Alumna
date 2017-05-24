@@ -1,5 +1,6 @@
 package com.example.alumna.view;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +10,6 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.alumna.R;
@@ -19,7 +19,6 @@ import com.example.alumna.widgets.ImageShower;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +43,7 @@ public class PublishActivity extends AppCompatActivity implements View.OnClickLi
     private Button backBtn;
     private ImageShower imageListView;
 
-    private ProgressBar progressbar;
+    private ProgressDialog mLoadingDialog;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +55,11 @@ public class PublishActivity extends AppCompatActivity implements View.OnClickLi
         toolbar=(Toolbar)findViewById(R.id.toolbar);
         backBtn=(Button)findViewById(R.id.back_Btn) ;
         setSupportActionBar(toolbar);
-        progressbar=(ProgressBar)findViewById(R.id.progress_bar);
+        mLoadingDialog = new ProgressDialog(this);
+        mLoadingDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mLoadingDialog.setMessage("发送中...");
+        mLoadingDialog.setCancelable(false);
+
         imageListView=(ImageShower)findViewById(R.id.img_list_view);
 
 
@@ -113,13 +116,13 @@ public class PublishActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void showprogressbar(String message) {
-        progressbar.setVisibility(View.VISIBLE);
+        mLoadingDialog.show();
         publishBtn.setClickable(false);
     }
 
     @Override
     public void hideprogressbar() {
-        progressbar.setVisibility(View.GONE);
+        mLoadingDialog.dismiss();
         publishBtn.setClickable(true);
     }
 

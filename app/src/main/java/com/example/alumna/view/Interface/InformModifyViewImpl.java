@@ -15,7 +15,9 @@ public interface InformModifyViewImpl {
     /*读取所有editview的信息*/
     HashMap<String,Object> modifyInform();
 
-    void showToast(String str);
+    void showImageToast();
+
+    void showInformToast();
 
     //为imageview设置tag
     void ImageUploadSuccess(String url);

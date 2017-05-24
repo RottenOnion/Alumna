@@ -80,11 +80,5 @@
             android:text="所在位置"
             android:textColor="@color/black" />
     </LinearLayout>
-    <android.support.v4.widget.ContentLoadingProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone"
-        />
+
 </LinearLayout>

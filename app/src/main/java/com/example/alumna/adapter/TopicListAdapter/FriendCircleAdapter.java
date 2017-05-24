@@ -2,19 +2,13 @@ package com.example.alumna.adapter.TopicListAdapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
 import com.example.alumna.MyApplication;
 import com.example.alumna.R;
 import com.example.alumna.adapter.TopicListAdapter.ViewHolder.BackgroundWallViewHolder;
@@ -23,8 +17,6 @@ import com.example.alumna.adapter.TopicListAdapter.ViewHolder.TextViewHolder;
 import com.example.alumna.adapter.TopicListAdapter.ViewHolder.TopicListViewHolder;
 import com.example.alumna.bean.TopicBean;
 import com.example.alumna.bean.UserBean;
-
-import com.example.alumna.utils.Image.ImageUtil;
 
 import java.util.ArrayList;
 
@@ -66,7 +58,7 @@ public class FriendCircleAdapter extends BaseRecycleViewAdapter {
         if (viewType==TYPE_BGWALL){
             //背景墙
             view=LayoutInflater.from(parent.getContext()).inflate(R.layout.background_wall_item,parent, false);
-            holder=new BackgroundWallViewHolder(view);
+            holder=new BackgroundWallViewHolder(view,context);
         }else {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_topic_item,parent, false);
             if (viewType== TopicListViewHolder.TYPE_TEXT) {
@@ -86,12 +78,11 @@ public class FriendCircleAdapter extends BaseRecycleViewAdapter {
             BackgroundWallViewHolder holder=(BackgroundWallViewHolder)viewHolder;
             holder.nameTv.setText(curUser.getUsername());
             Glide.with(context).load(curUser.getHead()).into(holder.headTv);
-//            if (backgroundDra == null && headBitmap == null) {
-//                initBackground(holder);
-//            } else {
-//                holder.backgroundIv.setImageDrawable(backgroundDra);
-//                holder.headTv.setImageBitmap(headBitmap);
-//            }
+
+            /**
+             * 背景墙
+             */
+
             return;
         }
 
@@ -115,32 +106,7 @@ public class FriendCircleAdapter extends BaseRecycleViewAdapter {
         return list.size()+1;
     }
 
-    private void initBackground(final BackgroundWallViewHolder holder) {
-        Glide.with(MyApplication.getContext()).load(curUser.getHead()).asBitmap().into(new SimpleTarget<Bitmap>() {
-            @Override
-            public void onResourceReady(Bitmap inputBitmap, GlideAnimation<? super Bitmap> glideAnimation) {
 
-                Log.d("ccl",curUser.getHead());
-
-                headBitmap = inputBitmap;
-                /*裁剪图片，适应侧滑菜单大小*/
-//                Bitmap inputBitmap = null;
-//                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-//                    inputBitmap = ((BitmapDrawable)context.getDrawable(R.drawable.test_touxiang)).getBitmap();
-//                }
-                int width = inputBitmap.getWidth(),height = inputBitmap.getHeight();
-                Bitmap cropBitmap = Bitmap.createBitmap(inputBitmap,0,0,width,height);
-                /*模糊图片*/
-                Bitmap blurBitmap = ImageUtil.blurBitmap(context, cropBitmap);
-                Drawable outputDrawable = new BitmapDrawable(context.getResources(),blurBitmap);
-                /*加入灰色遮罩层，避免图片过亮影响其他控件*/
-                outputDrawable.setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
-
-                holder.headTv.setImageBitmap(headBitmap);
-                holder.backgroundIv.setImageDrawable(backgroundDra);
-            }
-        });
-    }
 
 
 }
