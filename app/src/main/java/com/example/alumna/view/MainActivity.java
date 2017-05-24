@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
     private RelativeLayout rightLayout;
 
     //左侧菜单头像
+    private LinearLayout headView;
     private ImageView leftHeadView;
 
     private TextView nametv;
@@ -101,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
         nametv=(TextView)findViewById(R.id.main_left_self_name) ;
         loadingView = (LoadingView) findViewById(R.id.loading_view);
 
+        headView=(LinearLayout)findViewById(R.id.head_layout);
         bg_backgroundIv=(ImageView)findViewById(R.id.backgroundIv);
         bg_headTv=(ImageView)findViewById(R.id.headIv) ;
         bg_nameTv=(TextView)findViewById(R.id.nameTv);
@@ -139,6 +141,18 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
                 i.putExtra("flag",TYPE_TEXT);
                 MainActivity.this.startActivity(i);
                 return false;
+            }
+        });
+
+        /**
+         * leftHeadView点击头像
+         */
+        headView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(MainActivity.this,MemberActivity.class);
+                i.putExtra("uid",""+MyApplication.getcurUser().getUid());
+                MainActivity.this.startActivity(i);
             }
         });
 
