@@ -208,7 +208,7 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
             public void onItemClick(View v, int position) {
                 switch (position){
                     case 0:
-                        Intent i=new Intent(MainActivity.this,MemberActivity.class);
+                        Intent i=new Intent(MainActivity.this,MemberCircleActivity.class);
                         i.putExtra("uid",""+MyApplication.getcurUser().getUid());
                         MainActivity.this.startActivity(i);
                         break;
