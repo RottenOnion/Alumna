@@ -1,5 +1,6 @@
 package com.example.alumna.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.alumna.R;
 import com.example.alumna.bean.UserBean;
 
@@ -20,10 +22,19 @@ import java.util.List;
 public class NearbyAdapter extends RecyclerView.Adapter<NearbyAdapter.NearbyHolder> {
 
     private List<UserBean> mDatas;
+    private Context mContext;
 
-    public NearbyAdapter(List<UserBean> mDatas) {
+
+    public NearbyAdapter(List<UserBean> mDatas, Context mContext) {
         this.mDatas = mDatas;
+        this.mContext = mContext;
     }
+
+    public void setDatas(List<UserBean> mDatas) {
+        this.mDatas = mDatas;
+
+    }
+
 
     @Override
     public NearbyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -35,16 +46,20 @@ public class NearbyAdapter extends RecyclerView.Adapter<NearbyAdapter.NearbyHold
     public void onBindViewHolder(NearbyHolder holder, int position) {
         UserBean user = mDatas.get(position);
 
-        /**
-         * 测试版代码，同意绑定数据
-         */
+        Glide.with(mContext).load(user.getHead())
+                .into(holder.headView);
         holder.headView.setImageResource(R.drawable.test_touxiang);
-        holder.textName.setText("张敬轩");
-        holder.btnGender.setBackgroundResource(R.drawable.button_male_shape);
-        holder.btnGender.setText("男");
+        holder.textName.setText(user.getUsername());
+        if (user.getSex() == 1) {
+            holder.btnGender.setBackgroundResource(R.drawable.button_male_shape);
+            holder.btnGender.setText("男");
+        } else if (user.getSex() == 2) {
+            holder.btnGender.setBackgroundResource(R.drawable.button_female_shape);
+            holder.btnGender.setText("女");
+        }
         holder.btnGrade.setBackgroundResource(R.drawable.button_grade_shape);
-        holder.btnGrade.setText("大三");
-        holder.textSchool.setText("华南理工大学");
+        holder.btnGrade.setText(user.getGrade());
+        holder.textSchool.setText(user.getSchool());
 
 
     }

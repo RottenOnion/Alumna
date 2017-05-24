@@ -7,7 +7,7 @@ package com.example.alumna.presenter.Interface;
 public interface NearbyPresenterImpl {
 
     //加载附近的人
-    void loadNearby();
+    void loadNearby(int uid,String location);
 
     //屏蔽
     void Block();
