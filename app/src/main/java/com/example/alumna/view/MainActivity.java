@@ -1,5 +1,6 @@
 package com.example.alumna.view;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -24,6 +25,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.example.alumna.MyApplication;
 import com.example.alumna.R;
 import com.example.alumna.adapter.LeftDrawerAdapter;
@@ -34,6 +37,7 @@ import com.example.alumna.bean.TopicBean;
 import com.example.alumna.presenter.MainPresenter;
 import com.example.alumna.utils.Image.ImageUtil;
 import com.example.alumna.view.Interface.MainViewImpl;
+import com.mingle.widget.LoadingView;
 
 import java.util.ArrayList;
 
@@ -63,6 +67,9 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
 
     private TextView nametv;
 
+    //加载view
+    private LoadingView loadingView;
+
     private final static boolean TYPE_TEXT=false;
     private static final boolean TYPE_IMAGE=true;
 
@@ -79,6 +86,9 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
         layoutCircle = (LinearLayout) findViewById(R.id.friend_circle);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         nametv=(TextView)findViewById(R.id.main_left_self_name) ;
+        loadingView = (LoadingView) findViewById(R.id.loading_view);
+
+        loadingView.setVisibility(View.VISIBLE);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
@@ -132,20 +142,31 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
          根据初始化左右侧滑菜单背景，菜单背景为头像的高斯模糊
          */
 
-        Glide.with(this).load(MyApplication.getcurUser().getHead()).into(leftHeadView);
+
         nametv.setText(MyApplication.getcurUser().getUsername());
 
-        /*裁剪图片，适应侧滑菜单大小*/
-        Bitmap inputBitmap = ((BitmapDrawable)leftHeadView.getDrawable()).getBitmap();
-        int width = inputBitmap.getWidth(),height = inputBitmap.getHeight();
-        Bitmap cropBitmap = Bitmap.createBitmap(inputBitmap,width/4,height/6,width/4*2,height/4*3);
-        /*模糊图片*/
-        Bitmap blurBitmap = ImageUtil.blurBitmap(this, cropBitmap);
-        Drawable outputDrawable = new BitmapDrawable(getResources(),blurBitmap);
-        /*加入灰色遮罩层，避免图片过亮影响其他控件*/
-        outputDrawable.setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
-        leftLayout.setBackground(outputDrawable);
-        rightLayout.setBackground(outputDrawable.getConstantState().newDrawable());
+        Glide.with(this).load(MyApplication.getcurUser().getHead())
+                .asBitmap()
+                .into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(Bitmap bitmap, GlideAnimation<? super Bitmap> glideAnimation) {
+                        leftHeadView.setImageBitmap(bitmap);
+                        /*裁剪图片，适应侧滑菜单大小*/
+                        Bitmap inputBitmap = ImageUtil.RGB565toARGB888(bitmap);
+                        int width = inputBitmap.getWidth(),height = inputBitmap.getHeight();
+                        Bitmap cropBitmap = Bitmap.createBitmap(inputBitmap,width/4,height/6,width/4*2,height/6*4);
+                        /*模糊图片*/
+                        Bitmap blurBitmap = ImageUtil.blurBitmap(getContext(), cropBitmap,3.0f);
+                        Drawable outputDrawable = new BitmapDrawable(getResources(),blurBitmap);
+                        /*加入灰色遮罩层，避免图片过亮影响其他控件*/
+                        outputDrawable.setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
+                        leftLayout.setBackground(outputDrawable);
+                        rightLayout.setBackground(outputDrawable.getConstantState().newDrawable());
+
+                    }
+                });
+
+
 
         /**
          * 初始化左侧滑菜单Item
@@ -177,7 +198,7 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
 
 
         /**
-        初始化朋友圈
+         初始化朋友圈
          */
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(OrientationHelper.VERTICAL);
@@ -213,11 +234,12 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
 
     @Override
     public void showProgressBar() {
-        refreshLayout.setRefreshing(true);
+
     }
 
     @Override
     public void hideProgressBar() {
+        loadingView.setVisibility(View.GONE);
         refreshLayout.setRefreshing(false);
     }
 
@@ -226,5 +248,11 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
         adapter=new FriendCircleAdapter(this,list);
         topiclist.setAdapter(adapter);
     }
+
+    public Context getContext() {
+        return this;
+    }
+
+
 
 }

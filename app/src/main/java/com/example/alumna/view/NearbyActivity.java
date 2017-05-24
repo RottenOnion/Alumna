@@ -44,14 +44,11 @@ public class NearbyActivity extends Activity implements NearbyViewImpl {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         loadingView = (LoadingView) findViewById(R.id.loading_view);
         loadingView.setVisibility(View.VISIBLE);
+        loadingView.setLoadingText("搜寻附近的校友中...");
 
-        initView();
 
         //load
         presenter.loadNearby(6,"123");
-
-
-
 
         //set listener
 
@@ -63,13 +60,6 @@ public class NearbyActivity extends Activity implements NearbyViewImpl {
 
     }
 
-    private void initView() {
-
-        // TODO: 2017/5/15
-
-
-
-    }
 
 
 

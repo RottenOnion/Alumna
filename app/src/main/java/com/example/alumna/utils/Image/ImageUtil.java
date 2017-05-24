@@ -34,8 +34,9 @@ public class ImageUtil {
      * @param 最大模糊度(在0.0到25.0之间)
      */
     private static final float BITMAP_SCALE = 0.125f;
-    private static final float BLUR_RADIUS = 0.5f;
-    public static Bitmap blurBitmap(Context context, Bitmap image) {
+    private static final float BLUR_RADIUS = 3f;
+    public static Bitmap blurBitmap(Context context, Bitmap bitmap,float blurRadius) {
+        Bitmap image = ImageUtil.RGB565toARGB888(bitmap);
         // 计算图片缩小后的长宽
         int width = Math.round(image.getWidth() * BITMAP_SCALE);
         int height = Math.round(image.getHeight() * BITMAP_SCALE);
@@ -52,7 +53,7 @@ public class ImageUtil {
         Allocation tmpIn = Allocation.createFromBitmap(rs, inputBitmap);
         Allocation tmpOut = Allocation.createFromBitmap(rs, outputBitmap);
         // 设置渲染的模糊程度, 25f是最大模糊度
-        blurScript.setRadius(BLUR_RADIUS);
+        blurScript.setRadius(blurRadius);
         // 设置blurScript对象的输入内存
         blurScript.setInput(tmpIn);
         // 将输出数据保存到输出内存中
@@ -60,6 +61,27 @@ public class ImageUtil {
         // 将数据填充到Allocation中
         tmpOut.copyTo(outputBitmap);
         return outputBitmap;
+    }
+
+
+    /**
+     * bitmap  转换 ARGB_8888
+     * @param img 原始bitmap
+     * @return  转换后bitmap
+     */
+    public static Bitmap RGB565toARGB888(Bitmap img) {
+        int numPixels = img.getWidth()* img.getHeight();
+        int[] pixels = new int[numPixels];
+
+        //Get JPEG pixels.  Each int is the color values for one pixel.
+        img.getPixels(pixels, 0, img.getWidth(), 0, 0, img.getWidth(), img.getHeight());
+
+        //Create a Bitmap of the appropriate format.
+        Bitmap result = Bitmap.createBitmap(img.getWidth(), img.getHeight(), Bitmap.Config.ARGB_8888);
+
+        //Set RGB pixels.
+        result.setPixels(pixels, 0, result.getWidth(), 0, 0, result.getWidth(), result.getHeight());
+        return result;
     }
 
 }

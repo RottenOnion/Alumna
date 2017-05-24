@@ -1,5 +1,6 @@
 package com.example.alumna.view;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -10,14 +11,12 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.alumna.MyApplication;
 import com.example.alumna.R;
 import com.example.alumna.presenter.LoginPresenter;
-import com.example.alumna.presenter.RegisterPresenter;
 import com.example.alumna.view.Interface.LoginViewImpl;
 
 import java.util.HashMap;
@@ -29,11 +28,11 @@ public class LoginActivity extends AppCompatActivity implements LoginViewImpl ,O
 
     private AutoCompleteTextView phoneTv;
     private EditText passwordEv;
-    private ProgressBar progressView;
     private View LoginView;
     private Button signBtn;
     private TextView forgetpassword;
     private Button registerBtn;
+    private ProgressDialog mLoadingDialog;
 
     //presenter
     LoginPresenter presenter;
@@ -47,9 +46,14 @@ public class LoginActivity extends AppCompatActivity implements LoginViewImpl ,O
         phoneTv = (AutoCompleteTextView) findViewById(R.id.phoneTv);
         passwordEv = (EditText) findViewById(R.id.passwordEt);
         signBtn = (Button) findViewById(R.id.loginBtn);
-        progressView = (ProgressBar) findViewById(R.id.login_progress);
+
         forgetpassword=(TextView)findViewById(R.id.foggetpassword) ;
         registerBtn=(Button) findViewById(R.id.registerBtn);
+
+        mLoadingDialog = new ProgressDialog(this);
+        mLoadingDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mLoadingDialog.setMessage("正在登陆...");
+        mLoadingDialog.setCancelable(false);
 
         forgetpassword.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 
@@ -71,13 +75,13 @@ public class LoginActivity extends AppCompatActivity implements LoginViewImpl ,O
 
     @Override
     public void showProgressBar() {
-        progressView.setVisibility(View.VISIBLE);
+        mLoadingDialog.show();
         LoginView.setVisibility(View.INVISIBLE);
     }
 
     @Override
     public void hideProgressBar() {
-        progressView.setVisibility(View.GONE);
+        mLoadingDialog.dismiss();
         LoginView.setVisibility(View.VISIBLE);
     }
 

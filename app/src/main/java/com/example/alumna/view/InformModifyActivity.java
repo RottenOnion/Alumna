@@ -1,14 +1,15 @@
 package com.example.alumna.view;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -46,6 +47,7 @@ public class InformModifyActivity extends AppCompatActivity implements View.OnCl
     private Toolbar toolbar;
     private Button backBtn;
     private AlertDialog genderDialog,gradeDialog,nameDialog,schoolDialog,locationDialog,signatureDialog,wechatDialog;
+    private ProgressDialog mLoadingDialog;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +63,10 @@ public class InformModifyActivity extends AppCompatActivity implements View.OnCl
         location_text=(TextView)findViewById(R.id.location_text);
         signature_text=(TextView)findViewById(R.id.signature_text);
         wechat_text = (TextView)findViewById(R.id.wechat_text);
+
+        mLoadingDialog = new ProgressDialog(this);
+        mLoadingDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mLoadingDialog.setMessage("修改中...");
 
         toolbar=(Toolbar)findViewById(R.id.toolbar);
         backBtn=(Button) findViewById(R.id.back_Btn) ;
@@ -192,12 +198,6 @@ public class InformModifyActivity extends AppCompatActivity implements View.OnCl
     protected void onDestroy() {
         super.onDestroy();
         presenter.UpdateImfor(MyApplication.getcurUser().getUid());
-        Log.i("tag","正在上传");
-        new Handler().postDelayed(new Runnable(){
-            public void run() {
-
-            }
-        }, 3000);
     }
 
     private void initImagePicker() {
@@ -246,6 +246,19 @@ public class InformModifyActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
+    /**
+     * 监听系统按钮
+     * @param keyCode   按钮（BACK,HOME）
+     */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            mLoadingDialog.show();
+            presenter.UpdateImfor(MyApplication.getcurUser().getUid());
+        }
+        return false;
+    }
+
     @Override
     public void showInform(UserBean user) {
         Glide.with(this).load(user.getHead()).error(R.drawable.ic_default_head).into(head_view);
@@ -278,13 +291,21 @@ public class InformModifyActivity extends AppCompatActivity implements View.OnCl
     }
 
     @Override
-    public void showToast(String str) {
-        Toast.makeText(this,str,Toast.LENGTH_SHORT).show();
+    public void showImageToast() {
+        Toast.makeText(this,"头像上传成功",Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showInformToast() {
+        Toast.makeText(this,"个人信息修改成功",Toast.LENGTH_LONG).show();
+        mLoadingDialog.dismiss();
+        finish();
     }
 
     @Override
     public void ImageUploadSuccess(String url) {
         head_view.setTag(R.id.image_url,url);
+        mLoadingDialog.dismiss();
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -295,6 +316,7 @@ public class InformModifyActivity extends AppCompatActivity implements View.OnCl
                 Glide.with(this).
                         load(images.get(0).path).into(head_view);
                 presenter.UploadImage(images);
+                mLoadingDialog.show();
             } else {
                 Toast.makeText(this, "没有数据", Toast.LENGTH_SHORT).show();
             }
