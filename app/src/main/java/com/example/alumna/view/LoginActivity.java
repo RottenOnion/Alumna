@@ -1,9 +1,13 @@
 package com.example.alumna.view;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -60,6 +64,17 @@ public class LoginActivity extends AppCompatActivity implements LoginViewImpl ,O
         signBtn.setOnClickListener(this);
         forgetpassword.setOnClickListener(this);
         registerBtn.setOnClickListener(this);
+
+        //申请运行时权限
+        requestPermission();
+    }
+
+    private void requestPermission() {
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION
+            ,Manifest.permission.CAMERA},1);
+        }
     }
 
     @Override

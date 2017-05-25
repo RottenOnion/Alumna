@@ -48,8 +48,8 @@ public class NearbyActivity extends Activity implements NearbyViewImpl {
 
         presenter = new NearbyPresenter(this);
         //load
-        Log.d("cao","" + MyApplication.getcurUser().getUid());
-        Log.d("cao","" + MyApplication.getcurUser().getLocation());
+        Log.d("cao","id" + MyApplication.getcurUser().getUid());
+        Log.d("cao","location" + MyApplication.getcurUser().getLocation());
         presenter.loadNearby(MyApplication.getcurUser().getUid(),MyApplication.getcurUser().getLocation());
 
         //set listener
@@ -93,8 +93,5 @@ public class NearbyActivity extends Activity implements NearbyViewImpl {
             }
         });
     }
-
-
-
 
 }

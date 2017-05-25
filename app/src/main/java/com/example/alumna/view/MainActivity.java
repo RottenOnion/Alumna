@@ -21,7 +21,6 @@ import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -43,9 +42,7 @@ import com.example.alumna.bean.UserBean;
 import com.example.alumna.presenter.MainPresenter;
 import com.example.alumna.utils.Image.ImageUtil;
 import com.example.alumna.view.Interface.MainViewImpl;
-
 import com.example.alumna.widgets.RecycleViewDivider;
-
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
@@ -160,6 +157,7 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
          * 获取当前位置
          */
         presenter.loadLocation();
+        presenter.loadCurUser(MyApplication.getcurUser().getUid());
 
         /**
          * leftHeadView点击头像
@@ -197,10 +195,7 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
         /**
          * 填充用户个人信息
          */
-        nametv.setText(MyApplication.getcurUser().getUsername());
-        bg_nameTv.setText(MyApplication.getcurUser().getUsername());
-        Glide.with(this).load(MyApplication.getcurUser().getHead()).into(bg_headTv);
-        Glide.with(this).load(MyApplication.getcurUser().getBackground()).into(bg_backgroundIv);
+        //setUserInform(MyApplication.getcurUser());
 
         /**
          根据初始化左右侧滑菜单背景，菜单背景为头像的高斯模糊
@@ -328,6 +323,13 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
     }
 
 
+    @Override
+    public void setUserInform(UserBean user) {
+        nametv.setText(user.getUsername());
+        bg_nameTv.setText(user.getUsername());
+        Glide.with(this).load(user.getHead()).into(bg_headTv);
+        Glide.with(this).load(user.getBackground()).into(bg_backgroundIv);
+    }
 
     @Override
     public void showProgress() {

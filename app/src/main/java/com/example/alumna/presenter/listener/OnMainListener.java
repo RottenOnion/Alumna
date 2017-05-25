@@ -16,5 +16,6 @@ public interface OnMainListener {
     void TopicSuccess(ArrayList<TopicBean> list);
     void UploadSuccess(String url);
     void UploadSuccess();
+    void onUserSuccess(UserBean user);
     void onError();
 }

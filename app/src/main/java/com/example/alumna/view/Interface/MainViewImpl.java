@@ -13,6 +13,8 @@ import java.util.List;
 
 public interface MainViewImpl {
 
+    void setUserInform(UserBean user);
+
     void showProgress();
 
     void hideProgress();

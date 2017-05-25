@@ -21,6 +21,7 @@ public interface MainModelImpl {
 
     void getComment(int tid,MainModel.OnCommentResult listResult);
 
+    void getcurUser(final int uid);
 
     void getFriend(int uid);
 

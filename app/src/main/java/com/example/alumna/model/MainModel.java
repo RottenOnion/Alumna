@@ -187,6 +187,40 @@ public class MainModel implements MainModelImpl {
         });
     }
 
+    @Override
+    public void getcurUser(final int uid) {
+        Map<String,Object> map = new HashMap<>();
+        final String mUrl = DataUtils.BASEURL + DataUtils.MEMBER;
+
+        map.put("uid",uid);
+        HttpUtil.getInstance().PostRequest(mUrl, map, new HttpRequestCallback<String>() {
+            @Override
+            public void onStart() {
+                Log.d("ccl","onStart");
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+
+            @Override
+            public void onResponse(String result) {
+                JsonObject jsonObject = new JsonParser().parse(result).getAsJsonObject();
+                int status=jsonObject.get("status").getAsInt();
+                if (status==1){
+                    JsonObject userString = jsonObject.get("userall").getAsJsonObject();
+                    Gson gson = new Gson();
+                    UserBean userBean = gson.fromJson(userString,UserBean.class);
+                    mListener.onUserSuccess(userBean);
+                }
+            }
+
+            @Override
+            public void onFailure(Call call) {
+            }
+        });
+    }
 
 
     /**

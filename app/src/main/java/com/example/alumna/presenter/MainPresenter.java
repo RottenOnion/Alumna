@@ -32,6 +32,12 @@ public class MainPresenter implements MainPresenterImpl ,OnMainListener {
         mModel = new MainModel(this);
     }
 
+
+    @Override
+    public void loadCurUser(int uid) {
+        mModel.getcurUser(uid);
+    }
+
     @Override
     public void loadTopicList(final int uid) {
         mModel.getTopicList(uid);
@@ -74,6 +80,11 @@ public class MainPresenter implements MainPresenterImpl ,OnMainListener {
     @Override
     public void UploadSuccess() {
         //背景上传成功
+    }
+
+    @Override
+    public void onUserSuccess(UserBean user) {
+        mView.setUserInform(user);
     }
 
     @Override

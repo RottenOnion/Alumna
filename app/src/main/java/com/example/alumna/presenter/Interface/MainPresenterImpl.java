@@ -13,6 +13,8 @@ import java.util.ArrayList;
 
 public interface MainPresenterImpl {
 
+    void loadCurUser(final int uid);
+
     void loadTopicList(int uid);
 
     void loadLocation();
