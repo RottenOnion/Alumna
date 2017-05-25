@@ -157,6 +157,11 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
         });
 
         /**
+         * 获取当前位置
+         */
+        presenter.loadLocation();
+
+        /**
          * leftHeadView点击头像
          */
         headView.setOnClickListener(new View.OnClickListener() {

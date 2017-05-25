@@ -10,6 +10,7 @@ import com.example.alumna.model.Interface.MainModelImpl;
 import com.example.alumna.model.MainModel;
 import com.example.alumna.presenter.Interface.MainPresenterImpl;
 import com.example.alumna.presenter.listener.OnMainListener;
+import com.example.alumna.utils.LocationUtil;
 import com.example.alumna.view.Interface.MainViewImpl;
 import com.lzy.imagepicker.bean.ImageItem;
 
@@ -80,5 +81,27 @@ public class MainPresenter implements MainPresenterImpl ,OnMainListener {
         mView.hideProgress();
     }
 
+    public void loadLocation(){
+        LocationUtil.getInstance().getLocation(new LocationUtil.getLocationCallback() {
+            @Override
+            public void onStart() {
 
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+
+            @Override
+            public void onSuccess(String location, String coordinate) {
+
+            }
+
+            @Override
+            public void onFailure(String result) {
+
+            }
+        });
+    }
 }

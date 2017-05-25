@@ -98,17 +98,10 @@ public class InformModifyActivity extends AppCompatActivity implements View.OnCl
         location_text.setOnClickListener(this);
         wechat_text.setOnClickListener(this);
 
-
+        presenter.getLocation();
 
         //load
         presenter.loadImfor(MyApplication.getcurUser().getUid());
-
-
-
-
-
-
-
     }
 
     private void initDialog() {
@@ -276,7 +269,10 @@ public class InformModifyActivity extends AppCompatActivity implements View.OnCl
         }
         school_text.setText(user.getSchool());
         grade_text.setText(user.getGrade());
-        location_text.setText(user.getLocation());
+        //获取坐标失败，原来的坐标放进去
+        if (location_text.getTag(R.id.coordinate)==null){
+            location_text.setTag(R.id.coordinate,user.getLocation());
+        }
         signature_text.setText(user.getSignature());
     }
 
@@ -288,7 +284,8 @@ public class InformModifyActivity extends AppCompatActivity implements View.OnCl
         params.put("sex",gender_text.getTag(R.id.gender_id).toString());
         params.put("school",school_text.getText().toString());
         params.put("grade",grade_text.getText().toString());
-        params.put("location",location_text.getText().toString());
+        //params.put("location",location_text.getText().toString());
+        params.put("location",location_text.getTag(R.id.coordinate).toString());
         params.put("signature",signature_text.getText().toString());
         params.put("wechat",wechat_text.getText().toString());
         return params;
@@ -348,5 +345,11 @@ public class InformModifyActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void hideProgress() {
         mLoadingDialog.dismiss();
+    }
+
+    @Override
+    public void setLocation(String coordinate) {
+        Log.i("coordinate",coordinate);
+        location_text.setTag(R.id.coordinate,coordinate);
     }
 }

@@ -45,6 +45,7 @@ public class MainModel implements MainModelImpl {
 
         Map<String,Object> params=new HashMap<>();
         params.put("uid",uid);
+
         params.put("location","123");
         params.put("time","1493177167");
 

@@ -25,4 +25,7 @@ public interface InformModifyViewImpl {
     void showProgress();
 
     void hideProgress();
+
+    //附带地理信息
+    void setLocation(String coordinate);
 }

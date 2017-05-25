@@ -1,12 +1,15 @@
 package com.example.alumna.presenter;
 
 
+import android.util.Log;
+
 import com.example.alumna.MyApplication;
 import com.example.alumna.bean.UserBean;
 import com.example.alumna.model.Interface.InformModifyModelImpl;
 import com.example.alumna.model.InformModifyModel;
 import com.example.alumna.presenter.Interface.InformModifyPresenterImpl;
 import com.example.alumna.presenter.listener.OnModifyListener;
+import com.example.alumna.utils.LocationUtil;
 import com.example.alumna.view.Interface.InformModifyViewImpl;
 import com.lzy.imagepicker.bean.ImageItem;
 
@@ -43,6 +46,31 @@ public class InformModifyPresenter implements InformModifyPresenterImpl,OnModify
     @Override
     public void UploadImage(final List<ImageItem> imgs) {
         uModel.UploadImage(imgs);
+    }
+
+    @Override
+    public void getLocation() {
+        LocationUtil.getInstance().getLocation(new LocationUtil.getLocationCallback() {
+            @Override
+            public void onStart() {
+                Log.i("coordinate","开始定位");
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+
+            @Override
+            public void onSuccess(String location, String coordinate) {
+                uView.setLocation(coordinate);
+            }
+
+            @Override
+            public void onFailure(String result) {
+
+            }
+        });
     }
 
     @Override

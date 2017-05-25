@@ -18,4 +18,7 @@ public interface InformModifyPresenterImpl {
 
     /*后台传输图片*/
     void UploadImage(List<ImageItem> imgs);
+
+    /*后台获取定位*/
+    void getLocation();
 }

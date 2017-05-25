@@ -15,6 +15,7 @@ public interface MainPresenterImpl {
 
     void loadTopicList(int uid);
 
+    void loadLocation();
 
     void loadFriendList(int uid);
 
