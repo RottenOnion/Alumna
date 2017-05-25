@@ -44,6 +44,7 @@ public class NearbyAdapter extends RecyclerView.Adapter<NearbyAdapter.NearbyHold
 
         //头像
         Glide.with(mContext).load(user.getHead())
+                .error(R.drawable.head_default)
                 .into(holder.headView);
 
         //名字
