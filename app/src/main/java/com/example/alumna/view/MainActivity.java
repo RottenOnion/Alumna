@@ -381,6 +381,7 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
 
     @Override
     public void showFriend(final List<UserBean> userList) {
+        textFriendCount.setText("" + userList.size());
         FriendAdapter adapter = new FriendAdapter(userList,this);
         adapter.setOnFriendItemClickListener(new FriendAdapter.OnFriendItemClickListener() {
             @Override
@@ -391,7 +392,7 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
             }
         });
         friendRV.setAdapter(adapter);
-        textFriendCount.setText(userList.size());
+
     }
 
     public Context getContext() {
