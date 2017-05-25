@@ -1,7 +1,7 @@
 package com.example.alumna.view.Interface;
 
 
-import com.example.alumna.bean.UserBean;
+import com.example.alumna.bean.NearbyUserBean;
 
 import java.util.List;
 
@@ -11,6 +11,6 @@ import java.util.List;
 
 public interface NearbyViewImpl {
 
-    void showNearby(List<UserBean> list);
+    void showNearby(List<NearbyUserBean> list);
 
 }

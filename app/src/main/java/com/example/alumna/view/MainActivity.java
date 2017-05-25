@@ -32,20 +32,26 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.example.alumna.MyApplication;
 import com.example.alumna.R;
+import com.example.alumna.adapter.FriendAdapter;
 import com.example.alumna.adapter.LeftDrawerAdapter;
 import com.example.alumna.adapter.LeftDrawerAdapter.onItemClickListener;
 import com.example.alumna.adapter.TopicListAdapter.FriendCircleAdapter;
 import com.example.alumna.bean.LeftBean;
 import com.example.alumna.bean.TopicBean;
+import com.example.alumna.bean.UserBean;
 import com.example.alumna.presenter.MainPresenter;
 import com.example.alumna.utils.Image.ImageUtil;
 import com.example.alumna.view.Interface.MainViewImpl;
+
+import com.example.alumna.widgets.RecycleViewDivider;
+
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.mingle.widget.LoadingView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements MainViewImpl {
@@ -59,6 +65,8 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
 
     private MainPresenter presenter;
     private Button publishBtn;
+
+    private RecyclerView friendRV;
 
 
     private LinearLayout layoutCircle;
@@ -100,6 +108,8 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
         layoutCircle = (LinearLayout) findViewById(R.id.friend_circle);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         nametv=(TextView)findViewById(R.id.main_left_self_name) ;
+        friendRV = (RecyclerView) findViewById(R.id.right_recycler);
+
         loadingView = (LoadingView) findViewById(R.id.loading_view);
 
         headView=(LinearLayout)findViewById(R.id.head_layout);
@@ -246,6 +256,12 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
         topiclist.setLayoutManager(layoutManager);
 
         /**
+         * 初始化好友列表
+         */
+        friendRV.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        friendRV.addItemDecoration(new RecycleViewDivider(this,LinearLayoutManager.VERTICAL,3,getResources().getColor(R.color.grayDivider)));
+
+        /**
          * 初始化背景墙选择dialog
          */
         final AlertDialog dialog = new AlertDialog
@@ -274,8 +290,11 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
 
     @Override
     protected void onResume() {
-        super.onResume();
+
+        presenter.loadFriendList(MyApplication.getcurUser().getUid());
         presenter.loadTopicList(MyApplication.getcurUser().getUid());
+        super.onResume();
+
     }
 
     private void loadLeftDatas() {
@@ -283,7 +302,7 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
         LeftBean data = new LeftBean(R.drawable.ic_menu_friend,"朋友圈");
         mLeftDatas.add(data);
 
-        data = new LeftBean(R.drawable.ic_menu_setting,"设置");
+        data = new LeftBean(R.drawable.ic_menu_setting,"修改个人信息");
         mLeftDatas.add(data);
 
         data = new LeftBean(R.drawable.ic_menu_about,"关于");
@@ -304,12 +323,12 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
 
 
     @Override
-    public void showProgressBar() {
+    public void showProgress() {
 
     }
 
     @Override
-    public void hideProgressBar() {
+    public void hideProgress() {
         loadingView.setVisibility(View.GONE);
         refreshLayout.setRefreshing(false);
     }
@@ -318,6 +337,20 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
     public void showFriendCircle(ArrayList<TopicBean> list) {
         adapter=new FriendCircleAdapter(this,list);
         topiclist.setAdapter(adapter);
+    }
+
+    @Override
+    public void showFriend(final List<UserBean> userList) {
+        FriendAdapter adapter = new FriendAdapter(userList,this);
+        adapter.setOnFriendItemClickListener(new FriendAdapter.OnFriendItemClickListener() {
+            @Override
+            public void onClick(int position) {
+                Intent i=new Intent(MainActivity.this,MemberActivity.class);
+                i.putExtra("uid",""+userList.get(position).getUid());
+                MainActivity.this.startActivity(i);
+            }
+        });
+        friendRV.setAdapter(adapter);
     }
 
     public Context getContext() {

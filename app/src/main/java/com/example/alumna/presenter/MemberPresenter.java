@@ -23,7 +23,7 @@ public class MemberPresenter implements MemberPresenterImpl,OnMemberListener {
 
     @Override
     public void loadUser(int id) {
-
+        mView.showProgress();
         mModel.getUser(id);
 
     }
@@ -35,7 +35,7 @@ public class MemberPresenter implements MemberPresenterImpl,OnMemberListener {
 
     @Override
     public void onUserSuccess(UserBean user) {
-
+        mView.hideProgress();
         mView.showUserInform(user);
     }
 

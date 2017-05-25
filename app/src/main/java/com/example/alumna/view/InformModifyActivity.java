@@ -47,6 +47,7 @@ public class InformModifyActivity extends AppCompatActivity implements View.OnCl
     private Toolbar toolbar;
     private Button backBtn;
     private AlertDialog genderDialog,gradeDialog,nameDialog,schoolDialog,locationDialog,signatureDialog,wechatDialog;
+    private ProgressDialog mChangeDialog;
     private ProgressDialog mLoadingDialog;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,9 +65,12 @@ public class InformModifyActivity extends AppCompatActivity implements View.OnCl
         signature_text=(TextView)findViewById(R.id.signature_text);
         wechat_text = (TextView)findViewById(R.id.wechat_text);
 
+        mChangeDialog = new ProgressDialog(this);
+        mChangeDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mChangeDialog.setMessage("修改中...");
         mLoadingDialog = new ProgressDialog(this);
-        mLoadingDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        mLoadingDialog.setMessage("修改中...");
+        mLoadingDialog.setCancelable(false);
+        mLoadingDialog.setMessage("加载中...");
 
         toolbar=(Toolbar)findViewById(R.id.toolbar);
         backBtn=(Button) findViewById(R.id.back_Btn) ;
@@ -253,7 +257,7 @@ public class InformModifyActivity extends AppCompatActivity implements View.OnCl
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            mLoadingDialog.show();
+            mChangeDialog.show();
             presenter.UpdateImfor(MyApplication.getcurUser().getUid());
         }
         return false;
@@ -298,14 +302,14 @@ public class InformModifyActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void showInformToast() {
         Toast.makeText(this,"个人信息修改成功",Toast.LENGTH_LONG).show();
-        mLoadingDialog.dismiss();
+        mChangeDialog.dismiss();
         finish();
     }
 
     @Override
     public void ImageUploadSuccess(String url) {
         head_view.setTag(R.id.image_url,url);
-        mLoadingDialog.dismiss();
+        mChangeDialog.dismiss();
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -316,7 +320,7 @@ public class InformModifyActivity extends AppCompatActivity implements View.OnCl
                 Glide.with(this).
                         load(images.get(0).path).into(head_view);
                 presenter.UploadImage(images);
-                mLoadingDialog.show();
+                mChangeDialog.show();
             } else {
                 Toast.makeText(this, "没有数据", Toast.LENGTH_SHORT).show();
             }
@@ -334,5 +338,15 @@ public class InformModifyActivity extends AppCompatActivity implements View.OnCl
         public int getWhich() {
             return which;
         }
+    }
+
+    @Override
+    public void showProgress() {
+        mLoadingDialog.show();
+    }
+
+    @Override
+    public void hideProgress() {
+        mLoadingDialog.dismiss();
     }
 }

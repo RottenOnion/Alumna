@@ -76,13 +76,11 @@ public class LoginActivity extends AppCompatActivity implements LoginViewImpl ,O
     @Override
     public void showProgressBar() {
         mLoadingDialog.show();
-        LoginView.setVisibility(View.INVISIBLE);
     }
 
     @Override
     public void hideProgressBar() {
         mLoadingDialog.dismiss();
-        LoginView.setVisibility(View.VISIBLE);
     }
 
     @Override

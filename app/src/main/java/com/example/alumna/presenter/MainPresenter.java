@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.example.alumna.MyApplication;
 import com.example.alumna.bean.TopicBean;
+import com.example.alumna.bean.UserBean;
 import com.example.alumna.model.Interface.MainModelImpl;
 import com.example.alumna.model.MainModel;
 import com.example.alumna.presenter.Interface.MainPresenterImpl;
@@ -13,6 +14,7 @@ import com.example.alumna.view.Interface.MainViewImpl;
 import com.lzy.imagepicker.bean.ImageItem;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -31,24 +33,35 @@ public class MainPresenter implements MainPresenterImpl ,OnMainListener {
 
     @Override
     public void loadTopicList(final int uid) {
-        mView.showProgressBar();
         mModel.getTopicList(uid);
     }
 
     @Override
+    public void loadFriendList(int uid) {
+        mModel.getFriend(uid);
+    }
+
+
+
     public void uploadBackground(int uid, ArrayList<ImageItem> img) {
         mModel.uploadImage(img);
     }
 
     @Override
     public void TopicSuccess(final ArrayList<TopicBean> list) {
+
         //避免数据未装载就返回票圈，这里给延时3秒
         new Handler().postDelayed(new Runnable(){
             public void run() {
                 mView.showFriendCircle(list);
-                mView.hideProgressBar();
+                mView.hideProgress();
             }
         }, 3000);
+    }
+
+    @Override
+    public void onFriendSuccess(List<UserBean> list) {
+        mView.showFriend(list);
     }
 
     @Override
@@ -62,10 +75,9 @@ public class MainPresenter implements MainPresenterImpl ,OnMainListener {
         //背景上传成功
     }
 
-
     @Override
     public void onError() {
-        mView.hideProgressBar();
+        mView.hideProgress();
     }
 
 

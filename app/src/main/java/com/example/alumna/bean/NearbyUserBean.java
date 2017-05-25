@@ -1,20 +1,25 @@
 package com.example.alumna.bean;
 
-public class UserBean {
+/**
+ * Created by py on 2017/5/25.
+ */
+
+public class NearbyUserBean {
     private int uid;
     private String head;
     private String username;
     private int sex;
-    private String location;
     private String phone;
-    private String signature;
-    private String background;
-    private String wechat;
     private String school;
     private String grade;
+    private String distance;
 
-    public UserBean(int id) {
-        uid = id;
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 
     public String getHead() {
@@ -41,54 +46,12 @@ public class UserBean {
         this.sex = sex;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
     public String getPhone() {
         return phone;
     }
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-
-    public int getUid() {
-        return uid;
-    }
-
-    public void setUid(int uid) {
-        this.uid = uid;
-    }
-
-
-    public String getSignature() {
-        return signature;
-    }
-
-    public void setSignature(String signature) {
-        this.signature = signature;
-    }
-
-    public String getBackground() {
-        return background;
-    }
-
-    public void setBackground(String background) {
-        this.background = background;
-    }
-
-    public String getWechat() {
-        return wechat;
-    }
-
-    public void setWechat(String wechat) {
-        this.wechat = wechat;
     }
 
     public String getSchool() {
@@ -107,20 +70,25 @@ public class UserBean {
         this.grade = grade;
     }
 
+    public String getDistance() {
+        return distance;
+    }
+
+    public void setDistance(String distance) {
+        this.distance = distance;
+    }
+
     @Override
     public String toString() {
-        return "UserBean{" +
+        return "NearbyUserBean{" +
                 "uid=" + uid +
                 ", head='" + head + '\'' +
                 ", username='" + username + '\'' +
                 ", sex=" + sex +
-                ", location='" + location + '\'' +
                 ", phone='" + phone + '\'' +
-                ", signature='" + signature + '\'' +
-                ", background='" + background + '\'' +
-                ", wechat='" + wechat + '\'' +
                 ", school='" + school + '\'' +
                 ", grade='" + grade + '\'' +
+                ", distance='" + distance + '\'' +
                 '}';
     }
 }

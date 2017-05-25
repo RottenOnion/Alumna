@@ -1,6 +1,6 @@
 package com.example.alumna.presenter.listener;
 
-import com.example.alumna.bean.UserBean;
+import com.example.alumna.bean.NearbyUserBean;
 
 import java.util.List;
 
@@ -9,6 +9,6 @@ import java.util.List;
  */
 
 public interface onNearbyListener {
-    void onSuccess(List<UserBean> userList);
+    void onSuccess(List<NearbyUserBean> userList);
     void onFail();
 }

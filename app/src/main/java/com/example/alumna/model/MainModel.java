@@ -18,9 +18,9 @@ import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import com.lzy.imagepicker.bean.ImageItem;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.Call;
@@ -186,6 +186,57 @@ public class MainModel implements MainModelImpl {
         });
     }
 
+
+
+    /**
+     * 获取好友列表
+     * @param uid
+     */
+    @Override
+    public void getFriend(int uid) {
+        //获得好友列表
+        Map<String, Object> map = new HashMap<>();
+        map.put("uid", uid);
+        HttpUtil.getInstance().PostRequest(DataUtils.BASEURL + DataUtils.MYFRIEND, map,
+                new HttpRequestCallback<String>() {
+                    @Override
+                    public void onStart() {
+
+                    }
+
+                    @Override
+                    public void onFinish() {
+
+                    }
+
+                    @Override
+                    public void onResponse(String result) {
+                        JsonObject jsonObject = new JsonParser().parse(result).getAsJsonObject();
+                        int status = jsonObject.get("status").getAsInt();
+                        if (status == 1) {
+                            JsonArray jsonArray = jsonObject.getAsJsonArray("list");
+                            Gson gson = new Gson();
+                            List<UserBean> userList = new ArrayList<>();
+                            for (JsonElement user : jsonArray) {
+                                UserBean userBean = gson.fromJson(user, new TypeToken<UserBean>() {
+                                }.getType());
+                                userList.add(userBean);
+                            }
+                            mListener.onFriendSuccess(userList);
+
+                            Log.d("cao", "好友列表拿到");
+                        } else {
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call call) {
+
+                    }
+                });
+    }
+
     @Override
     public void uploadImage(ArrayList<ImageItem> imgs) {
         String url=DataUtils.BASEURL+DataUtils.SENDPIC;
@@ -244,6 +295,7 @@ public class MainModel implements MainModelImpl {
 
             }
         });
+
     }
 
     public interface OnLikeListResult{
