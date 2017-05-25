@@ -46,6 +46,7 @@ public class RegisterModel implements RegisterModelImpl{
             public void onResponse(String result) {
                 JsonObject jsonObject = new JsonParser().parse(result).getAsJsonObject();
                 int status=jsonObject.get("status").getAsInt();
+                Log.i("S",result);
                 if (status==1){
                     JsonObject userString = jsonObject.get("user").getAsJsonObject();
                     Gson gson = new Gson();

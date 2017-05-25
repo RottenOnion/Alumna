@@ -89,6 +89,7 @@ public class InformModifyActivity extends AppCompatActivity implements View.OnCl
 
         //set listener
         head_view.setOnClickListener(this);
+        head_view.setTag(R.id.image_url,"");
         presenter = new InformModifyPresenter(this);
         gender_text.setOnClickListener(this);
         grade_text.setOnClickListener(this);
@@ -279,7 +280,11 @@ public class InformModifyActivity extends AppCompatActivity implements View.OnCl
     @Override
     public HashMap<String,Object> modifyInform() {
         HashMap<String,Object>params =new HashMap<>();
-        params.put("head",head_view.getTag(R.id.image_url).toString());
+        if (head_view.getTag(R.id.image_url)!=null){
+            params.put("head",head_view.getTag(R.id.image_url).toString());
+        }else{
+            params.put("head","");
+        }
         params.put("username",name_text.getText().toString());
         params.put("sex",gender_text.getTag(R.id.gender_id).toString());
         params.put("school",school_text.getText().toString());

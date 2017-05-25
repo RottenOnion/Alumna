@@ -178,7 +178,8 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
          * 获取当前位置
          */
         presenter.loadLocation();
-        presenter.loadCurUser(MyApplication.getcurUser().getUid());
+        setUserInform(MyApplication.getcurUser());
+        //presenter.loadCurUser(MyApplication.getcurUser().getUid());
 
         /**
          * leftHeadView点击头像
@@ -358,8 +359,12 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
     public void setUserInform(UserBean user) {
         nametv.setText(user.getUsername());
         bg_nameTv.setText(user.getUsername());
-        Glide.with(this).load(user.getHead()).into(bg_headTv);
-        Glide.with(this).load(user.getBackground()).into(bg_backgroundIv);
+        Glide.with(this).load(user.getHead()).
+                placeholder(R.drawable.ic_image_error).
+                error(R.drawable.ic_default_head).into(bg_headTv);
+        Glide.with(this).load(user.getBackground()).
+                placeholder(R.drawable.ic_image_error).
+                error(R.drawable.ic_image_error).into(bg_backgroundIv);
     }
 
     @Override

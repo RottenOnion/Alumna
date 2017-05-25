@@ -102,6 +102,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void showStatus(int status) {
+        register_btn.setClickable(true);
+
         switch (status){
             case 1:
                 Toast.makeText(this,"注册成功！",Toast.LENGTH_SHORT).show();break;
@@ -147,6 +149,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             password2_et.requestFocus();
             return;
         }
+        register_btn.setClickable(false);
         presenter.register();
     }
 }

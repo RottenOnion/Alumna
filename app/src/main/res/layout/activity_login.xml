@@ -58,6 +58,7 @@
                 android:layout_height="wrap_content"
                 android:minHeight="40dp"
                 android:hint="@string/prompt_username"
+                android:text="18888888887"
                 android:textColorHint="@color/textHintGray"
                 android:inputType="phone"
                 android:maxLines="1" />
@@ -82,6 +83,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/prompt_password"
                 android:minHeight="40dp"
+                android:text="1234"
                 android:imeOptions="actionUnspecified"
                 android:inputType="textPassword"
                 android:maxLines="1" />

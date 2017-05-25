@@ -115,7 +115,8 @@ public class ImageShower extends GridLayout{
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);//截取中间显示
             imageView.setId(imgs.get(position).name.hashCode());
             //imageView.setOnClickListener(OnItemClickListener);
-            Glide.with(getContext()).load(imgs.get(position).path).into(imageView);
+            Glide.with(getContext()).load(imgs.get(position).path).
+                    error(R.drawable.ic_image_error).placeholder(R.drawable.ic_image_error).into(imageView);
             return imageView;
         }
     }
