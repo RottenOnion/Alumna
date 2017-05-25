@@ -7,13 +7,18 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.alumna.R;
 import com.example.alumna.adapter.TopicListAdapter.FriendCircleAdapter;
 import com.example.alumna.bean.TopicBean;
 import com.example.alumna.bean.UserBean;
 import com.example.alumna.presenter.MemberCirclePresenter;
 import com.example.alumna.view.Interface.MemberCircleViewImpl;
+import com.mingle.widget.LoadingView;
 
 import java.util.ArrayList;
 
@@ -22,13 +27,17 @@ public class MemberCircleActivity extends AppCompatActivity implements MemberCir
     private RecyclerView topiclist;
     private FriendCircleAdapter adapter;
     private SwipeRefreshLayout refreshLayout;
+    private TextView nameTv;
+    private ImageView headIv,bgIv;
     private MemberCirclePresenter presenter;
+    //加载view
+    private LoadingView loadingView;
 
     private int uid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_member_circle);
+        setContentView(R.layout.content_main);
         presenter=new MemberCirclePresenter(this);
         init();
 
@@ -43,8 +52,14 @@ public class MemberCircleActivity extends AppCompatActivity implements MemberCir
     }
 
     private void init() {
-        topiclist = (RecyclerView) findViewById(R.id.friend_circle);
+        topiclist = (RecyclerView) findViewById(R.id.topiclist);
         refreshLayout=(SwipeRefreshLayout)findViewById(R.id.refresh_layout);
+        nameTv=(TextView)findViewById(R.id.nameTv);
+        bgIv=(ImageView)findViewById(R.id.backgroundIv);
+        headIv=(ImageView)findViewById(R.id.headIv);
+
+        loadingView = (LoadingView) findViewById(R.id.loading_view);
+        loadingView.setVisibility(View.VISIBLE);
 
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener(){
             @Override
@@ -66,7 +81,15 @@ public class MemberCircleActivity extends AppCompatActivity implements MemberCir
 
     @Override
     public void showUser(UserBean user) {
+        nameTv.setText(user.getUsername());
+        Glide.with(this).load(user.getHead()).into(headIv);
+        Glide.with(this).load(user.getBackground()).into(bgIv);
+    }
 
+    @Override
+    public void hideLoadView() {
+        loadingView.setVisibility(View.GONE);
+        refreshLayout.setRefreshing(false);
     }
 
 }

@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.alumna.MyApplication;
 import com.example.alumna.R;
 import com.example.alumna.bean.TopicBean;
 import com.example.alumna.bean.UserBean;
@@ -50,7 +51,6 @@ public class MemberActivity extends Activity implements OnClickListener, MemberV
 
         //load
         presenter.loadUser(uid);
-        //presenter.loadTopicList(1);
 
     }
 
@@ -64,6 +64,8 @@ public class MemberActivity extends Activity implements OnClickListener, MemberV
         btnGender = (Button) findViewById(R.id.btn_gender);
         btnGrade = (Button) findViewById(R.id.btn_grade);
         layoutCircle = (LinearLayout) findViewById(R.id.layout_friend_circle);
+
+        layoutCircle.setOnClickListener(this);
         mLoadingProgress = new ProgressDialog(this);
         mLoadingProgress.setCancelable(false);
         mLoadingProgress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -74,7 +76,11 @@ public class MemberActivity extends Activity implements OnClickListener, MemberV
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-
+            case R.id.layout_friend_circle:
+                Intent i=new Intent(this,MemberCircleActivity.class);
+                i.putExtra("uid",mUid);
+                this.startActivity(i);
+                break;
             default:
                 break;
 

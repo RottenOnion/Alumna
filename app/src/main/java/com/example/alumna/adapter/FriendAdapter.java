@@ -20,6 +20,7 @@ import java.util.List;
 
 public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.FriendHolder> {
 
+    private OnFriendItemClickListener onFriendItemClickListener;
     private List<UserBean> mDatas;
     private Context mContext;
 
@@ -31,7 +32,7 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.FriendHold
     @Override
     public FriendHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.friend_item,parent,false);
-        return new FriendHolder(view);
+        return new FriendHolder(view,onFriendItemClickListener);
     }
 
     @Override
@@ -51,17 +52,38 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.FriendHold
         return mDatas == null ? 0 : mDatas.size();
     }
 
-    public static class FriendHolder extends RecyclerView.ViewHolder {
+    public static class FriendHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private ImageView headView;
         private TextView textName;
         private TextView textTime;
+        private OnFriendItemClickListener friendItemClickListener;
 
-        public FriendHolder(View itemView) {
+        public FriendHolder(View itemView,OnFriendItemClickListener listener) {
             super(itemView);
             headView = (ImageView) itemView.findViewById(R.id.head_view);
             textName = (TextView) itemView.findViewById(R.id.text_name);
             textTime = (TextView) itemView.findViewById(R.id.message_text);
+            this.friendItemClickListener=listener;
+
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            friendItemClickListener.onClick(getPosition());
+        }
+    }
+
+    public OnFriendItemClickListener getOnFriendItemClickListener() {
+        return onFriendItemClickListener;
+    }
+
+    public void setOnFriendItemClickListener(OnFriendItemClickListener onFriendItemClickListener) {
+        this.onFriendItemClickListener = onFriendItemClickListener;
+    }
+
+    public interface OnFriendItemClickListener{
+        void onClick(int position);
     }
 }

@@ -9,6 +9,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -20,7 +21,6 @@ import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -42,9 +42,7 @@ import com.example.alumna.bean.UserBean;
 import com.example.alumna.presenter.MainPresenter;
 import com.example.alumna.utils.Image.ImageUtil;
 import com.example.alumna.view.Interface.MainViewImpl;
-
 import com.example.alumna.widgets.RecycleViewDivider;
-
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
@@ -64,7 +62,6 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
     private FriendCircleAdapter adapter;
 
     private MainPresenter presenter;
-    private Button publishBtn;
 
     private RecyclerView friendRV;
 
@@ -79,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
     private RelativeLayout rightLayout;
 
     //左侧菜单头像
+    private LinearLayout headView;
     private ImageView leftHeadView;
 
     private TextView nametv;
@@ -91,6 +89,9 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
     public ImageView bg_headTv;
     public TextView bg_nameTv;
 
+    //浮动按钮
+    private FloatingActionButton publish_Fab;
+
     private final static boolean TYPE_TEXT=false;
     private static final boolean TYPE_IMAGE=true;
 
@@ -102,15 +103,15 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
 
         mLeftRvView = (RecyclerView) findViewById(R.id.main_left_recycler);
         topiclist = (RecyclerView) findViewById(R.id.topiclist);
-        publishBtn=(Button)findViewById(R.id.publish_Btn) ;
         refreshLayout=(SwipeRefreshLayout)findViewById(R.id.refresh_layout);
         layoutCircle = (LinearLayout) findViewById(R.id.friend_circle);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         nametv=(TextView)findViewById(R.id.main_left_self_name) ;
         friendRV = (RecyclerView) findViewById(R.id.right_recycler);
-
+        publish_Fab=(FloatingActionButton)findViewById(R.id.publish_fab);
         loadingView = (LoadingView) findViewById(R.id.loading_view);
 
+        headView=(LinearLayout)findViewById(R.id.head_layout);
         bg_backgroundIv=(ImageView)findViewById(R.id.backgroundIv);
         bg_headTv=(ImageView)findViewById(R.id.headIv) ;
         bg_nameTv=(TextView)findViewById(R.id.nameTv);
@@ -133,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
         /**
          * 发布动态
          */
-        publishBtn.setOnClickListener(new View.OnClickListener() {
+        publish_Fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i=new Intent(MainActivity.this,PublishActivity.class);
@@ -142,13 +143,25 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
             }
         });
 
-        publishBtn.setOnLongClickListener(new View.OnLongClickListener() {
+        publish_Fab.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 Intent i=new Intent(MainActivity.this,PublishActivity.class);
                 i.putExtra("flag",TYPE_TEXT);
                 MainActivity.this.startActivity(i);
                 return false;
+            }
+        });
+
+        /**
+         * leftHeadView点击头像
+         */
+        headView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(MainActivity.this,MemberActivity.class);
+                i.putExtra("uid",""+MyApplication.getcurUser().getUid());
+                MainActivity.this.startActivity(i);
             }
         });
 
@@ -218,7 +231,7 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
             public void onItemClick(View v, int position) {
                 switch (position){
                     case 0:
-                        Intent i=new Intent(MainActivity.this,MemberActivity.class);
+                        Intent i=new Intent(MainActivity.this,MemberCircleActivity.class);
                         i.putExtra("uid",""+MyApplication.getcurUser().getUid());
                         MainActivity.this.startActivity(i);
                         break;
@@ -326,8 +339,16 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
     }
 
     @Override
-    public void showFriend(List<UserBean> userList) {
+    public void showFriend(final List<UserBean> userList) {
         FriendAdapter adapter = new FriendAdapter(userList,this);
+        adapter.setOnFriendItemClickListener(new FriendAdapter.OnFriendItemClickListener() {
+            @Override
+            public void onClick(int position) {
+                Intent i=new Intent(MainActivity.this,MemberActivity.class);
+                i.putExtra("uid",""+userList.get(position).getUid());
+                MainActivity.this.startActivity(i);
+            }
+        });
         friendRV.setAdapter(adapter);
     }
 

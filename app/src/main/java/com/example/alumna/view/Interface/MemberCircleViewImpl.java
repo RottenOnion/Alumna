@@ -12,4 +12,5 @@ import java.util.ArrayList;
 public interface MemberCircleViewImpl {
     void showCircle(ArrayList<TopicBean> list);
     void showUser(UserBean user) ;
+    void hideLoadView();
 }
