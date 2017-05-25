@@ -25,6 +25,7 @@ public class MemberCirclePresenter implements OnMemberCircleListener,MemberCircl
     }
     @Override
     public void onLoadCircleSuccess(ArrayList<TopicBean> list) {
+        view.hideLoadView();
         view.showCircle(list);
     }
 

@@ -9,6 +9,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -64,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
     private FriendCircleAdapter adapter;
 
     private MainPresenter presenter;
-    private Button publishBtn;
 
     private RecyclerView friendRV;
 
@@ -92,6 +92,9 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
     public ImageView bg_headTv;
     public TextView bg_nameTv;
 
+    //浮动按钮
+    private FloatingActionButton publish_Fab;
+
     private final static boolean TYPE_TEXT=false;
     private static final boolean TYPE_IMAGE=true;
 
@@ -103,13 +106,12 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
 
         mLeftRvView = (RecyclerView) findViewById(R.id.main_left_recycler);
         topiclist = (RecyclerView) findViewById(R.id.topiclist);
-        publishBtn=(Button)findViewById(R.id.publish_Btn) ;
         refreshLayout=(SwipeRefreshLayout)findViewById(R.id.refresh_layout);
         layoutCircle = (LinearLayout) findViewById(R.id.friend_circle);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         nametv=(TextView)findViewById(R.id.main_left_self_name) ;
         friendRV = (RecyclerView) findViewById(R.id.right_recycler);
-
+        publish_Fab=(FloatingActionButton)findViewById(R.id.publish_fab);
         loadingView = (LoadingView) findViewById(R.id.loading_view);
 
         headView=(LinearLayout)findViewById(R.id.head_layout);
@@ -135,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
         /**
          * 发布动态
          */
-        publishBtn.setOnClickListener(new View.OnClickListener() {
+        publish_Fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i=new Intent(MainActivity.this,PublishActivity.class);
@@ -144,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
             }
         });
 
-        publishBtn.setOnLongClickListener(new View.OnLongClickListener() {
+        publish_Fab.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 Intent i=new Intent(MainActivity.this,PublishActivity.class);
