@@ -50,7 +50,14 @@ public class NearbyActivity extends Activity implements NearbyViewImpl {
         //load
         Log.d("cao","id" + MyApplication.getcurUser().getUid());
         Log.d("cao","location" + MyApplication.getcurUser().getLocation());
-        presenter.loadNearby(MyApplication.getcurUser().getUid(),MyApplication.getcurUser().getLocation());
+        if (MyApplication.getcurUser().getLocation() == null || MyApplication.getcurUser().getLocation().equals("")) {
+            Toast.makeText(this, "未获取到您的当前位置，使用默认位置搜寻...", Toast.LENGTH_SHORT).show();
+            presenter.loadNearby(MyApplication.getcurUser().getUid(), "23.051482,113.400643");
+        } else {
+            presenter.loadNearby(MyApplication.getcurUser().getUid(), MyApplication.getcurUser().getLocation());
+        }
+
+
 
         //set listener
 
@@ -93,5 +100,8 @@ public class NearbyActivity extends Activity implements NearbyViewImpl {
             }
         });
     }
+
+
+
 
 }

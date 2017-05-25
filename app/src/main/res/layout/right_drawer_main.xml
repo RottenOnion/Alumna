@@ -20,7 +20,7 @@
         android:textColor="@color/plain"/>
 
     <TextView
-        android:id="@+id/alumna_count_text"
+        android:id="@+id/friend_count_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/all_alumna_text"
@@ -28,7 +28,7 @@
         android:layout_marginBottom="20dp"
         style="@style/DrawerLayoutTextStyle"
         android:textColor="@android:color/darker_gray"
-        android:text="99"/>
+        />
 
     <LinearLayout
         android:id="@+id/friend_circle"

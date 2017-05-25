@@ -60,7 +60,6 @@
                 android:hint="@string/prompt_username"
                 android:textColorHint="@color/textHintGray"
                 android:inputType="phone"
-android:text="1"
                 android:maxLines="1" />
 
         </android.support.design.widget.TextInputLayout>
@@ -85,7 +84,6 @@ android:text="1"
                 android:minHeight="40dp"
                 android:imeOptions="actionUnspecified"
                 android:inputType="textPassword"
-                android:text="123456"
                 android:maxLines="1" />
 
         </android.support.design.widget.TextInputLayout>

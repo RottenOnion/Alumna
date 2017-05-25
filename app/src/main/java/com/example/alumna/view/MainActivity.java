@@ -1,8 +1,10 @@
 package com.example.alumna.view;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -10,6 +12,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -20,6 +24,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -81,6 +86,9 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
 
     private TextView nametv;
 
+    //右侧好友数量
+    private TextView textFriendCount;
+
     //加载view
     private LoadingView loadingView;
 
@@ -88,6 +96,9 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
     public ImageView bg_backgroundIv;
     public ImageView bg_headTv;
     public TextView bg_nameTv;
+
+    //右侧按钮
+    private ImageView rightButton;
 
     //浮动按钮
     private FloatingActionButton publish_Fab;
@@ -99,6 +110,14 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //获取运行时权限
+        if (ContextCompat.checkSelfPermission(MyApplication.getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION
+                    ,Manifest.permission.CAMERA},1);
+        }
+
         presenter=new MainPresenter(this);
 
         mLeftRvView = (RecyclerView) findViewById(R.id.main_left_recycler);
@@ -115,6 +134,8 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
         bg_backgroundIv=(ImageView)findViewById(R.id.backgroundIv);
         bg_headTv=(ImageView)findViewById(R.id.headIv) ;
         bg_nameTv=(TextView)findViewById(R.id.nameTv);
+        textFriendCount = (TextView) findViewById(R.id.friend_count_text);
+        rightButton = (ImageView) findViewById(R.id.btn_toolbar_right);
 
         loadingView.setVisibility(View.VISIBLE);
 
@@ -288,6 +309,16 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
                 dialog.getWindow().setLayout(800,280);
             }
         });
+
+        /**
+         * 右侧按钮
+         */
+        rightButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawer.openDrawer(Gravity.END);
+            }
+        });
     }
 
     @Override
@@ -360,6 +391,7 @@ public class MainActivity extends AppCompatActivity implements MainViewImpl {
             }
         });
         friendRV.setAdapter(adapter);
+        textFriendCount.setText(userList.size());
     }
 
     public Context getContext() {

@@ -96,7 +96,7 @@ public class MainPresenter implements MainPresenterImpl ,OnMainListener {
         LocationUtil.getInstance().getLocation(new LocationUtil.getLocationCallback() {
             @Override
             public void onStart() {
-
+                Log.d("cao","开始获取位置");
             }
 
             @Override
@@ -106,12 +106,12 @@ public class MainPresenter implements MainPresenterImpl ,OnMainListener {
 
             @Override
             public void onSuccess(String location, String coordinate) {
-
+                Log.d("cao",coordinate);
             }
 
             @Override
             public void onFailure(String result) {
-
+                Log.d("cao","获取位置失败");
             }
         });
     }
