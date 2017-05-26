@@ -23,6 +23,9 @@
             android:text="@string/action_sign_in"/>
     </android.support.v7.widget.Toolbar>
 
+<android.support.v4.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:id="@+id/loginView"
@@ -100,7 +103,7 @@
             android:text="@string/action_sign_in"
             android:background="@drawable/button_login_shape"
             android:textColor="#515151"
-             />
+            />
 
         <Button
             android:id="@+id/registerBtn"
@@ -128,6 +131,8 @@
             android:textSize="15dp"
             android:text="@string/fotgetpsw"/>
     </LinearLayout>
+</android.support.v4.widget.NestedScrollView>
+
 
 
 </LinearLayout>
